@@ -1,21 +1,20 @@
 /**
- * Generic vehicle with no defined type.
- * Subclasses must specify the vehicle's type through the constructor.
+ * Encapsulates a vehicle that can be stored at the parking lot.
  */
-public abstract class Vehicle {
-    private String plate;
-    final String type;
+public class Vehicle {
+    private final String mPlate;
+    private final String mType;
 
     public Vehicle(String plate, String type){
-        this.plate = plate;
-        this.type = type;
+        mPlate = plate;
+        mType = type;
     }
 
-    public String getPlate(){
-        return plate;
+    public String plate(){
+        return mPlate;
     }
 
-    public String getType(){
-        return type;
+    public String type(){
+        return mType;
     }
 }
