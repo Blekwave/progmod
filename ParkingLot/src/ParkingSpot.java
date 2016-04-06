@@ -1,41 +1,59 @@
+import java.math.BigDecimal;
+
 /**
  * Describe this class and the methods exposed by it.
  */
-public abstract class ParkingSpot {
-    private String spotID;
-    private Boolean occupied;
-    private Vehicle occupant;
-    private int arrivalTime;
-    final String spotType;
-    final double hourlyRate;
-
-    public ParkingSpot(String spotID, String spotType, double hourlyRate){
-        this.spotID = spotID;
-        this.spotType = spotType;
-        this.hourlyRate = hourlyRate;
-    }
-
-    public Boolean isOccupied(){
-        return this.occupied;
-    }
-
-    public String getSpotID(){
-        return this.spotID;
-    }
-
-    public void parkVehicle(Vehicle v, int arrivalTime){
-        if (this.occupied){
-            throw new ParkingSpot.ParkingException("Attempted to park on an occupied spot.");
-        }
-    }
-
-    private double getPrice(int departureTime){
-        return this.hourlyRate * (departureTime - this.arrivalTime) / 60;
-    }
-
+public class ParkingSpot {
     public static class ParkingException extends Exception {
         public ParkingException(String message){
             super(message);
         }
     }
+
+    private final String mSpotID;
+    private final String mSpotType;
+    private final BigDecimal mHourlyRate;
+    private Boolean mIsOccupied;
+    private Vehicle mOccupant;
+    private Integer mArrivalTime;
+
+    public ParkingSpot(String spotID, String spotType, BigDecimal hourlyRate){
+        mSpotID = spotID;
+        mSpotType = spotType;
+        mHourlyRate = hourlyRate;
+        mIsOccupied = false;
+        mOccupant = null;
+    }
+
+    public Boolean isOccupied(){
+        return mIsOccupied;
+    }
+
+    public Vehicle occupant(){
+        return mOccupant;
+    }
+
+    public String spotID(){
+        return mSpotID;
+    }
+
+    public void occupy(Vehicle v, Integer arrivalTime) throws ParkingException {
+        if (mIsOccupied){
+            throw new ParkingException("Attempted to park on an occupied spot");
+        }
+        mIsOccupied = true;
+        mOccupant = v;
+        mArrivalTime = arrivalTime;
+    }
+
+    public BigDecimal vacate(Integer departureTime) throws ParkingException {
+        if (!mIsOccupied){
+            throw new ParkingException("Attempted to depart from a non-occupied spot");
+        }
+        mIsOccupied = false;
+        mOccupant = null;
+        BigDecimal interval = new BigDecimal(departureTime - mArrivalTime);
+        return mHourlyRate.divide(new BigDecimal(60)).multiply(interval);
+    }
+
 }
