@@ -1,8 +1,3 @@
-/**
- * Settings for a ParkingLot to be passed to ParkingLot's constructor.
- * This class' constructor parses a properly formatted configuration file to an object.
- */
-
 import java.io.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -12,17 +7,31 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ParkingLotConfig {
-    private class ParkingSpotConfig {
-        public String mType;
-        public Integer mSpotsPerLevel;
-        public BigDecimal mHourlyRate;
+public class ParkingLotBuilder {
+    public class ParkingSpotConfig {
+        private String mType;
+        private Integer mSpotsPerLevel;
+        private BigDecimal mHourlyRate;
+
+        public String type() {
+            return mType;
+        }
+
+        public Integer spotsPerLevel(){
+            return mSpotsPerLevel;
+        }
+
+        public BigDecimal hourlyRate(){
+            return mHourlyRate;
+        }
+
 
         public ParkingSpotConfig(String type, Integer spotsPerLevel, BigDecimal hourlyRate){
             mType = type;
             mSpotsPerLevel = spotsPerLevel;
             mHourlyRate = hourlyRate;
         }
+
     }
 
     private class ConfigFormatException extends IOException {
@@ -38,18 +47,7 @@ public class ParkingLotConfig {
     private Integer mNumLevels;
     private ArrayList<ParkingSpotConfig> mSpotTypes;
     private HashMap<String, ArrayList<String>> mVehicleSpotRelations;
-
-    public Integer numLevels(){
-        return mNumLevels;
-    }
-
-    public Iterator<ParkingSpotConfig> spotTypesIterator(){
-        return mSpotTypes.iterator();
-    }
-
-    public Iterator<Map.Entry<String, ArrayList<String>>> vehicleSpotRelationsIterator(){
-        return mVehicleSpotRelations.entrySet().iterator();
-    }
+    private Boolean mParsingVehicleSpotRelations = false;
 
     private static String nextNonEmptyLineOrEOF(BufferedReader br) throws IOException {
         String line;
@@ -67,13 +65,11 @@ public class ParkingLotConfig {
         return line;
     }
 
-    private Boolean mParsingVehicleSpotRelations = false;
-
-    public ParkingLotConfig(File f) throws IOException {
+    public ParkingLotBuilder (String configPath) throws IOException {
         mSpotTypes = new ArrayList<>();
         mVehicleSpotRelations = new HashMap<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(configPath))) {
             parseNumLevels(br);
             parseSpotTypes(br);
             parseVehicleSpotRelations(br);
@@ -106,7 +102,6 @@ public class ParkingLotConfig {
         }
     }
 
-
     private void parseSpotTypes(BufferedReader br) throws IOException {
         String line;// Read spot types header: [SPOT TYPES]
         line = nextNonEmptyLine(br);
@@ -135,7 +130,6 @@ public class ParkingLotConfig {
         }
     }
 
-
     private void parseVehicleSpotRelations(BufferedReader br) throws IOException {
         String line;
         mParsingVehicleSpotRelations = true;
@@ -156,4 +150,54 @@ public class ParkingLotConfig {
             }
         }
     }
+
+    public ParkingLot build(){
+        HashMap<String, ArrayList<ParkingSpot>> spotsByType;
+        spotsByType = generateSpotsByType();
+        HashMap<String, ArrayList<ArrayList<ParkingSpot>>> spotListsByVehicle;
+        spotListsByVehicle = generateVehicleSpotPriorityMap(spotsByType);
+        return new ParkingLot(spotListsByVehicle);
+    }
+
+    private HashMap<String,ArrayList<ParkingSpot>> generateSpotsByType() {
+        HashMap<String, ArrayList<ParkingSpot>> spotsByType;
+        spotsByType = new HashMap<>();
+        for (ParkingSpotConfig spotConfig : mSpotTypes){
+            ArrayList<ParkingSpot> spots = new ArrayList<>();
+            for (int level = 1; level <= mNumLevels; level++){
+                for (int id = 1; id <= spotConfig.spotsPerLevel(); id++){
+                    ParkingSpot spot = new ParkingSpot(
+                        String.format("N%d%s%d", level, spotConfig.type(), id),
+                        spotConfig.type(),
+                        spotConfig.hourlyRate()
+                    );
+                    spots.add(spot);
+                }
+            }
+            spotsByType.put(spotConfig.type(), spots);
+        }
+        return spotsByType;
+    }
+
+    private HashMap<String, ArrayList<ArrayList<ParkingSpot>>>
+    generateVehicleSpotPriorityMap (HashMap<String, ArrayList<ParkingSpot>> spotsByType){
+        HashMap<String, ArrayList<ArrayList<ParkingSpot>>> spotListsByVehicle;
+        spotListsByVehicle = new HashMap<>();
+        for (Map.Entry<String, ArrayList<String>> relation :
+                mVehicleSpotRelations.entrySet()){
+            String vehicleType = relation.getKey();
+            ArrayList<String> spotTypePriorities = relation.getValue();
+
+            ArrayList<ArrayList<ParkingSpot>> spotLists;
+            spotLists = new ArrayList<>();
+
+            for (String spotType : spotTypePriorities) {
+                spotLists.add(spotsByType.get(spotType));
+            }
+
+            spotListsByVehicle.put(vehicleType, spotLists);
+        }
+        return spotListsByVehicle;
+    }
+
 }
