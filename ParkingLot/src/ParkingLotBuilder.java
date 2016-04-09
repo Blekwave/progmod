@@ -138,13 +138,7 @@ public class ParkingLotBuilder {
         }
     }
 
-    private static Pattern sSpotTypeRegex = Pattern.compile(
-        "(?<type>\\w+) x(?<spotsperlevel>\\d+) \\$(?<hourlyrate>\\d+(?:\\.\\d+)?)"
-    );
     private static Pattern sLevelsRegex = Pattern.compile("(\\d+) LEVELS");
-    private static Pattern sVehicleSpotRelationRegex = Pattern.compile(
-        "(\\w+): (?:(\\w+) > )*(\\w+)"
-    );
 
     /**
      * Parses the number of levels from the config file.
@@ -165,6 +159,10 @@ public class ParkingLotBuilder {
             throw new ConfigFormatException("Failed to read number of levels");
         }
     }
+
+    private static Pattern sSpotTypeRegex = Pattern.compile(
+        "(?<type>\\w+) x(?<spotsperlevel>\\d+) \\$(?<hourlyrate>\\d+(?:\\.\\d+)?)"
+    );
 
     /**
      * Parses the spot types and their settings from the config file.
@@ -202,6 +200,14 @@ public class ParkingLotBuilder {
         }
     }
 
+    private static Pattern sVehicleSpotRelationRegex = Pattern.compile(
+        "(?<vehicletype>\\w+): (?<spotpriority>(?:\\w+ > )*\\w+)"
+    );
+
+    private static Pattern sSpotPriorityRegex = Pattern.compile(
+        "\\w+"
+    );
+
     /**
      * Parses the priority relations between vehicle and spot types.
      *
@@ -219,11 +225,16 @@ public class ParkingLotBuilder {
         while ((line = nextNonEmptyLineOrEOF(br)) != null){
             Matcher vehicleSpotRelationMatcher = sVehicleSpotRelationRegex.matcher(line);
             if (vehicleSpotRelationMatcher.matches()){
-                String vehicleType = vehicleSpotRelationMatcher.group(1); // vehicle type
+                String vehicleType = vehicleSpotRelationMatcher.group("vehicletype");
+                String spotPriority = vehicleSpotRelationMatcher.group("spotpriority");
+
+                Matcher spotPriorityMatcher = sSpotPriorityRegex.matcher(spotPriority);
                 ArrayList<String> spotTypePrecedence = new ArrayList<>();
-                for (int i = 2; i <= vehicleSpotRelationMatcher.groupCount(); i++){
-                    spotTypePrecedence.add(vehicleSpotRelationMatcher.group(i));
+                while (spotPriorityMatcher.find()){
+                    String spotType = spotPriorityMatcher.group();
+                    spotTypePrecedence.add(spotType);
                 }
+
                 mVehicleSpotRelations.put(vehicleType, spotTypePrecedence);
             } else {
                 throw new ConfigFormatException("Failed to read vehicle spot relation description");
