@@ -2,64 +2,59 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 /**
  * Describe this class and the methods exposed by it.
  */
 public class ParkingLot {
+    private HashMap<String, ArrayList<ArrayList<ParkingSpot>>> mParkingSpots;
 
-    private HashMap<String, ArrayList<ArrayList<ParkingSpot>>> mSpotListsByVehicle;
-    private Integer mNumLevels;
-
-    public ParkingLot(ParkingLotConfig config){
-        mNumLevels = config.numLevels();
-        HashMap<String, ArrayList<ParkingSpot>> spotsByType;
-        spotsByType = generateSpotsByType(config);
-        mSpotListsByVehicle = new HashMap<>();
-        assignSpotListsToVehicleTypes(config, spotsByType);
+    public ParkingLot(HashMap<String, ArrayList<ArrayList<ParkingSpot>>> spots){
+        mParkingSpots = spots;
     }
 
-    private HashMap<String,ArrayList<ParkingSpot>> generateSpotsByType(ParkingLotConfig config) {
-        Iterator<ParkingLotConfig.ParkingSpotConfig> it;
-        HashMap<String, ArrayList<ParkingSpot>> spotsByType;
-        it = config.spotTypesIterator();
-        spotsByType = new HashMap<>();
-        while (it.hasNext()){
-            ParkingLotConfig.ParkingSpotConfig spotConfig = it.next();
-            ArrayList<ParkingSpot> spots = new ArrayList<>();
-            for (int level = 1; level <= config.numLevels(); level++){
-                for (int id = 1; id <= spotConfig.spotsPerLevel(); id++){
-                    ParkingSpot spot = new ParkingSpot(
-                        String.format("N%d%s%d", level, spotConfig.type(), id),
-                        spotConfig.type(),
-                        spotConfig.hourlyRate()
-                    );
-                    spots.add(spot);
+    void park(Vehicle v, Integer arrivalTime) throws ParkingException {
+        Iterator<ArrayList<ParkingSpot>> typeIt = mParkingSpots.get(v.type()).iterator();
+        while(typeIt.hasNext()) {
+            Iterator<ParkingSpot> spotIt = typeIt.next().iterator();
+            while(spotIt.hasNext()) {
+                ParkingSpot p = spotIt.next();
+                if(!p.isOccupied()) {
+                    p.occupy(v, arrivalTime);
+                    System.out.println(p.spotID());
+                    return;
+                }
+                else if(p.occupant().plate() == v.plate()) {
+                    throw new ParkingException("This is a cloned car! "
+                            + "Call the cops! Refusing to accept the car into "
+                            + "the parking lot. Fight with your life, brave "
+                            + "Merida!");
                 }
             }
-            spotsByType.put(spotConfig.type(), spots);
         }
-        return spotsByType;
+
+        throw new ParkingException("Failed to find a suitable parking spot!");
     }
 
-    private void assignSpotListsToVehicleTypes(ParkingLotConfig config, HashMap<String, ArrayList<ParkingSpot>> spotsByType) {
-        Iterator<Map.Entry<String, ArrayList<String>>> it;
-        it = config.vehicleSpotRelationsIterator();
-
-        while (it.hasNext()){
-            Map.Entry<String, ArrayList<String>> relation;
-            relation = it.next();
-            String vehicleType = relation.getKey();
-            ArrayList<String> spotTypePriorities = relation.getValue();
-
-            ArrayList<ArrayList<ParkingSpot>> spotLists;
-            spotLists = new ArrayList<>();
-
-            for (String spotType : spotTypePriorities) {
-                spotLists.add(spotsByType.get(spotType));
+    void depart(Vehicle v, Integer departureTime) throws ParkingException {
+        Iterator<ArrayList<ParkingSpot>> typeIt = mParkingSpots.get(v.type()).iterator();
+        while(typeIt.hasNext()) {
+            Iterator<ParkingSpot> spotIt = typeIt.next().iterator();
+            while(spotIt.hasNext()) {
+                ParkingSpot p = spotIt.next();
+                if(p.isOccupied() && p.occupant().plate() == v.plate()) {
+                    BigDecimal price = p.vacate(departureTime);
+                    Integer hour = departureTime / 60;
+                    System.out.println(String.format("%s;%d:%d;%,.2f",
+                            v.type(), hour, departureTime - hour*60,
+                            new DecimalFormat("0,00").format(price)));
+                }
             }
-
-            mSpotListsByVehicle.put(vehicleType, spotLists);
         }
+
+        throw new ParkingException("Didn't find the car. Call the cops, "
+                 + "and pray to God that it is not your fault.");
     }
 }

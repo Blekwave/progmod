@@ -4,12 +4,6 @@ import java.math.BigDecimal;
  * Describe this class and the methods exposed by it.
  */
 public class ParkingSpot {
-    public static class ParkingException extends Exception {
-        public ParkingException(String message){
-            super(message);
-        }
-    }
-
     private final String mSpotID;
     private final String mSpotType;
     private final BigDecimal mHourlyRate;
