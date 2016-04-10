@@ -7,8 +7,19 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+/**
+ * Main class for this assignment. Deals with IO, mostly.
+ *
+ * Exposed methods:
+ * - main(String[] args)
+ */
 public class TP1
 {
+    /**
+     * Compiles the regular expression for parsing parking/departure events.
+     *
+     * @return The compiled pattern.
+     */
     private static Pattern compileEventRegex(){
         String eventTypeRegex = "(?<type>[ES])";
         String timeRegex = "(?<time>(?<hours>\\d{2}):(?<minutes>\\d{2}))";

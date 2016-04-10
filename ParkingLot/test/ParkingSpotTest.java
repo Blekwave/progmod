@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import static org.junit.Assert.*;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Quick unit test for the ParkingSpot class
  */
 public class ParkingSpotTest {
     @Test
