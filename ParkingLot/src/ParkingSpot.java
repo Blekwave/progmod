@@ -1,4 +1,6 @@
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 /**
  * Describe this class and the methods exposed by it.
@@ -31,6 +33,10 @@ public class ParkingSpot {
         return mSpotID;
     }
 
+    public Integer arrivalTime(){
+        return mArrivalTime;
+    }
+
     public void occupy(Vehicle v, Integer arrivalTime) throws ParkingException {
         if (mIsOccupied){
             throw new ParkingException("Attempted to park on an occupied spot");
@@ -47,7 +53,7 @@ public class ParkingSpot {
         mIsOccupied = false;
         mOccupant = null;
         BigDecimal interval = new BigDecimal(departureTime - mArrivalTime);
-        return mHourlyRate.divide(new BigDecimal(60)).multiply(interval);
+        return mHourlyRate.multiply(interval).divide(new BigDecimal(60), RoundingMode.HALF_UP);
     }
 
 }

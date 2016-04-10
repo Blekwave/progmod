@@ -1,3 +1,5 @@
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -26,7 +28,7 @@ public class ParkingLot {
                     System.out.println(p.spotID());
                     return;
                 }
-                else if(p.occupant().plate() == v.plate()) {
+                else if(p.occupant().plate().equals(v.plate())) {
                     throw new ParkingException("This is a cloned car! "
                             + "Call the cops! Refusing to accept the car into "
                             + "the parking lot. Fight with your life, brave "
@@ -44,12 +46,25 @@ public class ParkingLot {
             Iterator<ParkingSpot> spotIt = typeIt.next().iterator();
             while(spotIt.hasNext()) {
                 ParkingSpot p = spotIt.next();
-                if(p.isOccupied() && p.occupant().plate() == v.plate()) {
+                if(p.isOccupied() && p.occupant().plate().equals(v.plate())) {
                     BigDecimal price = p.vacate(departureTime);
-                    Integer hour = departureTime / 60;
-                    System.out.println(String.format("%s;%d:%d;%,.2f",
-                            v.type(), hour, departureTime - hour*60,
-                            new DecimalFormat("0,00").format(price)));
+
+                    Integer interval = departureTime - p.arrivalTime();
+
+                    DecimalFormat twoDigits = new DecimalFormat("00");
+                    DecimalFormat twoPlaces = new DecimalFormat("0.00");
+                    DecimalFormatSymbols sym = DecimalFormatSymbols.getInstance();
+                    sym.setDecimalSeparator(',');
+                    twoPlaces.setDecimalFormatSymbols(sym);
+
+                    String hours = twoDigits.format(interval / 60);
+                    String minutes = twoDigits.format(interval % 60);
+                    String priceStr = twoPlaces.format(price);
+
+                    System.out.println(String.format("%s;%s:%s;%s",
+                        v.type(), hours, minutes, priceStr));
+
+                    return;
                 }
             }
         }
