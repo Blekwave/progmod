@@ -36,16 +36,16 @@ public class ParkingLot {
      *
      * @param v Vehicle to be parked.
      * @param arrivalTime Time of arrival, in minutes.
+     * @return Feedback string related to the parking operation
      * @throws ParkingException Thrown if a vehicle with such a plate is alrea-
      *                          dy parked in this lot.
      */
-    void park(Vehicle v, Integer arrivalTime) throws ParkingException {
+    String park(Vehicle v, Integer arrivalTime) throws ParkingException {
         for (ArrayList<ParkingSpot> parkingSpots : mParkingSpots.get(v.type())) {
             for (ParkingSpot p : parkingSpots) {
                 if (!p.isOccupied()) {
                     p.occupy(v, arrivalTime);
-                    System.out.println(p.spotID());
-                    return;
+                    return p.spotID();
                 } else if (p.occupant().plate().equals(v.plate())) {
                     throw new ParkingException("This is a cloned car! "
                         + "Call the cops! Refusing to accept the car into "
@@ -55,7 +55,7 @@ public class ParkingLot {
             }
         }
 
-        System.out.println("LOTADO");
+        return "LOTADO";
     }
 
     /**
@@ -65,9 +65,10 @@ public class ParkingLot {
      *
      * @param v Departing Vehicle
      * @param departureTime Time of departure, in minutes
+     * @return Feedback string related to the departure operation
      * @throws ParkingException Thrown if no such vehicle exists in the lot
      */
-    void depart(Vehicle v, Integer departureTime) throws ParkingException {
+    String depart(Vehicle v, Integer departureTime) throws ParkingException {
         for (ArrayList<ParkingSpot> parkingSpots : mParkingSpots.get(v.type())) {
             for (ParkingSpot p : parkingSpots) {
                 if (p.isOccupied() && p.occupant().plate().equals(v.plate())) {
@@ -85,10 +86,8 @@ public class ParkingLot {
                     String minutes = twoDigits.format(interval % 60);
                     String priceStr = twoPlaces.format(price);
 
-                    System.out.println(String.format("%s;%s:%s;%s",
-                        v.type(), hours, minutes, priceStr));
+                    return String.format("%s;%s:%s;%s", v.type(), hours, minutes, priceStr);
 
-                    return;
                 }
             }
         }

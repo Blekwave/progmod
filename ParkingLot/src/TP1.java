@@ -41,10 +41,10 @@ public class TP1
             Vehicle v = new Vehicle(plate, vehicleType);
 
             if (eventType.equals("E")) {
-                parkingLot.park(v, time);
+                System.out.println(parkingLot.park(v, time));
             }
             else {
-                parkingLot.depart(v, time);
+                System.out.println(parkingLot.depart(v, time));
             }
         }
     }
