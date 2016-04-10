@@ -1,9 +1,6 @@
 import java.text.DecimalFormatSymbols;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
@@ -18,21 +15,17 @@ public class ParkingLot {
     }
 
     void park(Vehicle v, Integer arrivalTime) throws ParkingException {
-        Iterator<ArrayList<ParkingSpot>> typeIt = mParkingSpots.get(v.type()).iterator();
-        while(typeIt.hasNext()) {
-            Iterator<ParkingSpot> spotIt = typeIt.next().iterator();
-            while(spotIt.hasNext()) {
-                ParkingSpot p = spotIt.next();
-                if(!p.isOccupied()) {
+        for (ArrayList<ParkingSpot> parkingSpots : mParkingSpots.get(v.type())) {
+            for (ParkingSpot p : parkingSpots) {
+                if (!p.isOccupied()) {
                     p.occupy(v, arrivalTime);
                     System.out.println(p.spotID());
                     return;
-                }
-                else if(p.occupant().plate().equals(v.plate())) {
+                } else if (p.occupant().plate().equals(v.plate())) {
                     throw new ParkingException("This is a cloned car! "
-                            + "Call the cops! Refusing to accept the car into "
-                            + "the parking lot. Fight with your life, brave "
-                            + "Merida!");
+                        + "Call the cops! Refusing to accept the car into "
+                        + "the parking lot. Fight with your life, brave "
+                        + "Merida!");
                 }
             }
         }
@@ -41,12 +34,9 @@ public class ParkingLot {
     }
 
     void depart(Vehicle v, Integer departureTime) throws ParkingException {
-        Iterator<ArrayList<ParkingSpot>> typeIt = mParkingSpots.get(v.type()).iterator();
-        while(typeIt.hasNext()) {
-            Iterator<ParkingSpot> spotIt = typeIt.next().iterator();
-            while(spotIt.hasNext()) {
-                ParkingSpot p = spotIt.next();
-                if(p.isOccupied() && p.occupant().plate().equals(v.plate())) {
+        for (ArrayList<ParkingSpot> parkingSpots : mParkingSpots.get(v.type())) {
+            for (ParkingSpot p : parkingSpots) {
+                if (p.isOccupied() && p.occupant().plate().equals(v.plate())) {
                     BigDecimal price = p.vacate(departureTime);
 
                     Integer interval = departureTime - p.arrivalTime();
