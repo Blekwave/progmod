@@ -5,15 +5,40 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Place where vehicles can park for an hourly wage. It defines supported
+ * vehicle types, existing spot types and which vehicles can park at which
+ * spots. It should not be created manually, but only via the ParkingLotBuilder
+ * class, which parses a settings file.
+ *
+ * Exposed methods:
+ * - park(Vehicle v, Integer arrivalTime)
+ * - depart(Vehicle v, Integer departureTime)
  */
 public class ParkingLot {
     private HashMap<String, ArrayList<ArrayList<ParkingSpot>>> mParkingSpots;
 
+    /**
+     * Create a new ParkingLot. Not supposed to be called directly, but through
+     * a ParkingLotBuilder object.
+     *
+     * @param spots Map between a vehicle type and lists of spots where such a
+     *              vehicle would be allowed to park. More about this in the
+     *              ParkingLotBuilder documentation.
+     */
     public ParkingLot(HashMap<String, ArrayList<ArrayList<ParkingSpot>>> spots){
         mParkingSpots = spots;
     }
 
+    /**
+     * Attempt to park a vehicle. If successful, the ID from the spot where it
+     * is parked gets printed to stdout. Else, "LOTADO" is printed, warning the
+     * user that there are no vacant spots for such a vehicle.
+     *
+     * @param v Vehicle to be parked.
+     * @param arrivalTime Time of arrival, in minutes.
+     * @throws ParkingException Thrown if a vehicle with such a plate is alrea-
+     *                          dy parked in this lot.
+     */
     void park(Vehicle v, Integer arrivalTime) throws ParkingException {
         for (ArrayList<ParkingSpot> parkingSpots : mParkingSpots.get(v.type())) {
             for (ParkingSpot p : parkingSpots) {
@@ -30,9 +55,18 @@ public class ParkingLot {
             }
         }
 
-        throw new ParkingException("Failed to find a suitable parking spot!");
+        System.out.println("LOTADO");
     }
 
+    /**
+     * Remove a parked vehicle from the parking lot and print to stdout some
+     * information: how much its owner owes, for how long the vehicle had been
+     * parked and the type of spot where it had been parked.
+     *
+     * @param v Departing Vehicle
+     * @param departureTime Time of departure, in minutes
+     * @throws ParkingException Thrown if no such vehicle exists in the lot
+     */
     void depart(Vehicle v, Integer departureTime) throws ParkingException {
         for (ArrayList<ParkingSpot> parkingSpots : mParkingSpots.get(v.type())) {
             for (ParkingSpot p : parkingSpots) {
