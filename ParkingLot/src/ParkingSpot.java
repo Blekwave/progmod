@@ -1,5 +1,5 @@
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.math.MathContext;
 
 /**
  * Spot which can be occupied by a vehicle. Its relevant properties are its ID
@@ -16,7 +16,7 @@ import java.math.RoundingMode;
 public class ParkingSpot {
     private final String mSpotID;
     private final String mSpotType;
-    private final BigDecimal mHourlyRate;
+    private final BigDecimal mMinuteRate;
     private Boolean mIsOccupied;
     private Vehicle mOccupant;
     private Integer mArrivalTime;
@@ -32,7 +32,7 @@ public class ParkingSpot {
     public ParkingSpot(String spotID, String spotType, BigDecimal hourlyRate){
         mSpotID = spotID;
         mSpotType = spotType;
-        mHourlyRate = hourlyRate;
+        mMinuteRate = hourlyRate.divide(new BigDecimal(60.0), MathContext.DECIMAL128);
         mIsOccupied = false;
         mOccupant = null;
     }
@@ -85,7 +85,7 @@ public class ParkingSpot {
         mIsOccupied = false;
         mOccupant = null;
         BigDecimal interval = new BigDecimal(departureTime - mArrivalTime);
-        return mHourlyRate.multiply(interval).divide(new BigDecimal(60), RoundingMode.HALF_UP);
+        return mMinuteRate.multiply(interval, MathContext.DECIMAL128);
     }
 
 }

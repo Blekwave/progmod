@@ -14,3 +14,18 @@ hs_err_pid*
 out/
 
 *.iml
+
+# LaTeX
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.bbl
+*.bcf
+*.blg
+*.brf
+*.dvi
+*.pdf
