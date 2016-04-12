@@ -3,6 +3,26 @@
 \usepackage[T1]{fontenc}
 \usepackage{fullpage}
 \usepackage{hyperref}
+\usepackage[fixlanguage]{babelbib}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{courier}
+\selectbiblanguage{brazilian}
+
+\lstset{ %
+  basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  commentstyle=\color{green},    % comment style
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Java,                 % the language of the code
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  stringstyle=\color{mauve},     % string literal style
+  tabsize=4	                   % sets default tabsize to 2 spaces
+}
 
 \author{Renato Utsch e Victor Diniz}
 \title{Documentação Trabalho Prático 1\\Programação Modular}
@@ -11,14 +31,44 @@
 \maketitle
 
 \section{Introdução}
+O trabalho prático consistiu na implementação de um sistema de gerenciamento de estacionamento de veículos automotivos.
+
+O programa implementado para resolver esse problema foi dividido em duas partes: a especificação do estacionamento (os preços, a quantidade de vagas, a relação dos tipos de vagas, etc) e o sistema de controle do estacionamento. Para especificar o estacionamento uma \emph{DSL (Domain Specific Language)} simples foi criada. Essa DSL especifica o número de andares, os tipos de vaga, a quantidade de vagas por andar, o preço de cada vaga e as relações entre as vagas. Uma classe lê esses dados do arquivo de especificação e constrói a classe de controle baseada nesse arquivo. O sistema de controle, por sua vez, possui funções para parar e retirar carros do estacionamento.
 
 \section{Implementação}
+As seções abaixo explicam separadamente a especificação do estacionamento e a implementação do sistema de controle.
+
+\subsection{Especificação do Estacionamento}
+Ao invés de implementar os preços e os tipos de vaga do estacionamento diretamente no código fonte, o que seria difícil de modificar, resolvemos criar um arquivo de configuração que é lido na inicialização do programa que contém todas as informações necessárias para o estacionamento funcionar. Com isso, 
+A especificação do estacionamento foi feita em uma DSL criada especificamente para essa tarefa. O arquivo de configuração padrão do trabalho é mostrado abaixo:
+
+\lstinputlisting[caption=parkinglot.config]{../parkinglot.config}
+
+O arquivo é dividido em 3 seções:
+\begin{enumerate}
+    \item Linha 1, especifica quantos andares têm no estacionamento, no caso, 4.
+    \item Linhas 3 a 7, especifica cada um dos tipos de vaga, junto com quantas vagas desse tipo há por andar e quanto que custa cada vaga. Por exemplo, há duas vagas do tipo MT por andar, e parar nelas custa 3,50 a hora.
+    \item Linhas 9 a 13, especificam, para cada um dos tipos de veículo, qual a preferência de vagas para parar no estacionamento. Por exemplo, para veículos do tipo MT, a preferência é primeiro para tentar parar em vagas do tipo MT, depois em vagas do tipo VP e, finalmente em vagas do tipo VG.
+\end{enumerate}
+
+É interessante notar que, da forma que o arquivo de configuração é estruturado, a preferência é preencher todas as vagas de um tipo, em todos os andares, antes de passar para um outro tipo da relação. No caso, se preenche todas as vagas do tipo MT, em todos os andares, antes de tentar preencher uma vaga do tipo VP com um veículo do tipo MT.
+
+Para ler esse arquivo, criamos uma classe chamada \emph{ParkingLotBuilder}, que, através de regexes, lê o arquivo de entrada e monta uma estrutura de dados com todas as informações necessárias para o funcionamento do estacionamento. Essa estrutura de dados é então passada para o construtor do sistema de controle (a classe \emph{ParkingLot}) para ser utilizada no sistema de estacionamento.
+
+<descrição da estrutura de dados aqui>
+
+\subsection{Sistema de controle}
+
 
 \section{Testes}
+Para testar os resultados do sistema de gerenciamento de estacionamento, utilizamos da biblioteca JUnit. Essa é uma biblioteca de \emph{unit testing} comumente utilizada pelas aplicações Java, que permite especificar casos de teste e o que é esperado da aplicação dado o caso de teste.
+
+Com a JUnit, pudemos especificar vários casos de teste (na pasta \emph{test}) que verificavam se, dada uma entrada particular para o estacionamento, a saída era a esperada. A partir disso, foi possível fazer diversas modificações no código com confiança de que tudo continuava funcionando, pois os testes nos garantiam que nossas modificações não mudavam o resultado esperado.
 
 \section{Conclusão}
+A implementação desse sistema de estacionamento foi uma boa forma de aprender a utilizar a linguagem Java e colocar alguns dos conceitos aprendidos em aula em prática. Embora seja bastante simples, foi o suficiente para aprendermos como trabalhar em equipe e boas práticas de Orientação a Objetos.
 
-\cite{javadoc}
+\nocite{*}
 \bibliographystyle{ieeetr}
 \bibliography{doc}
 
