@@ -9,18 +9,24 @@
 \usepackage{courier}
 \selectbiblanguage{brazilian}
 
+\definecolor{mygreen}{RGB}{0, 150, 0}
+\definecolor{myblue}{RGB}{0, 0, 200}
+\definecolor{myred}{RGB}{150, 0, 0}
+
 \lstset{ %
   basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
   breaklines=true,                 % sets automatic line breaking
-  commentstyle=\color{green},    % comment style
+  commentstyle=\color{mygreen},    % comment style
   frame=single,	                   % adds a frame around the code
   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-  keywordstyle=\color{blue},       % keyword style
+  keywordstyle=\bfseries\color{myblue},       % keyword style
   language=Java,                 % the language of the code
   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
   rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-  stringstyle=\color{mauve},     % string literal style
+  stringstyle=\color{myred},     % string literal style
+  showspaces=false,
+  showstringspaces=false,
   tabsize=4	                   % sets default tabsize to 2 spaces
 }
 
@@ -55,10 +61,59 @@ O arquivo é dividido em 3 seções:
 
 Para ler esse arquivo, criamos uma classe chamada \emph{ParkingLotBuilder}, que, através de regexes, lê o arquivo de entrada e monta uma estrutura de dados com todas as informações necessárias para o funcionamento do estacionamento. Essa estrutura de dados é então passada para o construtor do sistema de controle (a classe \emph{ParkingLot}) para ser utilizada no sistema de estacionamento.
 
-<descrição da estrutura de dados aqui>
+\subsubsection{Estrutura de Dados}
+
+Com os dados do arquivo de configuração, a classe ParkingLotBuilder constrói uma estrutura de dados do tipo abaixo:
+
+\begin{lstlisting}
+HashMap<String, ArrayList<ArrayList<ParkingSpot>>>
+\end{lstlisting}
+
+Como essa estrutura é um pouco complicada, vamos descrever ela de dentro para fora:
+
+\begin{itemize}
+    \item A classe \emph{ParkingSpot} é responsável por cuidar de uma vaga em particular do estacionamento. Quando o ParkingLotBuilder lê o arquivo de configuração, ele cria uma instância da ParkingSpot por vaga de estacionamento. Essa classe sabe qual o seu tipo de vaga, em qual andar está, se está ocupada ou não, há quanto tempo está ocupada e qual o custo por hora para parar nela.
+    \item A \emph{ArrayList<ParkingSpot>} é uma array de ParkingSpots que contém todos os parking spots de um mesmo tipo. Por exemplo, pode haver uma ArrayList com ParkingSpots do tipo "MT". Esses ParkingSpots são ordenados em ordem, de modo que se você iterar por eles primeiro você acessará os do primeiro andar, depois do segundo, e assim por diante.
+    \item A \emph{ArrayList<ArrayList<ParkingSpot>} é uma array que contém arrays de ParkingSpots. Isso é necessário pois um determinado tipo de veículo pode parar em tipos diferentes de vaga (por exemplo, um veículo do tipo MT pode parar, em ordem, nas vagas do tipo MT, VP ou VG). As arrays estão ordenadas nessa ordem, de modo que encontrar uma vaga para um determinado tipo de veículo significa apenas iterar pelas arrays de ParkingSpots.
+    \item O \emph{HashMap} que encapsula a estrutura de dados descrita no item anterior mapeia a String do tipo de veículo para as arrays com as vagas que esse tipo de veículo pode parar.
+\end{itemize}
 
 \subsection{Sistema de controle}
-O sistema de controle do estacionamento tira vantagem do formato da estrutura de dados gerada pela classe Builder para funcionar de maneira extremamente simples.
+O sistema de controle do estacionamento tira vantagem do formato da estrutura de dados gerada pela classe Builder para funcionar de maneira extremamente simples. O código abaixo exemplifica como parar um veículo:
+
+\begin{lstlisting}
+void park(Vehicle v, HashMap<String, ArrayList<ArrayList<ParkingSpot>>> hash) throws ParkingException {
+    // Primeiro, encontrar a lista de arrays do tipo de veículo sendo parado.
+    ArrayList<ArrayList<ParkingSpot>> arrays = hash.get(v.type());
+
+    // Segundo, iterar por essa lista para receber as listas de vagas de um tipo.
+    for(ArrayList<ParkingSpot> spots : arrays) {
+         // Terceiro, para cada tipo de vaga, iterar por todas as vagas.
+         for(ParkingSpot s : spots) {
+             // Quarto, se o local não está ocupado, parar lá.
+             if(!s.isOccupied()) {
+                 s.occupy(v);
+                 return;
+             }
+         }
+    }
+
+    throw ParkingException("Estacionamento lotado.");
+}
+\end{lstlisting}
+
+A partir do exemplo acima, podemos definir o seguinte método para parar um veículo:
+\begin{enumerate}
+    \item Recuperar a lista de arrays de vagas do tipo do veículo sendo parado. Note que como tipos de veículos diferentes podem compartilhar os mesmos tipos de vagas, listas de arrays de vagas diferentes podem referenciar as mesmas vagas.
+    \item Iterar pelas listas de arrays para recuperar as arrays representando apenas um tipo de vaga.
+    \item Iterar por cada vaga do mesmo tipo até encontrar uma vaga livre. Note que se as vagas de um tipo estiverem todas preenchidas, basta apenas continuar iterando pelas outras arrays para achar vagas disponíveis de outro tipo.
+    \item Se encontrar uma vaga vazia, parar o carro nela e retornar.
+    \item Se nenhuma vaga for encontrada, disparar uma exceção.
+\end{enumerate}
+
+Essa estrutura de dados é muito versátil por englobar todas as informações necessárias para o estacionamento de uma maneira bem simples de recuperar e iterar, inclusive com ótima complexidade assintótica. Tudo isso é possível porque listas de arrays de vagas podem compartilhar as mesmas arrays de vagas (por exemplo, veículos do tipo MT compartilham as listas de vagas do tipo VG com os tipos de veículo VP e VG).
+
+Para tirar um veículo do estacionamento, o código é igualmente simples, basta iterar por todas as vagas em que o tipo de veículo pode parar até encontrar o veículo com a placa procurada.
 
 \section{Testes}
 Para testar os resultados do sistema de gerenciamento de estacionamento, utilizamos da biblioteca JUnit. Essa é uma biblioteca de \emph{unit testing} comumente utilizada pelas aplicações Java, que permite especificar casos de teste e o que é esperado da aplicação dado o caso de teste.
