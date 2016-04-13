@@ -16,7 +16,7 @@ import java.util.regex.Matcher;
 public class Main {
     public static void main(String[] args) throws IOException, ParkingException{
         ParkingInputReader input = new ParkingInputReader(System.in);
-        ParkingLot parkingLot = new ParkingLotBuilder("../parkinglot.config").build();
+        ParkingLot parkingLot = new ParkingLotBuilder("parkinglot.config").build();
 
         while(input.hasNext()) {
             ParkingEvent e = input.next();
