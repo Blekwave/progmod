@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileReader;
+
 import static org.junit.Assert.*;
 
 /**
@@ -12,7 +14,8 @@ public class ParkingLotTest {
 
     @Before
     public void setUp() throws Exception {
-        mBuilder = new ParkingLotBuilder("parkinglot.config");
+        FileReader configReader = new FileReader("parkinglot.config");
+        mBuilder = new ParkingLotBuilder(configReader);
     }
 
     @Test
