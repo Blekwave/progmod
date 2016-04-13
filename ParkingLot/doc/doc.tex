@@ -120,7 +120,9 @@ Uma decisão de projeto importante foi a não utilização de getters e setters.
 \section{Testes}
 Para testar os resultados do sistema de gerenciamento de estacionamento, utilizamos da biblioteca JUnit. Essa é uma biblioteca de \emph{unit testing} comumente utilizada pelas aplicações Java, que permite especificar casos de teste e o que é esperado da aplicação dado o caso de teste.
 
-Com a JUnit, pudemos especificar vários casos de teste (na pasta \emph{test}) que verificavam se, dada uma entrada particular para o estacionamento, a saída era a esperada. A partir disso, foi possível fazer diversas modificações no código com confiança de que tudo continuava funcionando, pois os testes nos garantiam que nossas modificações não mudavam o resultado esperado.
+Com a JUnit, pudemos especificar vários casos de teste (na pasta \emph{test}) que verificavam se, dada uma entrada particular para o estacionamento, a saída era a esperada. Além disso, para cada classe que fazia alguma função importante implementamos testes específicos que testavam a entrada e a saída das classes para termos a garantia de que a classe estava implementada corretamente.
+
+Com os Unit Tests, foi possível fazer diversas modificações no código com confiança de que tudo continuava funcionando, pois os testes nos garantiam que nossas modificações não mudavam o resultado esperado.
 
 \section{Conclusão}
 A implementação desse sistema de estacionamento foi uma boa forma de aprender a utilizar a linguagem Java e colocar alguns dos conceitos aprendidos em aula em prática. Embora seja bastante simples, foi o suficiente para aprendermos como trabalhar em equipe e boas práticas de Orientação a Objetos.
