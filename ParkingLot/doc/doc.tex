@@ -112,6 +112,11 @@ Essa estrutura de dados é muito versátil por englobar todas as informações n
 
 Para tirar um veículo do estacionamento, o código é igualmente simples, basta iterar por todas as vagas em que o tipo de veículo pode parar até encontrar o veículo com a placa procurada.
 
+\subsection{Arquitetura}
+Ao decidir como implementaríamos nossas classes, estabelecemos alguns padrões. Fora seguir os padrões Camel Case comuns em javam, também decidimos seguir uma notação húngara simplificada, utilizando o prefixo "m" para membros de classe e "s" para variáveis estáticas. 
+
+Uma decisão de projeto importante foi a não utilização de getters e setters. Na comunidade de desenvolvedores que utilizam o paradigma de Orientação a Objetos, sempre houve uma discórdia sobre esse padrão de projeto, com muitos considerando-o como contra-produtivo~\cite{evil}. Nós concordamos com esse grupo de desenvolvedores e, por isso, não usamos getters e setters.
+
 \section{Testes}
 Para testar os resultados do sistema de gerenciamento de estacionamento, utilizamos da biblioteca JUnit. Essa é uma biblioteca de \emph{unit testing} comumente utilizada pelas aplicações Java, que permite especificar casos de teste e o que é esperado da aplicação dado o caso de teste.
 
@@ -120,7 +125,6 @@ Com a JUnit, pudemos especificar vários casos de teste (na pasta \emph{test}) q
 \section{Conclusão}
 A implementação desse sistema de estacionamento foi uma boa forma de aprender a utilizar a linguagem Java e colocar alguns dos conceitos aprendidos em aula em prática. Embora seja bastante simples, foi o suficiente para aprendermos como trabalhar em equipe e boas práticas de Orientação a Objetos.
 
-\nocite{*}
 \bibliographystyle{ieeetr}
 \bibliography{doc}
 
