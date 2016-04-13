@@ -15,18 +15,23 @@ import java.util.regex.Matcher;
  */
 public class Main {
     public static void main(String[] args) throws IOException, ParkingException{
-        ParkingInputReader input = new ParkingInputReader(System.in);
+        FileInputStream inputStream = new FileInputStream("entrada.txt");
+        PrintWriter output = new PrintWriter("saida.txt");
+
+        ParkingInputReader input = new ParkingInputReader(inputStream);
         ParkingLot parkingLot = new ParkingLotBuilder("parkinglot.config").build();
 
         while(input.hasNext()) {
             ParkingEvent e = input.next();
 
             if(e.type().equals("E")) {
-                System.out.println(parkingLot.park(e.vehicle(), e.time()));
+                output.println(parkingLot.park(e.vehicle(), e.time()));
             }
             else {
-                System.out.println(parkingLot.depart(e.vehicle(), e.time()));
+                output.println(parkingLot.depart(e.vehicle(), e.time()));
             }
         }
+
+        output.close();
     }
 }
