@@ -35,4 +35,4 @@ clean:
 	rm -f doc/*.pdf
 
 run:
-	cd src && java TP1
+	cd src && java Main
