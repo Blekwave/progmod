@@ -8,6 +8,7 @@ all:
 test: all
 	javac -cp $(CLASSPATH) test/*.java
 	java -cp $(CLASSPATH) org.junit.runner.JUnitCore ParkingSpotTest
+	java -cp $(CLASSPATH) org.junit.runner.JUnitCore ParkingLotTest
 
 .PHONY: doc
 doc:
@@ -33,6 +34,7 @@ clean:
 	rm -f doc/*.brf
 	rm -f doc/*.dvi
 	rm -f doc/*.pdf
+	rm -f test/*.java
 
 run:
 	java -cp $(CLASSPATH) Main
