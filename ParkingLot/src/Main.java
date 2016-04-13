@@ -19,7 +19,9 @@ public class Main {
         PrintWriter output = new PrintWriter("saida.txt");
 
         ParkingInputReader input = new ParkingInputReader(inputStream);
-        ParkingLot parkingLot = new ParkingLotBuilder("parkinglot.config").build();
+
+        FileReader configReader = new FileReader("parkinglot.config");
+        ParkingLot parkingLot = new ParkingLotBuilder(configReader).build();
 
         while(input.hasNext()) {
             ParkingEvent e = input.next();

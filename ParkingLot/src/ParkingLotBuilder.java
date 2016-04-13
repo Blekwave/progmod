@@ -115,16 +115,17 @@ public class ParkingLotBuilder {
      *     MT: MT > VP > VG
      *     NE: NE
      *
-     * @param configPath path to the configuration file.
+     * @param configReader Reader object (FileReader, StringReader) containing
+     *                     the configuration file to be read.
      * @throws ConfigFormatException If there's something wrong with the confi-
      *                               guration file's format.
      * @throws IOException If BufferedReader.readLine raises it
      */
-    public ParkingLotBuilder (String configPath) throws IOException {
+    public ParkingLotBuilder (Reader configReader) throws IOException {
         mSpotTypes = new ArrayList<>();
         mVehicleSpotRelations = new HashMap<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(configPath))) {
+        try (BufferedReader br = new BufferedReader(configReader)) {
             parseNumLevels(br);
             parseSpotTypes(br);
             parseVehicleSpotRelations(br);
