@@ -9,7 +9,6 @@ test: all
 	javac -cp $(CLASSPATH) test/*.java
 	java -cp $(CLASSPATH) org.junit.runner.JUnitCore ParkingSpotTest
 	java -cp $(CLASSPATH) org.junit.runner.JUnitCore ParkingLotTest
-	java -cp $(CLASSPATH) org.junit.runner.JUnitCore ParkingLotBuilderTest
 
 .PHONY: doc
 doc:
