@@ -82,7 +82,7 @@ Como essa estrutura é um pouco complicada, vamos descrever ela de dentro para f
 O sistema de controle do estacionamento tira vantagem do formato da estrutura de dados gerada pela classe Builder para funcionar de maneira extremamente simples. O código abaixo exemplifica como parar um veículo:
 
 \begin{lstlisting}
-void park(Vehicle v, HashMap<String, ArrayList<ArrayList<ParkingSpot>>> hash) throws ParkingException {
+String park(Vehicle v, HashMap<String, ArrayList<ArrayList<ParkingSpot>>> hash) throws ParkingException {
     // Primeiro, encontrar a lista de arrays do tipo de veículo sendo parado.
     ArrayList<ArrayList<ParkingSpot>> arrays = hash.get(v.type());
 
@@ -92,13 +92,12 @@ void park(Vehicle v, HashMap<String, ArrayList<ArrayList<ParkingSpot>>> hash) th
          for(ParkingSpot s : spots) {
              // Quarto, se o local não está ocupado, parar lá.
              if(!s.isOccupied()) {
-                 s.occupy(v);
-                 return;
+                 return s.occupy(v);
              }
          }
     }
 
-    throw ParkingException("Estacionamento lotado.");
+    return "LOTADO";
 }
 \end{lstlisting}
 
