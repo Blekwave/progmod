@@ -4,6 +4,9 @@ CLASSPATH=src:test:3rdparty/junit-4.12.jar:3rdparty/hamcrest-core-1.3.jar
 all:
 	javac src/*.java
 
+run: all
+	java -cp $(CLASSPATH) Main
+
 .PHONY: test
 test: all
 	javac -cp $(CLASSPATH) test/*.java
@@ -21,6 +24,7 @@ doc:
 .PHONY: clean
 clean:
 	rm -f */*.class
+	rm -f saida.txt
 	rm -f doc/*.aux
 	rm -f doc/*.lof
 	rm -f doc/*.log
@@ -35,5 +39,3 @@ clean:
 	rm -f doc/*.dvi
 	rm -f doc/*.pdf
 
-run:
-	java -cp $(CLASSPATH) Main
