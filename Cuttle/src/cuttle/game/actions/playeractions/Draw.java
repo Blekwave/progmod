@@ -9,21 +9,24 @@ import org.json.JSONObject;
  * Describe this class and the methods exposed by it.
  */
 public class Draw extends PlayerAction {
+
+    private CuttleCard mDrawn;
+
     public Draw(Player player){
         super(player, "draw");
     }
 
     @Override
     public void act() {
-        CuttleCard drawn = game().deck().pop();
-        player().hand().push(drawn);
-        game().updateCardPile(drawn, player().hand());
+        mDrawn = game().deck().pop();
+        player().hand().push(mDrawn);
+        game().updateCardPile(mDrawn, player().hand());
     }
 
     @Override
     public JSONObject buildPlayerUpdate() {
         JSONObject obj = super.buildPlayerUpdate();
-        obj.put("drawn", player().hand().last());
+        obj.put("drawn", mDrawn.id());
         return obj;
     }
 }
