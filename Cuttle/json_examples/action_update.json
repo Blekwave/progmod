@@ -1,0 +1,29 @@
+{
+    "type": "action_update",
+    "action_type": "discard",
+    "player": 1,
+    "card_location": "p1_hand",
+    "card_index": 2
+}
+
+// Sent to player 1 (or to the opponent, if the player's hand is visible)
+{
+    "type": "action_update",
+    "action_type": "draw",
+    "player": 1,
+    "drawn": 32
+}
+
+// Sent to player 0
+{
+    "type": "action_update",
+    "action_type": "draw",
+    "player": 1
+}
+
+{
+    "type": "action_update",
+    "action_type": "destroy",
+    "card_location": "p0_hand",
+    "card_index": 3
+}

@@ -4,7 +4,8 @@
     "calls": [
         {
             "id": 0,
-            "behavior_type": "draw"
+            "behavior_type": "draw",
+            "player": 0
         },
         {
             "id": 1,
