@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class PointPlayBehavior extends Behavior {
+public class PointPlayBehavior extends CardBehavior<BehaviorCall> {
 
     public PointPlayBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt);
@@ -17,9 +17,9 @@ public class PointPlayBehavior extends Behavior {
 
     @Override
     public ArrayList<BehaviorCall> listValidCalls() {
-        ArrayList<BehaviorCall> l = new ArrayList<>();
-        l.add(new BehaviorCall(this));
-        return l;
+        ArrayList<BehaviorCall> list = new ArrayList<>();
+        list.add(new BehaviorCall(this));
+        return list;
     }
 
     @Override

@@ -20,6 +20,14 @@ public class CuttleGame {
         return mVictoryReq;
     }
 
+    public Player player(){
+        return mPlayer;
+    }
+
+    public Player opponent(){
+        return mOpponent;
+    }
+
     public void startGame(){
         // ...
     }

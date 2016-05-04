@@ -25,6 +25,10 @@ public abstract class CuttleCard extends PlayingCard {
         mGame = game;
     }
 
+    public CuttleGame game(){
+        return mGame;
+    }
+
     public Integer id(){
         return mId;
     }
