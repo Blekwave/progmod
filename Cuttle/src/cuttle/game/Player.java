@@ -43,6 +43,8 @@ public class Player {
                 return 7;
             case 4:
                 return 5;
+            default:
+                return -1; // TODO: throw an error
         }
     }
 
