@@ -1,4 +1,4 @@
-package cuttle.game.cards.actions;
+package cuttle.game.actions;
 
 import cuttle.game.CuttleGame;
 import org.json.JSONObject;

@@ -1,9 +1,8 @@
-package cuttle.game.cards.actions.gameactions;
+package cuttle.game.actions.gameactions;
 
-import cuttle.game.CuttleGame;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.Pile;
-import cuttle.game.cards.actions.Action;
+import cuttle.game.actions.Action;
 import org.json.JSONObject;
 
 /**
