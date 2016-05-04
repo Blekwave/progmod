@@ -8,9 +8,9 @@ import cuttle.game.cards.events.Trigger;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class Destroy extends TargetedAction{
-    public Destroy(CuttleCard target){
-        super(target, "destroy");
+public class Return extends TargetedAction {
+    public Return(CuttleCard target){
+        super(target, "return");
     }
 
     @Override
@@ -20,7 +20,7 @@ public class Destroy extends TargetedAction{
         Pile cardPile = game().cardPile(target());
         Integer index = cardPile.indexOf(target());
         cardPile.pop(index);
-        game().scrapPile().push(target());
+        game().deck().push(target());
         game().updateCardPile(target(), game().scrapPile());
     }
 }
