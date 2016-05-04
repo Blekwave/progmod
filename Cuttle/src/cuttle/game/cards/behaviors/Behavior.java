@@ -2,6 +2,7 @@ package cuttle.game.cards.behaviors;
 
 import cuttle.game.cards.prompts.Prompt;
 import cuttle.game.cards.prompts.PromptType;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -10,9 +11,11 @@ import java.util.ArrayList;
  */
 public abstract class Behavior<T extends BehaviorCall> {
     private PromptType mPromptType;
+    private String mType;
 
-    public Behavior(PromptType promptType){
+    public Behavior(PromptType promptType, String type){
         mPromptType = promptType;
+        mType = type;
     }
 
     public ArrayList<? extends BehaviorCall> listValidCalls() {
@@ -21,5 +24,12 @@ public abstract class Behavior<T extends BehaviorCall> {
         return list;
     }
 
-    public abstract void call(T c, Prompt p);
+    public JSONObject buildCallJSON(T call){
+        JSONObject obj = new JSONObject();
+        call.defineJSONProperties(obj);
+        obj.put("behavior_type", mType);
+        return obj;
+    }
+
+    public abstract void call(T call, Prompt p);
 }

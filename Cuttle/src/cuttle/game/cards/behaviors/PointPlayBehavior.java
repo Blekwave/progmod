@@ -10,7 +10,7 @@ import cuttle.game.cards.prompts.PromptType;
 public class PointPlayBehavior extends CardBehavior<BehaviorCall> {
 
     public PointPlayBehavior(CuttleCard card){
-        super(card, PromptType.PlayPrompt);
+        super(card, PromptType.PlayPrompt, "point_play");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package cuttle.game.cards.behaviors;
 
 import cuttle.game.cards.CuttleCard;
+import cuttle.game.cards.Pile;
 import cuttle.game.cards.prompts.Prompt;
 import cuttle.game.cards.prompts.PromptType;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  */
 public class ScuttleBehavior extends CardBehavior<TargetedBehaviorCall> {
     public ScuttleBehavior(CuttleCard card){
-        super(card, PromptType.PlayPrompt);
+        super(card, PromptType.PlayPrompt, "scuttle");
     }
 
     private Integer scuttleValue(CuttleCard c){
@@ -20,8 +21,7 @@ public class ScuttleBehavior extends CardBehavior<TargetedBehaviorCall> {
 
     @Override
     public ArrayList<TargetedBehaviorCall> listValidCalls() {
-        ArrayList<CuttleCard> opponentsBoard = card().game().opponent().pointBoard();
-
+        Pile opponentsBoard = card().game().opponent().pointBoard();
         ArrayList<TargetedBehaviorCall> list = new ArrayList<>();
 
         for (CuttleCard c : opponentsBoard){
