@@ -16,8 +16,6 @@ public class CuttleGame {
         mOpponent = new Player(this, 1);
     }
 
-    public static final Integer victoryReq = 21;
-
     public Player player(){
         return mPlayer;
     }

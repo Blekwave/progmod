@@ -15,12 +15,6 @@ public class Player {
         return mId;
     }
 
-    private Integer mId;
-
-    private Integer mVictoryReq;
-    private Integer mHandVisibility;
-    private Integer mProtection;
-
     public Pile hand(){
         return mHand;
     }
@@ -37,20 +31,34 @@ public class Player {
         return mGame;
     }
 
+    public Integer victoryReq(){
+        switch (mKingCount){
+            case 0:
+                return 21;
+            case 1:
+                return 14;
+            case 2:
+                return 10;
+            case 3:
+                return 7;
+            case 4:
+                return 5;
+        }
+    }
+
+    private Integer mId;
     private Pile mHand;
     private Pile mPointBoard;
     private Pile mContinuousBoard;
-
     private CuttleGame mGame;
-
     private ArrayList<PlayerBehavior> mBehaviors;
 
     public Player(CuttleGame game, Integer id){
         mId = id;
 
-        mVictoryReq = CuttleGame.victoryReq;
-        mHandVisibility = 0;
-        mProtection = 0;
+        mKingCount = 0;
+        mQueenCount = 0;
+        mEightCount = 0;
 
         mHand = new Pile("p" + id + "_hand");
         mPointBoard = new Pile("p" + id + "_point_board");
@@ -58,5 +66,33 @@ public class Player {
 
         mGame = game;
     }
+
+    public void raiseVisibility(){
+        mEightCount++;
+    }
+
+    public void lowerVisibility(){
+        mEightCount--;
+    }
+
+    public void raiseProtection(){
+        mQueenCount++;
+    }
+
+    public void lowerProtection(){
+        mQueenCount--;
+    }
+
+    public void raiseVictoryReq(){
+        mKingCount++;
+    }
+
+    public void lowerVictoryReq(){
+        mKingCount--;
+    }
+
+    private Integer mEightCount;
+    private Integer mQueenCount;
+    private Integer mKingCount;
 
 }
