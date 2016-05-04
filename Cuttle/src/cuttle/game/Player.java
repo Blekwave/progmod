@@ -33,6 +33,10 @@ public class Player {
         return mContinuousBoard;
     }
 
+    public CuttleGame game(){
+        return mGame;
+    }
+
     private Pile mHand;
     private Pile mPointBoard;
     private Pile mContinuousBoard;

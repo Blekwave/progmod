@@ -15,7 +15,7 @@ public abstract class PlayerAction extends Action {
     private Player mPlayer;
 
     public PlayerAction(Player player, String type){
-        super(type);
+        super(player.game(), type);
         mPlayer = player;
     }
 
