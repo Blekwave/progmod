@@ -1,6 +1,7 @@
 package cuttle.game.cards;
 
 import cuttle.game.cards.behaviors.Behavior;
+import cuttle.game.cards.behaviors.CardBehavior;
 import cuttle.game.cards.events.Event;
 import cuttle.game.cards.events.Trigger;
 import cuttle.game.CuttleGame;
@@ -12,9 +13,21 @@ import java.util.ArrayList;
  */
 public abstract class CuttleCard extends PlayingCard {
 
+    public Integer id(){
+        return mId;
+    }
+
+    public CuttleGame game(){
+        return mGame;
+    }
+
+    public ArrayList<CardBehavior> behaviors(){
+        return mBehaviors;
+    }
+
     private CuttleGame mGame;
 
-    private ArrayList<Behavior> mBehaviors;
+    private ArrayList<CardBehavior> mBehaviors;
     private ArrayList<Event> mEvents;
 
     private final Integer mId;
@@ -25,13 +38,7 @@ public abstract class CuttleCard extends PlayingCard {
         mGame = game;
     }
 
-    public CuttleGame game(){
-        return mGame;
-    }
 
-    public Integer id(){
-        return mId;
-    }
 
     public void bindEvent(Event e){
         // ...

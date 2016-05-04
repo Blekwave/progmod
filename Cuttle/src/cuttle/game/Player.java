@@ -31,6 +31,14 @@ public class Player {
         return mGame;
     }
 
+    public ArrayList<PlayerBehavior> behaviors(){
+        return mBehaviors;
+    }
+
+    public BehaviorIterator behaviorIterator(){
+        return new BehaviorIterator(this);
+    }
+
     public Integer victoryReq(){
         switch (mKingCount){
             case 0:
@@ -68,6 +76,8 @@ public class Player {
 
         mGame = game;
     }
+
+    // CONTINUOUS CARD FLAGS
 
     public void raiseVisibility(){
         mEightCount++;

@@ -8,7 +8,7 @@ import cuttle.game.cards.events.Trigger;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class Destroy extends TargetedAction{
+public class Destroy extends TargetedAction {
     public Destroy(CuttleCard target){
         super(target, "destroy");
     }
