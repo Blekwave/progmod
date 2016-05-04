@@ -29,6 +29,10 @@ public class Pile implements Iterable<CuttleCard> {
         mList.add(card);
     }
 
+    public CuttleCard last(){
+        return mList.get(mList.size() - 1);
+    }
+
     public Integer indexOf(CuttleCard card){
         return mList.indexOf(card);
     }

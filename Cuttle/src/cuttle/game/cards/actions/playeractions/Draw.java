@@ -1,9 +1,9 @@
 package cuttle.game.cards.actions.playeractions;
 
-import cuttle.game.CuttleGame;
 import cuttle.game.Player;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.actions.PlayerAction;
+import org.json.JSONObject;
 
 /**
  * Describe this class and the methods exposed by it.
@@ -18,5 +18,12 @@ public class Draw extends PlayerAction {
         CuttleCard drawn = game().deck().pop();
         player().hand().push(drawn);
         game().updateCardPile(drawn, player().hand());
+    }
+
+    @Override
+    public JSONObject buildPlayerUpdate() {
+        JSONObject obj = super.buildPlayerUpdate();
+        obj.put("drawn", player().hand().last());
+        return obj;
     }
 }
