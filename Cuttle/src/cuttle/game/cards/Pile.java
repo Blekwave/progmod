@@ -19,10 +19,14 @@ public class Pile implements Iterable<CuttleCard> {
         mName = name;
     }
 
+    public CuttleCard pop(Integer index){
+        CuttleCard card = mList.get(index);
+        mList.remove(index);
+        return card;
+    }
+
     public CuttleCard pop(){
-        CuttleCard top = mList.get(mList.size() - 1);
-        mList.remove(mList.size() - 1);
-        return top;
+        return pop(mList.size() - 1);
     }
 
     public void push(CuttleCard card){
