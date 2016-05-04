@@ -15,8 +15,11 @@ public abstract class Behavior<T extends BehaviorCall> {
         mPromptType = promptType;
     }
 
-
-    public abstract ArrayList<T> listValidCalls();
+    public ArrayList<? extends BehaviorCall> listValidCalls() {
+        ArrayList<BehaviorCall> list = new ArrayList<>();
+        list.add(new BehaviorCall(this));
+        return list;
+    }
 
     public abstract void call(T c, Prompt p);
 }

@@ -16,13 +16,6 @@ public class PointPlayBehavior extends CardBehavior<BehaviorCall> {
     }
 
     @Override
-    public ArrayList<BehaviorCall> listValidCalls() {
-        ArrayList<BehaviorCall> list = new ArrayList<>();
-        list.add(new BehaviorCall(this));
-        return list;
-    }
-
-    @Override
     public void call(BehaviorCall c, Prompt p) {
         // ...
     }
