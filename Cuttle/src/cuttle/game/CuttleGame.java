@@ -45,7 +45,7 @@ public class CuttleGame {
     private ServerAdapter mServerAdapter;
 
     public void startGame(){
-        // Initialize deck
+        // TODO: Initialize deck
         mScrapPile = new Pile("scrap_pile", null);
 
         mCardPileMap = new HashMap<>();
