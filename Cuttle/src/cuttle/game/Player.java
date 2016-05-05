@@ -5,6 +5,7 @@ import cuttle.game.cards.Pile;
 import cuttle.game.cards.behaviors.PlayerBehavior;
 import cuttle.game.cards.behaviors.playerbehaviors.DiscardBehavior;
 import cuttle.game.cards.behaviors.playerbehaviors.DrawBehavior;
+import cuttle.game.cards.behaviors.playerbehaviors.PassBehavior;
 
 import java.util.ArrayList;
 
@@ -74,6 +75,7 @@ public class Player {
         mBehaviors = new ArrayList<>();
         mBehaviors.add(new DrawBehavior(this));
         mBehaviors.add(new DiscardBehavior(this));
+        mBehaviors.add(new PassBehavior(this));
     }
 
     // CHECK WIN
