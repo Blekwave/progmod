@@ -31,7 +31,7 @@ public class Pile implements Iterable<CuttleCard> {
 
     public CuttleCard pop(Integer index){
         CuttleCard card = mList.get(index);
-        mList.remove(index);
+        mList.remove(index.intValue());
         return card;
     }
 
