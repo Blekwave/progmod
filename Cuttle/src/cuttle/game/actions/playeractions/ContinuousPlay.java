@@ -8,8 +8,8 @@ import cuttle.game.cards.CuttleCard;
  * Describe this class and the methods exposed by it.
  */
 public class ContinuousPlay extends TargetedPlayerAction {
-    public ContinuousPlay(CuttleCard target, Player player){
-        super(target, player, "continuous_play");
+    public ContinuousPlay(CuttleCard target){
+        super(target, target.owner(), "continuous_play");
     }
 
     @Override

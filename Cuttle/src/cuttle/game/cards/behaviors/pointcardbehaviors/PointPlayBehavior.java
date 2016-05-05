@@ -20,7 +20,6 @@ public class PointPlayBehavior extends CardBehavior<BehaviorCall> {
 
     @Override
     public void call(BehaviorCall c, Prompt p) {
-        Player owner = game().cardPile(card()).owner();
-        game().perform(new PointPlay(card(), owner));
+        game().perform(new PointPlay(card()));
     }
 }

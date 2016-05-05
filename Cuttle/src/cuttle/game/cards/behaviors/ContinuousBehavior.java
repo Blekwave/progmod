@@ -15,7 +15,7 @@ public abstract class ContinuousBehavior<T extends BehaviorCall> extends CardBeh
 
     @Override
     public void call(T call, Prompt prompt) {
-        game().perform(new ContinuousPlay(card(), card().owner()));
+        game().perform(new ContinuousPlay(card()));
         entryEffect(call, prompt);
     }
 
