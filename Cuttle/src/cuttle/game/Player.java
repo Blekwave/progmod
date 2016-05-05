@@ -3,6 +3,8 @@ package cuttle.game;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.Pile;
 import cuttle.game.cards.behaviors.PlayerBehavior;
+import cuttle.game.cards.behaviors.playerbehaviors.DiscardBehavior;
+import cuttle.game.cards.behaviors.playerbehaviors.DrawBehavior;
 
 import java.util.ArrayList;
 
@@ -48,8 +50,9 @@ public class Player {
     private Pile mPointBoard;
     private Pile mContinuousBoard;
     private CuttleGame mGame;
-    private ArrayList<PlayerBehavior> mBehaviors;
     private Player mOpponent;
+
+    private ArrayList<PlayerBehavior> mBehaviors;
 
     public Player(CuttleGame game, Integer id, Player opponent){
         mId = id;
@@ -64,6 +67,10 @@ public class Player {
 
         mGame = game;
         mOpponent = opponent;
+
+        mBehaviors = new ArrayList<>();
+        mBehaviors.add(new DrawBehavior(this));
+        mBehaviors.add(new DiscardBehavior(this));
     }
 
     // CHECK WIN

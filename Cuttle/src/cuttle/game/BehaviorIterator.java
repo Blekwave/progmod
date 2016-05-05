@@ -14,13 +14,10 @@ public class BehaviorIterator implements Iterator<Behavior> {
     private Iterator<CuttleCard> mHandIterator;
     private Iterator<? extends Behavior> mInternalIterator;
 
-    private Boolean mIteratingPlayer;
-
     public BehaviorIterator(Player player){
         mPlayer = player;
         mHandIterator = player.hand().iterator();
         mInternalIterator = player.behaviors().iterator();
-        mIteratingPlayer = true;
     }
 
     @Override
