@@ -1,5 +1,6 @@
 package cuttle.game.cards.prompts;
 
+import cuttle.game.BehaviorIterator;
 import cuttle.game.Player;
 import cuttle.game.cards.behaviors.Behavior;
 import cuttle.game.cards.behaviors.BehaviorCall;
@@ -7,7 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Describe this class and the methods exposed by it.
@@ -60,7 +60,7 @@ public abstract class Prompt {
 
     public void registerValidCalls(Player player){
         mCallsJSONArray = new JSONArray();
-        Iterator<Behavior> it = player.behaviorIterator();
+        BehaviorIterator it = player.behaviorIterator();
 
         while (it.hasNext()){
             Behavior<? extends BehaviorCall, Prompt> b = it.next();

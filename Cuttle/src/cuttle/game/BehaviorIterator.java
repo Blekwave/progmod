@@ -10,12 +10,10 @@ import java.util.Iterator;
  */
 public class BehaviorIterator implements Iterator<Behavior> {
 
-    private Player mPlayer;
     private Iterator<CuttleCard> mHandIterator;
     private Iterator<? extends Behavior> mInternalIterator;
 
     public BehaviorIterator(Player player){
-        mPlayer = player;
         mHandIterator = player.hand().iterator();
         mInternalIterator = player.behaviors().iterator();
     }
