@@ -39,23 +39,6 @@ public class Player {
         return new BehaviorIterator(this);
     }
 
-    public Integer victoryReq(){
-        switch (mKingCount){
-            case 0:
-                return 21;
-            case 1:
-                return 14;
-            case 2:
-                return 10;
-            case 3:
-                return 7;
-            case 4:
-                return 5;
-            default:
-                return -1; // TODO: throw an error
-        }
-    }
-
     private Integer mId;
     private Pile mHand;
     private Pile mPointBoard;
@@ -79,6 +62,10 @@ public class Player {
 
     // CONTINUOUS CARD FLAGS
 
+    public Boolean handIsVisible(){
+        return mEightCount > 0;
+    }
+
     public void raiseVisibility(){
         mEightCount++;
     }
@@ -87,12 +74,33 @@ public class Player {
         mEightCount--;
     }
 
+    public Boolean isProtected(){
+        return mQueenCount > 0;
+    }
+
     public void raiseProtection(){
         mQueenCount++;
     }
 
     public void lowerProtection(){
         mQueenCount--;
+    }
+
+    public Integer victoryReq(){
+        switch (mKingCount){
+            case 0:
+                return 21;
+            case 1:
+                return 14;
+            case 2:
+                return 10;
+            case 3:
+                return 7;
+            case 4:
+                return 5;
+            default:
+                return -1; // TODO: throw an error
+        }
     }
 
     public void raiseVictoryReq(){
