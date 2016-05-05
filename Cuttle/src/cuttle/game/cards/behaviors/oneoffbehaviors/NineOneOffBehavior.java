@@ -21,8 +21,10 @@ public class NineOneOffBehavior extends OneOffBehavior<TargetedBehaviorCall> {
     public ArrayList<TargetedBehaviorCall> listValidCalls() {
         ArrayList<TargetedBehaviorCall> list = new ArrayList<>();
 
-        for (CuttleCard c : game().opponent().continuousBoard()){
-            list.add(new TargetedBehaviorCall(this, c));
+        if (!game().opponent().isProtected()){
+            for (CuttleCard c : game().opponent().continuousBoard()){
+                list.add(new TargetedBehaviorCall(this, c));
+            }
         }
 
         return list;

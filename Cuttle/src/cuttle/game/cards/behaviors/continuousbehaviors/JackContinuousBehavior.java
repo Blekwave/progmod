@@ -26,8 +26,10 @@ public class JackContinuousBehavior extends ContinuousBehavior<TargetedBehaviorC
             list.add(new TargetedBehaviorCall(this, c));
         }
 
-        for (CuttleCard c : game().opponent().pointBoard()){
-            list.add(new TargetedBehaviorCall(this, c));
+        if (!game().opponent().isProtected()){
+            for (CuttleCard c : game().opponent().pointBoard()){
+                list.add(new TargetedBehaviorCall(this, c));
+            }
         }
 
         return list;
