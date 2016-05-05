@@ -4,7 +4,10 @@ import cuttle.game.actions.Action;
 import cuttle.game.cards.Pile;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.deck.DeckBuilder;
+import cuttle.game.cards.prompts.PlayPrompt;
 import cuttle.game.updates.GameEndUpdate;
+import cuttle.game.updates.GameStartUpdate;
+import cuttle.game.updates.NewTurnUpdate;
 
 import java.util.HashMap;
 
@@ -12,12 +15,6 @@ import java.util.HashMap;
  * Describe this class and the methods exposed by it.
  */
 public class CuttleGame {
-
-    public CuttleGame(ServerInterface server){
-        mPlayer = new Player(this, 0, mOpponent);
-        mOpponent = new Player(this, 1, mPlayer);
-        mServerAdapter = new ServerAdapter(server, this);
-    }
 
     public Player player(){
         return mPlayer;
@@ -44,16 +41,52 @@ public class CuttleGame {
     private Pile mDeck;
     private Pile mScrapPile;
     private ServerAdapter mServerAdapter;
+    private Player mWinner;
 
-    public void startGame(){
+    public CuttleGame(ServerInterface server, Integer idFirst, Integer idSecond){
+        mPlayer = new Player(this, idFirst, mOpponent);
+        mOpponent = new Player(this, idSecond, mPlayer);
+        mServerAdapter = new ServerAdapter(server, this);
+
+        start();
+    }
+
+    private void preGamePreparations(){
         DeckBuilder deckBuilder = new DeckBuilder(this);
         mDeck = deckBuilder.buildDeck();
         mScrapPile = new Pile("scrap_pile", null);
 
+        // All cards begin inside the deck
         mCardPileMap = new HashMap<>();
         for (CuttleCard c : mDeck){
             mCardPileMap.put(c, mDeck);
         }
+    }
+
+    private Integer start(){
+        preGamePreparations();
+
+        GameStartUpdate gameStartUpdate = new GameStartUpdate(player());
+        mServerAdapter.update(gameStartUpdate);
+
+        while (!isGameOver()){
+            newTurn();
+            new PlayPrompt().prompt(mPlayer);
+            switchPlayer();
+        }
+
+        return mWinner.id();
+    }
+
+    private void newTurn(){
+        NewTurnUpdate update = new NewTurnUpdate(mPlayer);
+        mServerAdapter.update(update);
+    }
+
+    private void switchPlayer(){
+        Player temp = mOpponent;
+        mOpponent = mPlayer;
+        mPlayer = temp;
     }
 
     private Boolean isGameOver(){
@@ -70,6 +103,7 @@ public class CuttleGame {
     private void updateGameEnd(Player player){
         GameEndUpdate update = new GameEndUpdate(player);
         mServerAdapter.update(update);
+        mWinner = player;
     }
 
     public void perform(Action action){
