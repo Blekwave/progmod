@@ -12,7 +12,7 @@ import cuttle.game.cards.prompts.PromptType;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class KingContinuousBehavior extends ContinuousBehavior<BehaviorCall, PlayPrompt> {
+public class KingContinuousBehavior extends ContinuousBehavior<BehaviorCall> {
     public KingContinuousBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt, "king_continuous");
     }

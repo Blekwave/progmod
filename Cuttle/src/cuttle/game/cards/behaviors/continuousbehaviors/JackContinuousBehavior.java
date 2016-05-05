@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class JackContinuousBehavior extends ContinuousBehavior<TargetedBehaviorCall, PlayPrompt> {
+public class JackContinuousBehavior extends ContinuousBehavior<TargetedBehaviorCall> {
     public JackContinuousBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt, "jack_continuous");
     }

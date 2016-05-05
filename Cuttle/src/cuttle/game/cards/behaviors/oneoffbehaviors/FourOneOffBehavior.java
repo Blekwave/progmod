@@ -10,7 +10,7 @@ import cuttle.game.cards.prompts.PromptType;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class FourOneOffBehavior extends OneOffBehavior<BehaviorCall, PlayPrompt> {
+public class FourOneOffBehavior extends OneOffBehavior<BehaviorCall> {
     public FourOneOffBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt, "four_one_off");
     }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class TwoOneOffBehavior extends OneOffBehavior<TargetedBehaviorCall, PlayPrompt> {
+public class TwoOneOffBehavior extends OneOffBehavior<TargetedBehaviorCall> {
     public TwoOneOffBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt, "two_one_off");
     }

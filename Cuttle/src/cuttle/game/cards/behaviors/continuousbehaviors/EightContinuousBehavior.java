@@ -13,7 +13,7 @@ import cuttle.game.cards.prompts.PromptType;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class EightContinuousBehavior extends ContinuousBehavior<BehaviorCall, PlayPrompt> {
+public class EightContinuousBehavior extends ContinuousBehavior<BehaviorCall> {
     public EightContinuousBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt, "eight_continuous");
     }
