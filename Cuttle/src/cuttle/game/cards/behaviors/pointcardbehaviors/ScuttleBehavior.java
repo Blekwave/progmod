@@ -1,6 +1,5 @@
 package cuttle.game.cards.behaviors.pointcardbehaviors;
 
-import cuttle.game.Player;
 import cuttle.game.actions.gameactions.Destroy;
 import cuttle.game.actions.playeractions.Discard;
 import cuttle.game.cards.CuttleCard;
@@ -8,7 +7,6 @@ import cuttle.game.cards.Pile;
 import cuttle.game.cards.behaviors.CardBehavior;
 import cuttle.game.cards.behaviors.TargetedBehaviorCall;
 import cuttle.game.cards.prompts.PlayPrompt;
-import cuttle.game.cards.prompts.Prompt;
 import cuttle.game.cards.prompts.PromptType;
 
 import java.util.ArrayList;

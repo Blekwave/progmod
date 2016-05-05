@@ -1,8 +1,6 @@
 package cuttle.game.actions;
 
 import cuttle.game.CuttleGame;
-import cuttle.game.updates.UpdateContainer;
-import cuttle.game.updates.UpdateInterface;
 import org.json.JSONObject;
 
 /**

@@ -1,6 +1,5 @@
 package cuttle.game.actions.playeractions;
 
-import cuttle.game.Player;
 import cuttle.game.actions.TargetedPlayerAction;
 import cuttle.game.cards.CuttleCard;
 

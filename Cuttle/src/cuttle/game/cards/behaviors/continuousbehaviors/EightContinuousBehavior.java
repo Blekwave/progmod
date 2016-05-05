@@ -7,7 +7,6 @@ import cuttle.game.cards.behaviors.BehaviorCall;
 import cuttle.game.cards.behaviors.ContinuousBehavior;
 import cuttle.game.cards.events.boardexitevents.EightExitEvent;
 import cuttle.game.cards.prompts.PlayPrompt;
-import cuttle.game.cards.prompts.Prompt;
 import cuttle.game.cards.prompts.PromptType;
 
 /**

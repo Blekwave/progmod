@@ -2,7 +2,6 @@ package cuttle.game.cards.prompts;
 
 import cuttle.game.Player;
 import cuttle.game.cards.CuttleCard;
-import cuttle.game.cards.behaviors.Behavior;
 import cuttle.game.cards.behaviors.BehaviorCall;
 import cuttle.game.cards.behaviors.CardBehavior;
 import cuttle.game.cards.behaviors.PlayerBehavior;

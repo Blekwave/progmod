@@ -21,7 +21,7 @@ public class Client {
      * Constructs a Client, connecting to the given IP at the given serverPort,
      * using the given UI interface.
      */
-    public Client(String ip, int serverPort, UI ui) throws UnknownHostException, IOException {
+    public Client(String ip, int serverPort, UI ui) throws IOException {
         mUI = ui;
         mSocket = new CuttleSocket(new Socket(ip, serverPort));
     }

@@ -1,7 +1,6 @@
 package cuttle.game.cards;
 
 import cuttle.game.Player;
-import cuttle.game.cards.behaviors.Behavior;
 import cuttle.game.cards.behaviors.CardBehavior;
 import cuttle.game.cards.events.Event;
 import cuttle.game.cards.events.Trigger;

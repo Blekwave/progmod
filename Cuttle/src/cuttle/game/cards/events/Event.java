@@ -8,7 +8,7 @@ import cuttle.game.cards.CuttleCard;
  */
 public abstract class Event {
     public Trigger trigger(){
-        return trigger();
+        return mTrigger;
     }
 
     public CuttleCard card(){

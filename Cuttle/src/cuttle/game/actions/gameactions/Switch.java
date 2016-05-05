@@ -3,7 +3,6 @@ package cuttle.game.actions.gameactions;
 import cuttle.game.actions.TargetedAction;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.Pile;
-import cuttle.game.cards.events.Trigger;
 
 /**
  * Describe this class and the methods exposed by it.
