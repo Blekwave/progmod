@@ -70,9 +70,9 @@ public class Player {
         mQueenCount = 0;
         mEightCount = 0;
 
-        mHand = new Pile("p" + id + "_hand");
-        mPointBoard = new Pile("p" + id + "_point_board");
-        mContinuousBoard = new Pile("p" + id + "_continuous_board");
+        mHand = new Pile("p" + id + "_hand", this);
+        mPointBoard = new Pile("p" + id + "_point_board", this);
+        mContinuousBoard = new Pile("p" + id + "_continuous_board", this);
 
         mGame = game;
     }

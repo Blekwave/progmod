@@ -15,12 +15,10 @@ public class Switch extends TargetedAction {
 
     @Override
     public void act(){
-        Pile cardPile = game().cardPile(target());
-        Integer index = cardPile.indexOf(target());
-        cardPile.pop(index);
+        targetPile().pop(targetPileIndex());
 
         Pile oppositePile;
-        if (cardPile.equals(game().player().pointBoard())){
+        if (targetPile().equals(game().player().pointBoard())){
             oppositePile = game().opponent().pointBoard();
         } else {
             oppositePile = game().player().pointBoard();

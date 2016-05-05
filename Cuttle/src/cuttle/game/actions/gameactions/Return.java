@@ -16,10 +16,7 @@ public class Return extends TargetedAction {
     @Override
     public void act(){
         target().trigger(Trigger.OnBoardExit);
-
-        Pile cardPile = game().cardPile(target());
-        Integer index = cardPile.indexOf(target());
-        cardPile.pop(index);
+        targetPile().pop(targetPileIndex());
         game().deck().push(target());
         game().updateCardPile(target(), game().scrapPile());
     }

@@ -1,5 +1,6 @@
 package cuttle.game;
 
+import cuttle.game.actions.Action;
 import cuttle.game.cards.Pile;
 import cuttle.game.cards.CuttleCard;
 
@@ -44,7 +45,7 @@ public class CuttleGame {
 
     public void startGame(){
         // Initialize deck
-        mScrapPile = new Pile("scrap_pile");
+        mScrapPile = new Pile("scrap_pile", null);
 
         mCardPileMap = new HashMap<>();
         for (CuttleCard c : mDeck){
@@ -55,6 +56,12 @@ public class CuttleGame {
     private Boolean checkWinCondition(){
         // ...
         return false;
+    }
+
+    public void perform(Action action){
+        action.act();
+        mServerInterface.update(action.buildPlayerUpdate(), mPlayer);
+        mServerInterface.update(action.buildOpponentUpdate(), mOpponent);
     }
 
     // CARD LOCATION ATTRIBUTES AND METHODS

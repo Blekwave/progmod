@@ -25,7 +25,7 @@ public abstract class Action {
     public JSONObject buildPlayerUpdate(){
         JSONObject obj = new JSONObject();
         obj.put("type", "action_update");
-        obj.put("update_type", mType);
+        obj.put("action_type", mType);
         return obj;
     }
 

@@ -1,5 +1,7 @@
 package cuttle.game.cards;
 
+import cuttle.game.Player;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -12,11 +14,17 @@ public class Pile implements Iterable<CuttleCard> {
         return mName;
     }
 
+    public Player owner(){
+        return mOwner;
+    }
+
     private String mName;
+    private Player mOwner;
     private ArrayList<CuttleCard> mList;
 
-    public Pile(String name){
+    public Pile(String name, Player owner){
         mName = name;
+        mOwner = owner;
     }
 
     public CuttleCard pop(Integer index){
