@@ -27,3 +27,31 @@
     "card_location": "p0_hand",
     "card_index": 3
 }
+
+// Happens when a player's hand becomes visible
+{
+    "type": "action_update",
+    "action_type", "show_hand",
+    "player": 1,
+    "player_hand":[
+        13, 22, 31, 51
+    ]
+}
+
+// Happens when a player's hand becomes invisible again
+{
+    "type": "action_update",
+    "action_type": "hide_hand",
+    "player": 1
+}
+
+// Also happens when a player's hand becomes invisible
+// player_hand only sent to player
+{
+    "type": "action_update",
+    "action_type": "shuffle_hand",
+    "player": 0,
+    "player_hand": [
+        12, 1, 0, 30, 4, 7
+    ]
+}
