@@ -3,6 +3,7 @@ package cuttle.game.cards;
 import cuttle.game.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 /**
@@ -25,6 +26,7 @@ public class Pile implements Iterable<CuttleCard> {
     public Pile(String name, Player owner){
         mName = name;
         mOwner = owner;
+        mList = new ArrayList<>();
     }
 
     public CuttleCard pop(Integer index){
@@ -43,6 +45,10 @@ public class Pile implements Iterable<CuttleCard> {
 
     public CuttleCard last(){
         return mList.get(mList.size() - 1);
+    }
+
+    public void shuffle(){
+        Collections.shuffle(mList);
     }
 
     public Integer indexOf(CuttleCard card){
