@@ -7,15 +7,15 @@ import cuttle.game.cards.CuttleCard;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class PointPlay extends TargetedPlayerAction {
-    public PointPlay(CuttleCard target, Player player){
-        super(target, player, "point_play");
+public class ContinuousPlay extends TargetedPlayerAction {
+    public ContinuousPlay(CuttleCard target, Player player){
+        super(target, player, "continuous_play");
     }
 
     @Override
     public void act(){
         targetPile().pop(targetPileIndex());
-        player().pointBoard().push(target());
-        game().updateCardPile(target(), player().pointBoard());
+        player().continuousBoard().push(target());
+        game().updateCardPile(target(), player().continuousBoard());
     }
 }
