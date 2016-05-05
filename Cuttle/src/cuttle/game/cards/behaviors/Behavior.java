@@ -10,6 +10,10 @@ import java.util.ArrayList;
  * Describe this class and the methods exposed by it.
  */
 public abstract class Behavior<T extends BehaviorCall> {
+    public PromptType promptType(){
+        return mPromptType;
+    }
+
     private PromptType mPromptType;
     private String mType;
 

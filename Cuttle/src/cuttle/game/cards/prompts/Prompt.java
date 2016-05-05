@@ -11,6 +11,10 @@ import java.util.ArrayList;
  * Describe this class and the methods exposed by it.
  */
 public abstract class Prompt {
+    public PromptType type(){
+        return mType;
+    }
+
     private final PromptType mType;
 
     private ArrayList<BehaviorCall> mCalls;
@@ -33,5 +37,11 @@ public abstract class Prompt {
         mCallsJSONArray.put(callJSON);
     }
 
-    public abstract void prompt(Player p);
+    public void prompt(Player player) {
+        registerValidCalls(player);
+        BehaviorCall chosenCall = player.game().serverInterface().prompt(this);
+        chosenCall.call(this);
+    }
+
+    public abstract void registerValidCalls(Player player);
 }

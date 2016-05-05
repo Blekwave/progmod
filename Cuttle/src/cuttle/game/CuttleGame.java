@@ -3,7 +3,6 @@ package cuttle.game;
 import cuttle.game.cards.Pile;
 import cuttle.game.cards.CuttleCard;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -14,6 +13,7 @@ public class CuttleGame {
     public CuttleGame(){
         mPlayer = new Player(this, 0);
         mOpponent = new Player(this, 1);
+        mServerInterface = new ServerInterface();
     }
 
     public Player player(){
@@ -24,9 +24,6 @@ public class CuttleGame {
         return mOpponent;
     }
 
-    private Player mPlayer;
-    private Player mOpponent;
-
     public Pile deck(){
         return mDeck;
     }
@@ -35,8 +32,15 @@ public class CuttleGame {
         return mScrapPile;
     }
 
+    public ServerInterface serverInterface(){
+        return mServerInterface;
+    }
+
+    private Player mPlayer;
+    private Player mOpponent;
     private Pile mDeck;
     private Pile mScrapPile;
+    private ServerInterface mServerInterface;
 
     public void startGame(){
         // Initialize deck
