@@ -1,10 +1,12 @@
-package cuttle.game.cards.behaviors;
+package cuttle.game.cards.behaviors.pointcardbehaviors;
 
 import cuttle.game.Player;
 import cuttle.game.actions.gameactions.Destroy;
 import cuttle.game.actions.playeractions.Discard;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.Pile;
+import cuttle.game.cards.behaviors.CardBehavior;
+import cuttle.game.cards.behaviors.TargetedBehaviorCall;
 import cuttle.game.cards.prompts.Prompt;
 import cuttle.game.cards.prompts.PromptType;
 
@@ -24,9 +26,9 @@ public class ScuttleBehavior extends CardBehavior<TargetedBehaviorCall> {
 
     @Override
     public ArrayList<TargetedBehaviorCall> listValidCalls() {
-        Pile opponentsBoard = card().game().opponent().pointBoard();
         ArrayList<TargetedBehaviorCall> list = new ArrayList<>();
 
+        Pile opponentsBoard = card().game().opponent().pointBoard();
         for (CuttleCard c : opponentsBoard){
             if (scuttleValue(this.card()) > scuttleValue(c)){
                 list.add(new TargetedBehaviorCall(this, c));
