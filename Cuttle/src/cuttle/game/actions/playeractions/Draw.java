@@ -35,10 +35,10 @@ public class Draw extends PlayerAction {
 
     @Override
     public JSONObject buildOpponentUpdate(){
+        JSONObject obj = super.buildPlayerUpdate();
         if (player().handIsVisible()){
-            return buildPlayerUpdate();
-        } else {
-            return super.buildOpponentUpdate();
+            obj.put("drawn", mDrawn.id());
         }
+        return obj;
     }
 }

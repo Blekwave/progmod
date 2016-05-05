@@ -5,9 +5,7 @@ import cuttle.game.cards.Pile;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.deck.DeckBuilder;
 import cuttle.game.cards.prompts.PlayPrompt;
-import cuttle.game.updates.GameEndUpdate;
-import cuttle.game.updates.GameStartUpdate;
-import cuttle.game.updates.NewTurnUpdate;
+import cuttle.game.updates.*;
 
 import java.util.HashMap;
 
@@ -108,7 +106,7 @@ public class CuttleGame {
 
     public void perform(Action action){
         action.act();
-        mServerAdapter.update(action);
+        mServerAdapter.update(new ActionUpdate(action));
     }
 
     // CARD LOCATION ATTRIBUTES AND METHODS

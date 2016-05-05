@@ -8,7 +8,7 @@ import org.json.JSONObject;
 /**
  * Describe this class and the methods exposed by it.
  */
-public abstract class Action implements UpdateInterface {
+public abstract class Action {
 
     public CuttleGame game(){
         return mGame;
@@ -35,8 +35,4 @@ public abstract class Action implements UpdateInterface {
         return buildPlayerUpdate();
     }
 
-    @Override
-    public UpdateContainer buildUpdate(){
-        return new UpdateContainer(buildPlayerUpdate(), buildOpponentUpdate());
-    }
 }
