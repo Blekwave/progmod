@@ -19,10 +19,10 @@ public abstract class OneOffBehavior<T extends BehaviorCall> extends CardBehavio
         ReactionPrompt reactionPrompt = new ReactionPrompt();
         reactionPrompt.prompt(game().opponent());
         if (!reactionPrompt.reacted()){
-            procEffect(call, prompt);
+            activateEffect(call, prompt);
         }
         game().perform(new Discard(card()));
     }
 
-    public abstract void procEffect(T call, Prompt prompt);
+    public abstract void activateEffect(T call, Prompt prompt);
 }

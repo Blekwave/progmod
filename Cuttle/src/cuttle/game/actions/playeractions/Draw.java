@@ -9,6 +9,9 @@ import org.json.JSONObject;
  * Describe this class and the methods exposed by it.
  */
 public class Draw extends PlayerAction {
+    public CuttleCard drawn(){
+        return mDrawn;
+    }
 
     private CuttleCard mDrawn;
 
