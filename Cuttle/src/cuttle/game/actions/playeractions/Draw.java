@@ -32,4 +32,13 @@ public class Draw extends PlayerAction {
         obj.put("drawn", mDrawn.id());
         return obj;
     }
+
+    @Override
+    public JSONObject buildOpponentUpdate(){
+        if (player().handIsVisible()){
+            return buildPlayerUpdate();
+        } else {
+            return super.buildOpponentUpdate();
+        }
+    }
 }
