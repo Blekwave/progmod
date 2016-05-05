@@ -1,5 +1,8 @@
 package cuttle.game.cards.behaviors;
 
+import cuttle.game.Player;
+import cuttle.game.actions.gameactions.Destroy;
+import cuttle.game.actions.playeractions.Discard;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.Pile;
 import cuttle.game.cards.prompts.Prompt;
@@ -35,6 +38,8 @@ public class ScuttleBehavior extends CardBehavior<TargetedBehaviorCall> {
 
     @Override
     public void call(TargetedBehaviorCall c, Prompt p) {
-        // ...
+        Player cardOwner = game().cardPile(card()).owner();
+        game().perform(new Discard(card(), cardOwner));
+        game().perform(new Destroy(c.target()));
     }
 }
