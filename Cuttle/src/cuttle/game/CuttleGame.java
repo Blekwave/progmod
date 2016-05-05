@@ -3,6 +3,7 @@ package cuttle.game;
 import cuttle.game.actions.Action;
 import cuttle.game.cards.Pile;
 import cuttle.game.cards.CuttleCard;
+import cuttle.game.updates.GameEndUpdate;
 
 import java.util.HashMap;
 
@@ -11,10 +12,10 @@ import java.util.HashMap;
  */
 public class CuttleGame {
 
-    public CuttleGame(){
+    public CuttleGame(ServerInterface server){
         mPlayer = new Player(this, 0);
         mOpponent = new Player(this, 1);
-        mServerInterface = new ServerInterface();
+        mServerAdapter = new ServerAdapter(server, this);
     }
 
     public Player player(){
@@ -33,15 +34,15 @@ public class CuttleGame {
         return mScrapPile;
     }
 
-    public ServerInterface serverInterface(){
-        return mServerInterface;
+    public ServerAdapter serverAdapter(){
+        return mServerAdapter;
     }
 
     private Player mPlayer;
     private Player mOpponent;
     private Pile mDeck;
     private Pile mScrapPile;
-    private ServerInterface mServerInterface;
+    private ServerAdapter mServerAdapter;
 
     public void startGame(){
         // Initialize deck
@@ -53,15 +54,25 @@ public class CuttleGame {
         }
     }
 
-    private Boolean checkWinCondition(){
-        // ...
+    private Boolean isGameOver(){
+        if (mPlayer.hasWon()){
+            updateGameEnd(mPlayer);
+            return true;
+        } else if (mOpponent.hasWon()){
+            updateGameEnd(mOpponent);
+            return true;
+        }
         return false;
+    }
+
+    private void updateGameEnd(Player player){
+        GameEndUpdate update = new GameEndUpdate(player);
+        mServerAdapter.update(update);
     }
 
     public void perform(Action action){
         action.act();
-        mServerInterface.update(action.buildPlayerUpdate(), mPlayer);
-        mServerInterface.update(action.buildOpponentUpdate(), mOpponent);
+        mServerAdapter.update(action);
     }
 
     // CARD LOCATION ATTRIBUTES AND METHODS

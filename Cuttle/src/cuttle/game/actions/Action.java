@@ -1,12 +1,14 @@
 package cuttle.game.actions;
 
 import cuttle.game.CuttleGame;
+import cuttle.game.updates.UpdateContainer;
+import cuttle.game.updates.UpdateInterface;
 import org.json.JSONObject;
 
 /**
  * Describe this class and the methods exposed by it.
  */
-public abstract class Action {
+public abstract class Action implements UpdateInterface {
 
     public CuttleGame game(){
         return mGame;
@@ -31,5 +33,10 @@ public abstract class Action {
 
     public JSONObject buildOpponentUpdate(){
         return buildPlayerUpdate();
+    }
+
+    @Override
+    public UpdateContainer buildUpdate(){
+        return new UpdateContainer(buildPlayerUpdate(), buildOpponentUpdate());
     }
 }

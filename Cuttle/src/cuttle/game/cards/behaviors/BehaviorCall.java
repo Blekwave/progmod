@@ -1,12 +1,14 @@
 package cuttle.game.cards.behaviors;
 
+import cuttle.game.updates.SymmetricUpdateContainer;
 import cuttle.game.cards.prompts.Prompt;
+import cuttle.game.updates.UpdateInterface;
 import org.json.JSONObject;
 
 /**
  * Describe this class and the methods exposed by it.
  */
-public class BehaviorCall {
+public class BehaviorCall implements UpdateInterface {
 
     public Behavior behavior(){
         return mBehavior;
@@ -23,4 +25,10 @@ public class BehaviorCall {
     }
 
     public void defineJSONProperties(JSONObject obj){}
+
+    @Override
+    public SymmetricUpdateContainer buildUpdate(){
+        return new SymmetricUpdateContainer(behavior().buildCallJSON(this));
+    }
+
 }

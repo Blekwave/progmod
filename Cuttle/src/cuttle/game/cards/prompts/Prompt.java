@@ -17,6 +17,14 @@ public abstract class Prompt {
         return mType;
     }
 
+    public ArrayList<BehaviorCall> calls(){
+        return mCalls;
+    }
+
+    public JSONObject promptJSON(){
+        return mPromptJSON;
+    }
+
     private final PromptType mType;
 
     private ArrayList<BehaviorCall> mCalls;
@@ -39,9 +47,14 @@ public abstract class Prompt {
         mCallsJSONArray.put(callJSON);
     }
 
+    public BehaviorCall getCallByIndex(Integer index){
+        return mCalls.get(index);
+    }
+
     public void prompt(Player player) {
         registerValidCalls(player);
-        BehaviorCall chosenCall = player.game().serverInterface().prompt(this);
+        BehaviorCall chosenCall = player.game().serverAdapter().prompt(this, player);
+        player.game().serverAdapter().update(chosenCall);
         chosenCall.call(this);
     }
 

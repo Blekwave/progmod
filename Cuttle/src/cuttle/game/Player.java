@@ -60,6 +60,16 @@ public class Player {
         mGame = game;
     }
 
+    // CHECK WIN
+
+    public Boolean hasWon(){
+        Integer pointSum = 0;
+        for (CuttleCard card : mPointBoard){
+            pointSum += card.rank().value();
+        }
+        return pointSum >= victoryReq();
+    }
+
     // CONTINUOUS CARD FLAGS
 
     public Boolean handIsVisible(){
