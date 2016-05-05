@@ -41,6 +41,10 @@ public class Player {
         return mOpponent;
     }
 
+    public void setOpponent(Player opponent){
+        mOpponent = opponent;
+    }
+
     public BehaviorIterator behaviorIterator(){
         return new BehaviorIterator(this);
     }
@@ -54,7 +58,7 @@ public class Player {
 
     private ArrayList<PlayerBehavior> mBehaviors;
 
-    public Player(CuttleGame game, Integer id, Player opponent){
+    public Player(CuttleGame game, Integer id){
         mId = id;
 
         mKingCount = 0;
@@ -66,7 +70,6 @@ public class Player {
         mContinuousBoard = new Pile("p" + id + "_continuous_board", this);
 
         mGame = game;
-        mOpponent = opponent;
 
         mBehaviors = new ArrayList<>();
         mBehaviors.add(new DrawBehavior(this));

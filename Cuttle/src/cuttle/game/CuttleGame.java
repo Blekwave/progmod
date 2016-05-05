@@ -42,8 +42,12 @@ public class CuttleGame {
     private Player mWinner;
 
     public CuttleGame(ServerInterface server, Integer idFirst, Integer idSecond){
-        mPlayer = new Player(this, idFirst, mOpponent);
-        mOpponent = new Player(this, idSecond, mPlayer);
+        mPlayer = new Player(this, idFirst);
+        mOpponent = new Player(this, idSecond);
+        // Opponents are defined after construction because both of them must
+        // have been initialized in order to bind these correctly.
+        mPlayer.setOpponent(mOpponent);
+        mOpponent.setOpponent(mPlayer);
         mServerAdapter = new ServerAdapter(server, this);
 
         start();
