@@ -37,17 +37,27 @@ public abstract class CuttleCard extends PlayingCard {
         super(suit, rank);
         mId = id;
         mGame = game;
+        mBehaviors = new ArrayList<>();
+        mEvents = new ArrayList<>();
     }
 
     public Player owner(){
         return game().cardPile(this).owner();
     }
 
-    public void bindEvent(Event e){
-        // ...
+    public void bindBehavior(CardBehavior cardBehavior){
+        mBehaviors.add(cardBehavior);
     }
 
-    public void trigger(Trigger t){
-        // ...
+    public void bindEvent(Event event){
+        mEvents.add(event);
+    }
+
+    public void trigger(Trigger trigger){
+        for (Event event : mEvents){
+            if (event.trigger().equals(trigger)){
+                event.execute();
+            }
+        }
     }
 }
