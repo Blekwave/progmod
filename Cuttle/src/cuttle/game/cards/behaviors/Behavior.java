@@ -39,6 +39,7 @@ public abstract class Behavior<T extends BehaviorCall, U extends Prompt> {
     public JSONObject buildCallJSON(T call){
         JSONObject obj = new JSONObject();
         call.defineJSONProperties(obj);
+        obj.put("type", "behavior_update");
         obj.put("behavior_type", mType);
         return obj;
     }
