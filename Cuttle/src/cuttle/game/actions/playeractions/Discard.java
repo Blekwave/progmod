@@ -9,14 +9,13 @@ import cuttle.game.cards.CuttleCard;
  */
 public class Discard extends TargetedPlayerAction {
 
-    public Discard(CuttleCard target, Player player){
-        super(target, player, "discard");
+    public Discard(CuttleCard target){
+        super(target, target.owner(), "discard");
     }
 
     @Override
     public void act() {
-        Integer index = player().hand().indexOf(target());
-        player().hand().pop(index);
+        targetPile().pop(targetPileIndex());
         game().scrapPile().push(target());
         game().updateCardPile(target(), game().scrapPile());
     }

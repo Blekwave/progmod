@@ -1,5 +1,6 @@
 package cuttle.game.cards;
 
+import cuttle.game.Player;
 import cuttle.game.cards.behaviors.Behavior;
 import cuttle.game.cards.behaviors.CardBehavior;
 import cuttle.game.cards.events.Event;
@@ -38,7 +39,9 @@ public abstract class CuttleCard extends PlayingCard {
         mGame = game;
     }
 
-
+    public Player owner(){
+        return game().cardPile(this).owner();
+    }
 
     public void bindEvent(Event e){
         // ...

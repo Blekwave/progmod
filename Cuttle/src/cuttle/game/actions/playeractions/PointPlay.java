@@ -15,8 +15,7 @@ public class PointPlay extends TargetedPlayerAction {
 
     @Override
     public void act(){
-        Integer index = player().hand().indexOf(target());
-        player().hand().pop(index);
+        targetPile().pop(targetPileIndex());
         player().pointBoard().push(target());
         game().updateCardPile(target(), player().pointBoard());
     }

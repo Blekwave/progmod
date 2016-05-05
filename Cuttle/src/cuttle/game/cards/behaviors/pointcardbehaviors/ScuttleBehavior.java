@@ -40,8 +40,7 @@ public class ScuttleBehavior extends CardBehavior<TargetedBehaviorCall> {
 
     @Override
     public void call(TargetedBehaviorCall c, Prompt p) {
-        Player cardOwner = game().cardPile(card()).owner();
-        game().perform(new Discard(card(), cardOwner));
+        game().perform(new Discard(card()));
         game().perform(new Destroy(c.target()));
     }
 }

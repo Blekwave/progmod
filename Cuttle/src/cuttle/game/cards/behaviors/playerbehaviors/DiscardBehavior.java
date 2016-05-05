@@ -31,6 +31,6 @@ public class DiscardBehavior extends PlayerBehavior<TargetedBehaviorCall> {
 
     @Override
     public void call(TargetedBehaviorCall call, Prompt p){
-        game().perform(new Discard(call.target(), player()));
+        game().perform(new Discard(call.target()));
     }
 }
