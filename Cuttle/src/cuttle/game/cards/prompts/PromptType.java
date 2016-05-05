@@ -6,8 +6,7 @@ package cuttle.game.cards.prompts;
 public enum PromptType {
     PlayPrompt("play_prompt"),
     ReactionPrompt("reaction_prompt"),
-    DiscardPrompt("discard_prompt"),
-    ImmediatePlayPrompt("immediate_play_prompt");
+    DiscardPrompt("discard_prompt");
 
     public String string(){
         return mString;
