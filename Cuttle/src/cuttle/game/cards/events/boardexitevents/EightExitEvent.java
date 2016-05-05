@@ -1,9 +1,11 @@
-package cuttle.game.cards.events;
+package cuttle.game.cards.events.boardexitevents;
 
 import cuttle.game.actions.playeractions.HideHand;
 import cuttle.game.actions.playeractions.LowerVisibility;
 import cuttle.game.actions.playeractions.ShuffleHand;
 import cuttle.game.cards.CuttleCard;
+import cuttle.game.cards.events.Event;
+import cuttle.game.cards.events.Trigger;
 
 /**
  * Describe this class and the methods exposed by it.

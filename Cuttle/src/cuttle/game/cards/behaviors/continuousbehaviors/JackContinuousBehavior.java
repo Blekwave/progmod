@@ -4,8 +4,8 @@ import cuttle.game.actions.gameactions.Switch;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.behaviors.ContinuousBehavior;
 import cuttle.game.cards.behaviors.TargetedBehaviorCall;
-import cuttle.game.cards.events.JackExitEvent;
-import cuttle.game.cards.prompts.Prompt;
+import cuttle.game.cards.events.boardexitevents.JackExitEvent;
+import cuttle.game.cards.prompts.PlayPrompt;
 import cuttle.game.cards.prompts.PromptType;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class JackContinuousBehavior extends ContinuousBehavior<TargetedBehaviorCall> {
+public class JackContinuousBehavior extends ContinuousBehavior<TargetedBehaviorCall, PlayPrompt> {
     public JackContinuousBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt, "jack_continuous");
     }
@@ -34,7 +34,7 @@ public class JackContinuousBehavior extends ContinuousBehavior<TargetedBehaviorC
     }
 
     @Override
-    public void entryEffect(TargetedBehaviorCall call, Prompt prompt) {
+    public void entryEffect(TargetedBehaviorCall call, PlayPrompt prompt) {
         game().perform(new Switch(call.target()));
         card().bindEvent(new JackExitEvent(card()));
     }

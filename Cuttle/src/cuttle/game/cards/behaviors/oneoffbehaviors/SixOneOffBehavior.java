@@ -4,13 +4,13 @@ import cuttle.game.actions.gameactions.Destroy;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.behaviors.BehaviorCall;
 import cuttle.game.cards.behaviors.OneOffBehavior;
-import cuttle.game.cards.prompts.Prompt;
+import cuttle.game.cards.prompts.PlayPrompt;
 import cuttle.game.cards.prompts.PromptType;
 
 /**
  * Describe this class and the methods exposed by it.
  */
-public class SixOneOffBehavior extends OneOffBehavior<BehaviorCall> {
+public class SixOneOffBehavior extends OneOffBehavior<BehaviorCall, PlayPrompt> {
     public SixOneOffBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt, "six_one_off");
     }
@@ -20,7 +20,7 @@ public class SixOneOffBehavior extends OneOffBehavior<BehaviorCall> {
     }
 
     @Override
-    public void activateEffect(BehaviorCall call, Prompt prompt) {
+    public void activateEffect(BehaviorCall call, PlayPrompt prompt) {
         for (CuttleCard c : game().player().continuousBoard()){
             destroy(c);
         }

@@ -1,13 +1,14 @@
 package cuttle.game.cards.behaviors;
 
 import cuttle.game.Player;
+import cuttle.game.cards.prompts.Prompt;
 import cuttle.game.cards.prompts.PromptType;
 import org.json.JSONObject;
 
 /**
  * Describe this class and the methods exposed by it.
  */
-public abstract class PlayerBehavior<T extends BehaviorCall> extends Behavior<T> {
+public abstract class PlayerBehavior<T extends BehaviorCall, U extends Prompt> extends Behavior<T, U> {
     public Player player(){
         return mPlayer;
     }

@@ -19,7 +19,7 @@ public class ImmediatePlayPrompt extends PlayPrompt {
 
     @Override
     public void registerValidCalls(Player player){
-        for (Behavior<? extends BehaviorCall> b : mCard.behaviors()){
+        for (Behavior<? extends BehaviorCall, ImmediatePlayPrompt> b : mCard.behaviors()){
             if (b.promptType().equals(type())){
                 for (BehaviorCall c : b.listValidCalls()){
                     registerCall(c);

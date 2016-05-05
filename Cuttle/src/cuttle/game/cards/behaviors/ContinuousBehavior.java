@@ -8,16 +8,16 @@ import cuttle.game.cards.prompts.PromptType;
 /**
  * Describe this class and the methods exposed by it.
  */
-public abstract class ContinuousBehavior<T extends BehaviorCall> extends CardBehavior<T> {
+public abstract class ContinuousBehavior<T extends BehaviorCall, U extends Prompt> extends CardBehavior<T, U> {
     public ContinuousBehavior(CuttleCard card, PromptType promptType, String type){
         super(card, promptType, type);
     }
 
     @Override
-    public void call(T call, Prompt prompt) {
+    public void call(T call, U prompt) {
         game().perform(new ContinuousPlay(card()));
         entryEffect(call, prompt);
     }
 
-    public abstract void entryEffect(T call, Prompt prompt);
+    public abstract void entryEffect(T call, U prompt);
 }

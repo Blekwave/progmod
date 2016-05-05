@@ -49,7 +49,7 @@ public abstract class Prompt {
         Iterator<Behavior> it = player.behaviorIterator();
 
         while (it.hasNext()){
-            Behavior<? extends BehaviorCall> b = it.next();
+            Behavior<? extends BehaviorCall, Prompt> b = it.next();
             if (b.promptType().equals(type())){
                 for (BehaviorCall c : b.listValidCalls()){
                     registerCall(c);

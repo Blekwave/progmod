@@ -2,10 +2,9 @@ package cuttle.game.cards.behaviors.oneoffbehaviors;
 
 import cuttle.game.actions.playeractions.Recover;
 import cuttle.game.cards.CuttleCard;
-import cuttle.game.cards.behaviors.BehaviorCall;
 import cuttle.game.cards.behaviors.OneOffBehavior;
 import cuttle.game.cards.behaviors.TargetedBehaviorCall;
-import cuttle.game.cards.prompts.Prompt;
+import cuttle.game.cards.prompts.PlayPrompt;
 import cuttle.game.cards.prompts.PromptType;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class ThreeOneOffBehavior extends OneOffBehavior<TargetedBehaviorCall> {
+public class ThreeOneOffBehavior extends OneOffBehavior<TargetedBehaviorCall, PlayPrompt> {
     public ThreeOneOffBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt, "three_one_off");
     }
@@ -30,7 +29,7 @@ public class ThreeOneOffBehavior extends OneOffBehavior<TargetedBehaviorCall> {
     }
 
     @Override
-    public void activateEffect(TargetedBehaviorCall call, Prompt prompt) {
+    public void activateEffect(TargetedBehaviorCall call, PlayPrompt prompt) {
         game().perform(new Recover(call.target(), game().player()));
     }
 }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Describe this class and the methods exposed by it.
  */
-public abstract class Behavior<T extends BehaviorCall> {
+public abstract class Behavior<T extends BehaviorCall, U extends Prompt> {
 
     public CuttleGame game(){
         return mGame;
@@ -43,5 +43,5 @@ public abstract class Behavior<T extends BehaviorCall> {
         return obj;
     }
 
-    public abstract void call(T call, Prompt p);
+    public abstract void call(T call, U prompt);
 }

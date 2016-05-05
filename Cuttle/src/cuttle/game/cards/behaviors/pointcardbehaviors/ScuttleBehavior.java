@@ -7,6 +7,7 @@ import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.Pile;
 import cuttle.game.cards.behaviors.CardBehavior;
 import cuttle.game.cards.behaviors.TargetedBehaviorCall;
+import cuttle.game.cards.prompts.PlayPrompt;
 import cuttle.game.cards.prompts.Prompt;
 import cuttle.game.cards.prompts.PromptType;
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class ScuttleBehavior extends CardBehavior<TargetedBehaviorCall> {
+public class ScuttleBehavior extends CardBehavior<TargetedBehaviorCall, PlayPrompt> {
     public ScuttleBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt, "scuttle");
     }
@@ -39,7 +40,7 @@ public class ScuttleBehavior extends CardBehavior<TargetedBehaviorCall> {
     }
 
     @Override
-    public void call(TargetedBehaviorCall c, Prompt p) {
+    public void call(TargetedBehaviorCall c, PlayPrompt prompt) {
         game().perform(new Discard(card()));
         game().perform(new Destroy(c.target()));
     }

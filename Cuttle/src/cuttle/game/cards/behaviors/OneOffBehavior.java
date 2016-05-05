@@ -9,13 +9,13 @@ import cuttle.game.cards.prompts.ReactionPrompt;
 /**
  * Describe this class and the methods exposed by it.
  */
-public abstract class OneOffBehavior<T extends BehaviorCall> extends CardBehavior<T> {
+public abstract class OneOffBehavior<T extends BehaviorCall, U extends Prompt> extends CardBehavior<T, U> {
     public OneOffBehavior(CuttleCard card, PromptType promptType, String type){
         super(card, promptType, type);
     }
 
     @Override
-    public void call(T call, Prompt prompt) {
+    public void call(T call, U prompt) {
         ReactionPrompt reactionPrompt = new ReactionPrompt();
         reactionPrompt.prompt(game().opponent());
         if (!reactionPrompt.reacted()){
@@ -24,5 +24,5 @@ public abstract class OneOffBehavior<T extends BehaviorCall> extends CardBehavio
         game().perform(new Discard(card()));
     }
 
-    public abstract void activateEffect(T call, Prompt prompt);
+    public abstract void activateEffect(T call, U prompt);
 }
