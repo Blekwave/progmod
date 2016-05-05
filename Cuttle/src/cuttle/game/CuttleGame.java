@@ -3,6 +3,7 @@ package cuttle.game;
 import cuttle.game.actions.Action;
 import cuttle.game.cards.Pile;
 import cuttle.game.cards.CuttleCard;
+import cuttle.game.cards.deck.DeckBuilder;
 import cuttle.game.updates.GameEndUpdate;
 
 import java.util.HashMap;
@@ -45,7 +46,8 @@ public class CuttleGame {
     private ServerAdapter mServerAdapter;
 
     public void startGame(){
-        // TODO: Initialize deck
+        DeckBuilder deckBuilder = new DeckBuilder(this);
+        mDeck = deckBuilder.buildDeck();
         mScrapPile = new Pile("scrap_pile", null);
 
         mCardPileMap = new HashMap<>();
