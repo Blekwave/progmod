@@ -28,7 +28,7 @@ public class ScuttleBehavior extends CardBehavior<TargetedBehaviorCall> {
     public ArrayList<TargetedBehaviorCall> listValidCalls() {
         ArrayList<TargetedBehaviorCall> list = new ArrayList<>();
 
-        Pile opponentsBoard = card().game().opponent().pointBoard();
+        Pile opponentsBoard = game().opponent().pointBoard();
         for (CuttleCard c : opponentsBoard){
             if (scuttleValue(this.card()) > scuttleValue(c)){
                 list.add(new TargetedBehaviorCall(this, c));
