@@ -13,8 +13,8 @@ import java.util.HashMap;
 public class CuttleGame {
 
     public CuttleGame(ServerInterface server){
-        mPlayer = new Player(this, 0);
-        mOpponent = new Player(this, 1);
+        mPlayer = new Player(this, 0, mOpponent);
+        mOpponent = new Player(this, 1, mPlayer);
         mServerAdapter = new ServerAdapter(server, this);
     }
 

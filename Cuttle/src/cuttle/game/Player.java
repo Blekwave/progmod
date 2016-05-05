@@ -35,6 +35,10 @@ public class Player {
         return mBehaviors;
     }
 
+    public Player opponent(){
+        return mOpponent;
+    }
+
     public BehaviorIterator behaviorIterator(){
         return new BehaviorIterator(this);
     }
@@ -45,8 +49,9 @@ public class Player {
     private Pile mContinuousBoard;
     private CuttleGame mGame;
     private ArrayList<PlayerBehavior> mBehaviors;
+    private Player mOpponent;
 
-    public Player(CuttleGame game, Integer id){
+    public Player(CuttleGame game, Integer id, Player opponent){
         mId = id;
 
         mKingCount = 0;
@@ -58,6 +63,7 @@ public class Player {
         mContinuousBoard = new Pile("p" + id + "_continuous_board", this);
 
         mGame = game;
+        mOpponent = opponent;
     }
 
     // CHECK WIN

@@ -18,7 +18,7 @@ public abstract class OneOffBehavior<T extends BehaviorCall> extends CardBehavio
     @Override
     public void call(T call, PlayPrompt prompt) {
         ReactionPrompt reactionPrompt = new ReactionPrompt();
-        reactionPrompt.prompt(game().opponent());
+        reactionPrompt.prompt(card().owner().opponent());
         if (!reactionPrompt.reacted()){
             activateEffect(call, prompt);
         }
