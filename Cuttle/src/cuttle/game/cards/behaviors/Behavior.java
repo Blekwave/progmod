@@ -1,5 +1,6 @@
 package cuttle.game.cards.behaviors;
 
+import cuttle.game.CuttleGame;
 import cuttle.game.cards.prompts.Prompt;
 import cuttle.game.cards.prompts.PromptType;
 import org.json.JSONObject;
@@ -10,14 +11,21 @@ import java.util.ArrayList;
  * Describe this class and the methods exposed by it.
  */
 public abstract class Behavior<T extends BehaviorCall> {
+
+    public CuttleGame game(){
+        return mGame;
+    }
+
     public PromptType promptType(){
         return mPromptType;
     }
 
+    private CuttleGame mGame;
     private PromptType mPromptType;
     private String mType;
 
-    public Behavior(PromptType promptType, String type){
+    public Behavior(CuttleGame game, PromptType promptType, String type){
+        mGame = game;
         mPromptType = promptType;
         mType = type;
     }

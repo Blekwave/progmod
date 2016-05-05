@@ -17,7 +17,7 @@ public abstract class CardBehavior<T extends BehaviorCall> extends Behavior<T> {
     private CuttleCard mCard;
 
     public CardBehavior(CuttleCard card, PromptType prompt, String type){
-        super(prompt, type);
+        super(card.game(), prompt, type);
         mCard = card;
     }
 

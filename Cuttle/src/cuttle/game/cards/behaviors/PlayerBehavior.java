@@ -15,7 +15,7 @@ public abstract class PlayerBehavior<T extends BehaviorCall> extends Behavior<T>
     private Player mPlayer;
 
     public PlayerBehavior(Player player, PromptType prompt, String type){
-        super(prompt, type);
+        super(player.game(), prompt, type);
         mPlayer = player;
     }
 

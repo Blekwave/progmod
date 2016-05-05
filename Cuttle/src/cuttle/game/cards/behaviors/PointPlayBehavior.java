@@ -15,6 +15,6 @@ public class PointPlayBehavior extends CardBehavior<BehaviorCall> {
 
     @Override
     public void call(BehaviorCall c, Prompt p) {
-        // ...
+
     }
 }
