@@ -22,6 +22,7 @@ public abstract class Prompt {
     }
 
     public JSONObject promptJSON(){
+        mPromptJSON.put("calls", mCallsJSONArray);
         return mPromptJSON;
     }
 
@@ -37,7 +38,6 @@ public abstract class Prompt {
         mPromptJSON = new JSONObject();
         mPromptJSON.put("type", "prompt");
         mPromptJSON.put("prompt_type", type.string());
-        mCallsJSONArray = new JSONArray();
     }
 
     public void registerCall(BehaviorCall call){
@@ -59,6 +59,7 @@ public abstract class Prompt {
     }
 
     public void registerValidCalls(Player player){
+        mCallsJSONArray = new JSONArray();
         Iterator<Behavior> it = player.behaviorIterator();
 
         while (it.hasNext()){
