@@ -41,7 +41,7 @@ public class GameStartUpdate implements UpdateInterface {
         JSONArray obj = new JSONArray();
 
         for (CuttleCard card : player.hand()){
-            obj.put(card.id().toString());
+            obj.put(card.id());
         }
 
         return obj;
