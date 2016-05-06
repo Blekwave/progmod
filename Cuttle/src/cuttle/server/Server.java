@@ -16,25 +16,6 @@ public class Server {
     /**
      * Runs the server and starts listening to clients.
      */
-    public void run() throws Exception {
-        ServerSocket listener = new ServerSocket(mPort);
-
-        try {
-            while(true) {
-                synchronized(System.out) {
-                    System.out.println("Creating new game...");
-                }
-
-                // Create a new game.
-                Player p1 = new Player(listener.accept());
-                Player p2 = new Player(listener.accept());
-
-                p1.start();
-                p2.start();
-            }
-        }
-        finally {
-            listener.close();
-        }
+    public void run() {
     }
 }

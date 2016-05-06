@@ -1,4 +1,4 @@
-package cuttle.simpleserver;
+package cuttle.server;
 
 import cuttle.game.CuttleGame;
 import cuttle.game.ServerInterface;
@@ -9,15 +9,14 @@ import java.util.Scanner;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class SimpleServer implements ServerInterface {
-
+public class DebugServer implements ServerInterface {
     private Scanner mScanner;
 
-    public SimpleServer(){
+    public DebugServer(){
         mScanner = new Scanner(System.in);
     }
 
-    public void startGame(){
+    public void run(){
         new CuttleGame(this, 0, 1);
     }
 
