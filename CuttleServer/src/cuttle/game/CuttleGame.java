@@ -51,6 +51,17 @@ public class CuttleGame {
         mServerAdapter = new ServerAdapter(server, this);
     }
 
+    private final Integer firstNumberOfCards = 5;
+    private final Integer secondNumberOfCards = 6;
+
+    private void dealCards(Player player, Integer number){
+        for (Integer i = 0; i < number; i++){
+            CuttleCard card = mDeck.pop();
+            player.hand().push(card);
+            updateCardPile(card, player.hand());
+        }
+    }
+
     private void preGamePreparations(){
         DeckBuilder deckBuilder = new DeckBuilder(this);
         mDeck = deckBuilder.buildDeck();
@@ -61,6 +72,10 @@ public class CuttleGame {
         for (CuttleCard c : mDeck){
             mCardPileMap.put(c, mDeck);
         }
+
+        // Deal five cards to the first player, six to the second
+        dealCards(mPlayer, firstNumberOfCards);
+        dealCards(mOpponent, secondNumberOfCards);
     }
 
     private void newTurn(){
@@ -94,7 +109,7 @@ public class CuttleGame {
     public void start(){
         preGamePreparations();
 
-        GameStartUpdate gameStartUpdate = new GameStartUpdate(player());
+        GameStartUpdate gameStartUpdate = new GameStartUpdate(this);
         mServerAdapter.update(gameStartUpdate);
 
         while (!isGameOver()){
