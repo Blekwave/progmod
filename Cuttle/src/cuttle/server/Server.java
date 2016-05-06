@@ -54,9 +54,9 @@ public class Server extends WebSocketServer implements ServerInterface {
 
             // Choose a random first player.
             if(mRandom.nextBoolean())
-                new CuttleGame(this, id, wId).start();
+                new GameThread(this, id, wId).start();
             else
-                new CuttleGame(this, wId, id).start();
+                new GameThread(this, wId, id).start();
 
             mWaitingSocket = null;
         }

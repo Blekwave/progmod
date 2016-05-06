@@ -12,7 +12,7 @@ import java.util.HashMap;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class CuttleGame extends Thread {
+public class CuttleGame {
 
     public Player player(){
         return mPlayer;
@@ -92,7 +92,7 @@ public class CuttleGame extends Thread {
         mWinner = player;
     }
 
-    public void run(){
+    public void start(){
         preGamePreparations();
 
         GameStartUpdate gameStartUpdate = new GameStartUpdate(player());
