@@ -18,7 +18,7 @@ public class ServerAdapter {
         mGame = game;
     }
 
-    public BehaviorCall prompt(Prompt prompt, Player player){
+    public BehaviorCall prompt(Prompt prompt, Player player) {
         JSONObject message = prompt.promptJSON();
         JSONObject response = mServer.prompt(message, player.id());
         Integer chosenCallId = (Integer) response.get("id");

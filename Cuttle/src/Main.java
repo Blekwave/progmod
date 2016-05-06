@@ -6,6 +6,8 @@ import cuttle.server.DebugServer;
  * Entry point to the Cuttle game.
  */
 public class Main {
+    private static final int DefaultPort = 42001;
+
     /**
      * Returns the argument position if exists or -1 if wasn't found.
      */
@@ -29,7 +31,7 @@ public class Main {
 
     public static void main(String[] args) {
         Boolean debug = false;
-        Integer port = 44001;
+        Integer port = DefaultPort;
         try {
             Integer pos;
 

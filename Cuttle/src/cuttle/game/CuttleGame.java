@@ -12,7 +12,7 @@ import java.util.HashMap;
 /**
  * Describe this class and the methods exposed by it.
  */
-public class CuttleGame {
+public class CuttleGame extends Thread {
 
     public Player player(){
         return mPlayer;
@@ -49,8 +49,6 @@ public class CuttleGame {
         mPlayer.setOpponent(mOpponent);
         mOpponent.setOpponent(mPlayer);
         mServerAdapter = new ServerAdapter(server, this);
-
-        start();
     }
 
     private void preGamePreparations(){
@@ -64,21 +62,6 @@ public class CuttleGame {
         for (CuttleCard c : mDeck){
             mCardPileMap.put(c, mDeck);
         }
-    }
-
-    private Integer start(){
-        preGamePreparations();
-
-        GameStartUpdate gameStartUpdate = new GameStartUpdate(player());
-        mServerAdapter.update(gameStartUpdate);
-
-        while (!isGameOver()){
-            newTurn();
-            new PlayPrompt().prompt(mPlayer);
-            switchPlayer();
-        }
-
-        return mWinner.id();
     }
 
     private void newTurn(){
@@ -107,6 +90,19 @@ public class CuttleGame {
         GameEndUpdate update = new GameEndUpdate(player);
         mServerAdapter.update(update);
         mWinner = player;
+    }
+
+    public void run(){
+        preGamePreparations();
+
+        GameStartUpdate gameStartUpdate = new GameStartUpdate(player());
+        mServerAdapter.update(gameStartUpdate);
+
+        while (!isGameOver()){
+            newTurn();
+            new PlayPrompt().prompt(mPlayer);
+            switchPlayer();
+        }
     }
 
     public void perform(Action action){

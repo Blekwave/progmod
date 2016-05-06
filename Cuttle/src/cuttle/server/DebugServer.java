@@ -17,7 +17,7 @@ public class DebugServer implements ServerInterface {
     }
 
     public void run(){
-        new CuttleGame(this, 0, 1);
+        new CuttleGame(this, 0, 1).run();
     }
 
     @Override
