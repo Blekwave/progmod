@@ -54,7 +54,6 @@ public class CuttleGame {
     private void preGamePreparations(){
         DeckBuilder deckBuilder = new DeckBuilder(this);
         mDeck = deckBuilder.buildDeck();
-        mDeck.shuffle();
         mScrapPile = new Pile("scrap_pile", null);
 
         // All cards begin inside the deck

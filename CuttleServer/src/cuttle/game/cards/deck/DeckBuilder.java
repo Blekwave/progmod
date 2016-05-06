@@ -33,6 +33,7 @@ public class DeckBuilder {
             deck.push(new Queen(mGame, id++, suit));
             deck.push(new King(mGame, id++, suit));
         }
+        deck.shuffle();
         return deck;
     }
 }
