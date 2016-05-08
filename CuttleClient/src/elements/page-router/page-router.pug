@@ -1,0 +1,10 @@
+link(rel="import" href="../../bower_components/polymer/polymer.html")
+link(rel="import" href="../../bower_components/iron-pages/iron-pages.html")
+link(rel="import" href="route-section.html")
+script(type="text/javascript" src="../../bower_components/page/page.js")
+
+dom-module(id="page-router")
+    template
+        iron-pages(selected="{{route}}")
+            content
+    script(type="text/javascript" src="page-router.js")

@@ -1,0 +1,28 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        title Cuttle
+
+        // Web application manifest
+        link(rel="manifest" href="manifest.json")
+
+        // Homescreen for Chrome on Android
+        meta(name="mobile-web-app-capable" content="yes")
+        meta(name="application-name" content="Cuttle")
+        link(rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png")
+
+        // Homescreen for Safari on iOS
+        meta(name="apple-mobile-web-app-capable" content="yes")
+        meta(name="apple-mobile-web-app-status-bar-style" content="black")
+        meta(name="apple-mobile-web-app-title" content="Cuttle")
+        link(rel="apple-touch-icon" href="images/touch/apple-touch-icon.png")
+
+        script(type="text/javascript" src="bower_components/webcomponentsjs/webcomponents-lite.min.js")
+        link(rel="stylesheet" type="text/css" href="main.css")
+        link(rel="import" href="elements/elements.html")
+    body(unresolved)
+        page-router
+            route-section(path="/" element="page-connection")
+            route-section(path="/game" element="page-game")

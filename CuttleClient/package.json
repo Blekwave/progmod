@@ -1,0 +1,25 @@
+{
+  "name": "CuttleClient",
+  "version": "0.1.0",
+  "description": "Web-based Cuttle client for the cuttle server",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "connect-history-api-fallback": "^1.2.0",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-html-minifier": "^0.1.8",
+    "gulp-less": "^3.1.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-pug": "^2.0.0",
+    "polybuild": "^1.1.0"
+  },
+  "authors": [
+      "Renato Utsch <renatoutsch@gmail.com>",
+      "Victor Diniz <blek.net@gmail.com>"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.12.5",
+    "gulp-watch": "^4.3.5"
+  }
+}

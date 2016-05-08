@@ -1,0 +1,23 @@
+{
+  "name": "CuttleClient",
+  "authors": [
+    "Renato Utsch <renatoutsch@gmail.com>",
+    "Victor Diniz<blek.net@gmail.com>"
+  ],
+  "description": "Web-based Cuttle client for the cuttle server",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0",
+    "page": "^1.7.1",
+    "iron-ajax": "^1.2.0",
+    "iron-pages": "^1.0.7"
+  }
+}
