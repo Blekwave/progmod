@@ -1,7 +1,7 @@
 package cuttle.game.cards.events;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Types of triggers, which can fire a card's Events
  */
 public enum Trigger {
     OnBoardExit

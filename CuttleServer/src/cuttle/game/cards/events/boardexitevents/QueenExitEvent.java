@@ -6,7 +6,8 @@ import cuttle.game.cards.events.Event;
 import cuttle.game.cards.events.Trigger;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Event triggered when a Queen leaves the board after being played as a con-
+ * tinuous card.
  */
 public class QueenExitEvent extends Event {
     public QueenExitEvent(CuttleCard card){
