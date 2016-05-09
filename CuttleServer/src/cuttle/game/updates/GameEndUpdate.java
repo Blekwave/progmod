@@ -4,7 +4,8 @@ import cuttle.game.Player;
 import org.json.JSONObject;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Update sent at the end of the game, notifying both player about who won or
+ * if there was a draw.
  */
 public class GameEndUpdate implements UpdateInterface {
 
@@ -12,15 +13,28 @@ public class GameEndUpdate implements UpdateInterface {
 
     private Boolean mTie;
 
+    /**
+     * Constructor used when there is a winner.
+     *
+     * @param winner Player who won.
+     */
     public GameEndUpdate(Player winner){
         mWinner = winner;
         mTie = false;
     }
 
+    /**
+     * Constructor used when there's a draw.
+     */
     public GameEndUpdate(){
         mTie = true;
     }
 
+    /**
+     * Generates the update container.
+     *
+     * @return UpdateContainer for the update.
+     */
     @Override
     public UpdateContainer buildUpdate() {
         JSONObject obj = new JSONObject();
