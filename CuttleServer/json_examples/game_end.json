@@ -1,4 +1,10 @@
 {
     "type": "game_end",
+    "result": "draw"
+}
+
+{
+    "type": "game_end",
+    "result": "win",
     "winner": 0
 }
