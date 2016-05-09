@@ -8,9 +8,15 @@ import cuttle.game.cards.prompts.ImmediatePlayPrompt;
 import cuttle.game.cards.prompts.PromptType;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Behavior for discarding a card drawn by a Seven one-off play, if there are
+ * no valid plays to be made.
  */
 public class ImmediateDiscardBehavior extends PlayerBehavior<BehaviorCall, ImmediatePlayPrompt> {
+    /**
+     * Initializes a new behavior, associated to a player.
+     *
+     * @param player Player to which this behavior is associated.
+     */
     public ImmediateDiscardBehavior(Player player){
         super(player, PromptType.PlayPrompt, "immediate_discard");
     }

@@ -11,13 +11,24 @@ import cuttle.game.cards.prompts.PromptType;
 import java.util.ArrayList;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Discard behavior, which happens when a Four is played.
  */
 public class DiscardBehavior extends PlayerBehavior<TargetedBehaviorCall, DiscardPrompt> {
+    /**
+     * Initializes a new behavior, associated to a player.
+     *
+     * @param player Player to which this behavior is associated.
+     */
     public DiscardBehavior(Player player){
         super(player, PromptType.DiscardPrompt, "discard");
     }
 
+    /**
+     * Lists valid discard calls, i.e., a call for every card in the player's
+     * hand.
+     *
+     * @return List of valid calls.
+     */
     @Override
     public ArrayList<TargetedBehaviorCall> listValidCalls() {
         ArrayList<TargetedBehaviorCall> list = new ArrayList<>();

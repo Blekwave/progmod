@@ -7,7 +7,7 @@ import cuttle.game.cards.prompts.PromptType;
 import cuttle.game.cards.prompts.ReactionPrompt;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Behavior for not reacting when prompted for a reaction.
  */
 public class PassBehavior extends PlayerBehavior<BehaviorCall, ReactionPrompt> {
     public PassBehavior(Player player){
