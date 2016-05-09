@@ -5,6 +5,10 @@
 
 {
     "type": "game_end",
-    "result": "win",
-    "winner": 0
+    "result": "win"
+}
+
+{
+    "type": "game_end",
+    "result": "lose"
 }
