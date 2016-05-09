@@ -10,19 +10,25 @@ Polymer({
         /**
          * The element that is going to be called when this path is selected.
          */
-        element: String
-    },
+        element: String,
 
-    created: function() {
-        this._elementNode = null;
-    },
-
-    render: function(context) {
-        if(!this._elementNode) {
-            this._elementNode = document.createElement(this.element);
-            Polymer.dom(this.root).appendChild(this._elementNode);
+        /**
+         * The proper element that was created.
+         */
+        elementNode: {
+            type: Object,
+            notify: true
         }
+    },
 
-        this._elementNode.focus();
+    createElement: function() {
+        if(!this.elementNode) {
+            this.elementNode = document.createElement(this.element);
+            Polymer.dom(this.root).appendChild(this.elementNode);
+        }
+    },
+
+    render: function() {
+        this.elementNode.focus();
     }
 });

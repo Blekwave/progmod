@@ -21,11 +21,20 @@ Polymer({
         this._pages.items.forEach(function(item, index) {
             page(item.path, function(ctx) {
                 self.route = index.toString();
-                item.element.params = ctx.params;
+                item.createElement();
+
+                if(self._params)
+                    item.elementNode.params = self._params;
                 item.render();
             });
         });
 
         page();
+    },
+
+    go: function(route, params) {
+        this._params = params;
+        page(route);
+        this.route = route;
     }
 });

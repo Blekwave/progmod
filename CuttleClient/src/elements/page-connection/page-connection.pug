@@ -1,6 +1,20 @@
 link(rel="import" href="../../bower_components/polymer/polymer.html")
+link(rel="import" href="../../bower_components/iron-form/iron-form.html")
+link(rel="import" href="../../bower_components/paper-input/paper-input.html")
+link(rel="import" href="../../bower_components/paper-button/paper-button.html")
 
 dom-module(id="page-connection")
     template
-        p h1 Cuttle connection page
+        style.
+            div {
+                margin: auto;
+                width: 400px;
+            }
+        div
+            h1 Cuttle connection page
+            form(is="iron-form" id="connectionForm" name="connection" action="#" method="get")
+                paper-input(id="submitInput" name="address" label="Address" required)
+                br
+                paper-button(id="submitButton" raised) Start Game
+
     script(type="text/javascript" src="page-connection.js")
