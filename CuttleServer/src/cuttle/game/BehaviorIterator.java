@@ -6,13 +6,18 @@ import cuttle.game.cards.behaviors.Behavior;
 import java.util.Iterator;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Iterator over a player's behaviors and every one of its cards' behaviors.
  */
 public class BehaviorIterator implements Iterator<Behavior> {
 
     private Iterator<CuttleCard> mHandIterator;
     private Iterator<? extends Behavior> mInternalIterator;
 
+    /**
+     * Initializes the iterator from a player's cards and behaviors.
+     *
+     * @param player Player over whose behaviors the iterator should iterate.
+     */
     public BehaviorIterator(Player player){
         mHandIterator = player.hand().iterator();
         mInternalIterator = player.behaviors().iterator();

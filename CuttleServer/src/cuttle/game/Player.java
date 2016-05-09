@@ -10,7 +10,9 @@ import cuttle.game.cards.behaviors.playerbehaviors.PassBehavior;
 import java.util.ArrayList;
 
 /**
- * Cuttle player.
+ * Player in a game of Cuttle. Three card Piles belong to it: hand, point board
+ * and continuous board. It also has a list of behaviors, in regard to plays
+ * such as drawing a card or not doing anything.
  */
 public class Player {
 
@@ -59,6 +61,12 @@ public class Player {
 
     private ArrayList<PlayerBehavior> mBehaviors;
 
+    /**
+     * Initializes a new player.
+     *
+     * @param game Game to which this player belongs.
+     * @param id Numeric identifier supplied by the server.
+     */
     public Player(CuttleGame game, Integer id){
         mId = id;
 
@@ -78,8 +86,11 @@ public class Player {
         mBehaviors.add(new PassBehavior(this));
     }
 
-    // CHECK WIN
-
+    /**
+     * Checks if this player has enough points to win the game.
+     *
+     * @return Whether or not it has won the game.
+     */
     public Boolean hasWon(){
         Integer pointSum = 0;
         for (CuttleCard card : mPointBoard){
@@ -88,8 +99,14 @@ public class Player {
         return pointSum >= victoryReq();
     }
 
-    // CONTINUOUS CARD FLAGS
-
+    /**
+     * Checks if this player's hand should be visible to the other player.
+     *
+     * A player's hand is visible if the opposing player has an eight in its
+     * continuous board.
+     *
+     * @return Whether its hand is visible.
+     */
     public Boolean handIsVisible(){
         return mEightCount > 0;
     }
@@ -102,6 +119,14 @@ public class Player {
         mEightCount--;
     }
 
+    /**
+     * Checks if this player is protected against targeted spells.
+     *
+     * A player is protected against targeted spells if it has a queen in its
+     * continuous board.
+     *
+     * @return Whether this player is protected.
+     */
     public Boolean isProtected(){
         return mQueenCount > 0;
     }
@@ -114,6 +139,14 @@ public class Player {
         mQueenCount--;
     }
 
+    /**
+     * Computes how many points are required for this player to win.
+     *
+     * A player's win requirements depend on the number of kings on board.
+     * None: 21, 1 king: 14, 2 kings: 10, 3 kings: 7, all 4 kings: 5
+     *
+     * @return Victory requirements for this player.
+     */
     public Integer victoryReq(){
         switch (mKingCount){
             case 0:
