@@ -1,6 +1,6 @@
 {
     "type": "game_start",
-    "starting_player": 1,
+    "player_id": 1,
     "card_by_id":{
         "0": {
             "suit": "hearts",
@@ -12,6 +12,5 @@
         }
         ...
     },
-    "p0_hand": [31, 45, 22, 16, 20, 2],
-    "p1_hand": [1, 0, 7, 9, 51]
+    "hand": [31, 45, 22, 16, 20, 2]
 }
