@@ -41,6 +41,17 @@ public class CuttleGame {
     private ServerAdapter mServerAdapter;
     private Player mWinner;
 
+    private Integer mTieTurnCounter;
+    private final Integer mTieTurns = 6;
+
+    private void increaseTieTurnCounter(){
+        mTieTurnCounter++;
+    }
+
+    private void resetTieTurnCounter(){
+        mTieTurns = 0;
+    }
+
     public CuttleGame(ServerInterface server, Integer idFirst, Integer idSecond){
         mPlayer = new Player(this, idFirst);
         mOpponent = new Player(this, idSecond);
@@ -66,6 +77,7 @@ public class CuttleGame {
         DeckBuilder deckBuilder = new DeckBuilder(this);
         mDeck = deckBuilder.buildDeck();
         mScrapPile = new Pile("scrap_pile", null);
+        mTieTurnCounter = 0;
 
         // All cards begin inside the deck
         mCardPileMap = new HashMap<>();
@@ -96,9 +108,13 @@ public class CuttleGame {
         } else if (mOpponent.hasWon()){
             updateGameEnd(mOpponent);
             return true;
+        } else if (mTieTurnCounter >= mTieTurns) {
+            updateGameEnd();
+            return true;
         }
         return false;
     }
+
 
     private void updateGameEnd(Player player){
         GameEndUpdate update = new GameEndUpdate(player);
@@ -114,7 +130,13 @@ public class CuttleGame {
 
         while (!isGameOver()){
             newTurn();
-            new PlayPrompt().prompt(mPlayer);
+            PlayPrompt prompt = new PlayPrompt();
+            prompt.prompt(mPlayer);
+            if (prompt.passed()){
+                increaseTieTurnCounter();
+            } else {
+                resetTieTurnCounter();
+            }
             switchPlayer();
         }
     }

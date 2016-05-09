@@ -1,6 +1,6 @@
 {
     "type": "game_end",
-    "result": "draw"
+    "result": "tie"
 }
 
 {
@@ -10,5 +10,5 @@
 
 {
     "type": "game_end",
-    "result": "lose"
+    "result": "loss"
 }
