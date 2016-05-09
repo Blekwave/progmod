@@ -6,7 +6,7 @@ import cuttle.game.actions.PlayerAction;
 import org.json.JSONObject;
 
 /**
- * Describe this class and the methods exposed by it.
+ * A player draws a card.
  */
 public class Draw extends PlayerAction {
     public CuttleCard drawn(){
@@ -26,6 +26,13 @@ public class Draw extends PlayerAction {
         game().updateCardPile(mDrawn, player().hand());
     }
 
+    /**
+     * Builds a JSON update object regarding to the action performed, to be
+     * relayed to the current player. Contains the action's player's ID as
+     * well as the card drawn.
+     *
+     * @return New JSONObject with the action's execution information.
+     */
     @Override
     public JSONObject buildPlayerUpdate() {
         JSONObject obj = super.buildPlayerUpdate();
@@ -33,6 +40,13 @@ public class Draw extends PlayerAction {
         return obj;
     }
 
+    /**
+     * Builds a JSON update object regarding to the action performed, to be
+     * relayed to the current opponent. Contains the action's player's ID as
+     * well as the card drawn, if the player's hand is visible.
+     *
+     * @return New JSONObject with the action's execution information.
+     */
     @Override
     public JSONObject buildOpponentUpdate(){
         JSONObject obj = super.buildPlayerUpdate();

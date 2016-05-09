@@ -5,7 +5,7 @@ import cuttle.game.cards.Pile;
 import org.json.JSONObject;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Action which targets a card.
  */
 public abstract class TargetedAction extends Action {
 
@@ -25,6 +25,13 @@ public abstract class TargetedAction extends Action {
     private Pile mTargetPile;
     private Integer mTargetPileIndex;
 
+
+    /**
+     * Initializes a new action, associated with a target card.
+     *
+     * @param target Card to be targeted by the action.
+     * @param type Unique string identifier for this action type.
+     */
     public TargetedAction(CuttleCard target, String type){
         super(target.game(), type);
         mTarget = target;
@@ -32,6 +39,13 @@ public abstract class TargetedAction extends Action {
         mTargetPileIndex = mTargetPile.indexOf(target);
     }
 
+    /**
+     * Builds a JSON update object regarding to the action performed, to be
+     * relayed to the current player. Contains information about the target
+     * card's pile and index in that pile.
+     *
+     * @return New JSONObject with the action's execution information.
+     */
     @Override
     public JSONObject buildPlayerUpdate() {
         JSONObject obj = super.buildPlayerUpdate();
@@ -40,6 +54,13 @@ public abstract class TargetedAction extends Action {
         return obj;
     }
 
+    /**
+     * Builds a JSON update object regarding to the action performed, to be
+     * relayed to the current opponent. Contains information about the target
+     * card's pile and index in that pile.
+     *
+     * @return New JSONObject with the action's execution information.
+     */
     @Override
     public JSONObject buildOpponentUpdate() {
         return buildPlayerUpdate();

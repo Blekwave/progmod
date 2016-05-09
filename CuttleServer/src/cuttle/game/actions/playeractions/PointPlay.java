@@ -4,7 +4,7 @@ import cuttle.game.actions.TargetedPlayerAction;
 import cuttle.game.cards.CuttleCard;
 
 /**
- * Describe this class and the methods exposed by it.
+ * A player plays a card as a point card.
  */
 public class PointPlay extends TargetedPlayerAction {
     public PointPlay(CuttleCard target){

@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Reveals a player's hand.
  */
 public class ShowHand extends PlayerAction {
     public ShowHand(Player player){
@@ -19,6 +19,13 @@ public class ShowHand extends PlayerAction {
         // Do nothing
     }
 
+    /**
+     * Builds a JSON update object regarding to the action performed, to be
+     * relayed to the current player. Contains the action's player's ID as
+     * well as his hand's card IDs in order, also shown to his opponent.
+     *
+     * @return New JSONObject with the action's execution information.
+     */
     @Override
     public JSONObject buildPlayerUpdate() {
         JSONObject obj = super.buildPlayerUpdate();
@@ -32,6 +39,13 @@ public class ShowHand extends PlayerAction {
         return obj;
     }
 
+    /**
+     * Builds a JSON update object regarding to the action performed, to be
+     * relayed to the opponent. Contains the action's player's ID as
+     * well as his hand's card IDs in order.
+     *
+     * @return New JSONObject with the action's execution information.
+     */
     @Override
     public JSONObject buildOpponentUpdate() {
         return buildPlayerUpdate();

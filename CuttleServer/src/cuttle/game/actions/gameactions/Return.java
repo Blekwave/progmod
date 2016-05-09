@@ -5,7 +5,9 @@ import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.events.Trigger;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Returns a card from the board to the top of the deck.
+ *
+ * Triggers OnBoardExit events associated with the card, if there are any.
  */
 public class Return extends TargetedAction {
     public Return(CuttleCard target){

@@ -4,7 +4,7 @@ import cuttle.game.Player;
 import cuttle.game.actions.PlayerAction;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Hides a player's hand.
  */
 public class HideHand extends PlayerAction {
     public HideHand(Player player){

@@ -7,9 +7,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Shuffles a player's hand.
  */
 public class ShuffleHand extends PlayerAction {
+
     public ShuffleHand(Player player){
         super(player, "shuffle_hand");
     }
@@ -19,6 +20,13 @@ public class ShuffleHand extends PlayerAction {
         player().hand().shuffle();
     }
 
+    /**
+     * Builds a JSON update object regarding to the action performed, to be
+     * relayed to the current player. Contains the action's player's ID as
+     * well as an array with the IDs of their cards in the new ordering.
+     *
+     * @return New JSONObject with the action's execution information.
+     */
     @Override
     public JSONObject buildPlayerUpdate() {
         JSONObject obj = super.buildPlayerUpdate();

@@ -4,7 +4,8 @@ import cuttle.game.Player;
 import cuttle.game.actions.PlayerAction;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Raises a player's victory requirements (registers there's one extra king on
+ * his board).
  */
 public class RaiseVictoryReq extends PlayerAction {
 

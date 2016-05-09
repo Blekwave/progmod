@@ -5,7 +5,7 @@ import cuttle.game.actions.TargetedPlayerAction;
 import cuttle.game.cards.CuttleCard;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Takes a card from the discard pile and gives it to a player.
  */
 public class Recover extends TargetedPlayerAction {
     public Recover(CuttleCard card, Player player){

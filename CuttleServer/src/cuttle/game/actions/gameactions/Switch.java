@@ -5,7 +5,7 @@ import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.Pile;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Switches a point card from a player's board to another's.
  */
 public class Switch extends TargetedAction {
     public Switch(CuttleCard target){

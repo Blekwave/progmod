@@ -5,7 +5,9 @@ import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.events.Trigger;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Destroys a card from a player's board.
+ *
+ * Triggers OnBoardExit events associated with the card, if there are any.
  */
 public class Destroy extends TargetedAction {
     public Destroy(CuttleCard target){

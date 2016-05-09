@@ -4,7 +4,8 @@ import cuttle.game.Player;
 import cuttle.game.actions.PlayerAction;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Raises a player's hand's visibility (registers there's one extra eight on
+ * their opponent's board).
  */
 public class RaiseVisibility extends PlayerAction {
 

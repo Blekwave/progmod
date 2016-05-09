@@ -4,7 +4,8 @@ import cuttle.game.Player;
 import cuttle.game.actions.PlayerAction;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Lowers a player's protection (registers there's one less queen on his
+ * board).
  */
 public class LowerProtection extends PlayerAction {
 

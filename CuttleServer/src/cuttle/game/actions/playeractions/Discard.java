@@ -4,7 +4,7 @@ import cuttle.game.actions.TargetedPlayerAction;
 import cuttle.game.cards.CuttleCard;
 
 /**
- * Describe this class and the methods exposed by it.
+ * A player discards a given card.
  */
 public class Discard extends TargetedPlayerAction {
 
