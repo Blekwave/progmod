@@ -7,13 +7,20 @@ import cuttle.game.cards.prompts.PromptType;
 import cuttle.game.cards.prompts.ReactionPrompt;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Behavior related to a card's one-off play.
  */
 public abstract class OneOffBehavior<T extends BehaviorCall> extends CardBehavior<T, PlayPrompt> {
     public OneOffBehavior(CuttleCard card, PromptType promptType, String type){
         super(card, promptType, type);
     }
 
+    /**
+     * Prompts the opponent for a reaction. If there's no reaction, executes
+     * the card's one-off effect. Finally, the card is discarded.
+     *
+     * @param call BehaviorCall to this behavior.
+     * @param prompt Prompt which prompted this behavior.
+     */
     @Override
     public void call(T call, PlayPrompt prompt) {
         ReactionPrompt reactionPrompt = new ReactionPrompt();
@@ -24,5 +31,11 @@ public abstract class OneOffBehavior<T extends BehaviorCall> extends CardBehavio
         game().perform(new Discard(card()));
     }
 
+    /**
+     * Effect triggered when a one-off card is played.
+     *
+     * @param call BehaviorCall associated to this behavior.
+     * @param prompt Prompt which prompted this behavior.
+     */
     public abstract void activateEffect(T call, PlayPrompt prompt);
 }

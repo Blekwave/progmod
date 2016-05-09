@@ -5,20 +5,34 @@ import cuttle.game.cards.Pile;
 import org.json.JSONObject;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Stateful call for a behavior which requires a target card.
  */
 public class TargetedBehaviorCall extends BehaviorCall {
-    private final CuttleCard mTarget;
-
-    public TargetedBehaviorCall(Behavior b, CuttleCard target){
-        super(b);
-        mTarget = target;
-    }
 
     public CuttleCard target(){
         return mTarget;
     }
 
+    private final CuttleCard mTarget;
+
+    /**
+     * Initializes a call, associated with a behavior and a target card.
+     *
+     * @param b Behavior to which this call is associated.
+     * @param target Card targeted by this behavior call.
+     */
+    public TargetedBehaviorCall(Behavior b, CuttleCard target){
+        super(b);
+        mTarget = target;
+    }
+
+    /**
+     * Defines extra properties to the JSON object associated with the behavior
+     * call which are related to this call's state, i.e. the target card's lo-
+     * cation and index.
+     *
+     * @param obj JSONObject to be modified.
+     */
     @Override
     public void defineJSONProperties(JSONObject obj){
         Pile targetPile = target().game().cardPile(target());
