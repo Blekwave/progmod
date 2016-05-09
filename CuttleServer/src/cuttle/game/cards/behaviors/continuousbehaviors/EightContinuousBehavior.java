@@ -24,9 +24,9 @@ public class EightContinuousBehavior extends ContinuousBehavior<BehaviorCall> {
 
     @Override
     public void entryEffect(BehaviorCall call, PlayPrompt prompt) {
-        game().perform(new RaiseVisibility(game().player()));
-        if (game().player().handIsVisible()){
-            game().perform(new ShowHand(game().player()));
+        game().perform(new RaiseVisibility(game().opponent()));
+        if (game().opponent().handIsVisible()){
+            game().perform(new ShowHand(game().opponent()));
         }
 
         card().bindEvent(new EightExitEvent(card()));

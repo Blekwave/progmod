@@ -18,10 +18,10 @@ public class EightExitEvent extends Event {
 
     @Override
     public void execute() {
-        game().perform(new LowerVisibility(card().owner()));
+        game().perform(new LowerVisibility(card().owner().opponent()));
         if (!card().owner().handIsVisible()){
-            game().perform(new HideHand(card().owner()));
-            game().perform(new ShuffleHand(card().owner()));
+            game().perform(new HideHand(card().owner().opponent()));
+            game().perform(new ShuffleHand(card().owner().opponent()));
         }
     }
 }
