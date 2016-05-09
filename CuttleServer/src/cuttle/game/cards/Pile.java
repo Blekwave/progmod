@@ -51,6 +51,10 @@ public class Pile implements Iterable<CuttleCard> {
         Collections.shuffle(mList);
     }
 
+    public Boolean isEmpty(){
+        return mList.isEmpty();
+    }
+
     public Integer indexOf(CuttleCard card){
         return mList.indexOf(card);
     }

@@ -39,7 +39,6 @@ public class CuttleGame {
     private Pile mDeck;
     private Pile mScrapPile;
     private ServerAdapter mServerAdapter;
-    private Player mWinner;
 
     private Integer mTieTurnCounter;
     private final Integer mTieTurns = 6;
@@ -49,7 +48,7 @@ public class CuttleGame {
     }
 
     private void resetTieTurnCounter(){
-        mTieTurns = 0;
+        mTieTurnCounter = 0;
     }
 
     public CuttleGame(ServerInterface server, Integer idFirst, Integer idSecond){
@@ -102,24 +101,19 @@ public class CuttleGame {
     }
 
     private Boolean isGameOver(){
+        GameEndUpdate update = null;
         if (mPlayer.hasWon()){
-            updateGameEnd(mPlayer);
-            return true;
+            update = new GameEndUpdate(mPlayer);
         } else if (mOpponent.hasWon()){
-            updateGameEnd(mOpponent);
-            return true;
+            update = new GameEndUpdate(mOpponent);
         } else if (mTieTurnCounter >= mTieTurns) {
-            updateGameEnd();
+            update = new GameEndUpdate();
+        }
+        if (update != null){
+            mServerAdapter.update(update);
             return true;
         }
         return false;
-    }
-
-
-    private void updateGameEnd(Player player){
-        GameEndUpdate update = new GameEndUpdate(player);
-        mServerAdapter.update(update);
-        mWinner = player;
     }
 
     public void start(){

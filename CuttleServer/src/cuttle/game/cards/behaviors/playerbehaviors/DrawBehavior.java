@@ -17,7 +17,7 @@ public class DrawBehavior extends PlayerBehavior<BehaviorCall, PlayPrompt> {
 
     @Override
     public void call(BehaviorCall call, PlayPrompt prompt) {
-        if (!player().game().deck().size().empty()){
+        if (!player().game().deck().isEmpty()){
             game().perform(new Draw(player()));
         } else {
             prompt.pass();
