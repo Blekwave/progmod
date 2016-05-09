@@ -10,7 +10,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Prompt which can prompt a player for a decision regarding a specific situ-
+ * ation and get their response, which is a behavior call to be executed.
  */
 public abstract class Prompt {
     public PromptType type(){
@@ -21,6 +22,14 @@ public abstract class Prompt {
         return mCalls;
     }
 
+    /**
+     * Generates a JSON object containing information regarding the prompt, to
+     * be relayed to the prompted player.
+     *
+     * The object contains a list of the possible behavior calls to be made.
+     *
+     * @return JSONObject to be sent to the player.
+     */
     public JSONObject promptJSON(){
         mPromptJSON.put("calls", mCallsJSONArray);
         return mPromptJSON;
@@ -32,6 +41,12 @@ public abstract class Prompt {
     private JSONObject mPromptJSON;
     private JSONArray mCallsJSONArray;
 
+    /**
+     * Initializes the prompt.
+     *
+     * @param type Type of the prompt, also defined in the behaviors which cor-
+     *             respond to it.
+     */
     public Prompt(PromptType type){
         mType = type;
         mCalls = new ArrayList<>();
@@ -40,6 +55,11 @@ public abstract class Prompt {
         mPromptJSON.put("prompt_type", type.string());
     }
 
+    /**
+     * Registers a behavior call to the list of valid calls for this prompt.
+     *
+     * @param call BehaviorCall to be registered.
+     */
     public void registerCall(BehaviorCall call){
         JSONObject callJSON = call.behavior().buildCallJSON(call);
         callJSON.put("id", mCalls.size());
@@ -47,6 +67,12 @@ public abstract class Prompt {
         mCallsJSONArray.put(callJSON);
     }
 
+    /**
+     * Gets a BehaviorCall from the list by its index in the list of calls.
+     *
+     * @param index Index in the list of calls.
+     * @return BehaviorCall corresponding to the index in this prompt.
+     */
     public BehaviorCall getCallByIndex(Integer index){
         return mCalls.get(index);
     }
@@ -58,6 +84,11 @@ public abstract class Prompt {
         chosenCall.call(this);
     }
 
+    /**
+     * Registers all valid calls from a player and their cards to this prompt.
+     *
+     * @param player Player whose Behaviors should be iterated.
+     */
     public void registerValidCalls(Player player){
         mCallsJSONArray = new JSONArray();
         BehaviorIterator it = player.behaviorIterator();

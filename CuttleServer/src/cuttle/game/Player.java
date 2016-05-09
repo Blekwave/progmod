@@ -5,6 +5,7 @@ import cuttle.game.cards.Pile;
 import cuttle.game.cards.behaviors.PlayerBehavior;
 import cuttle.game.cards.behaviors.playerbehaviors.DiscardBehavior;
 import cuttle.game.cards.behaviors.playerbehaviors.DrawBehavior;
+import cuttle.game.cards.behaviors.playerbehaviors.ImmediateDiscardBehavior;
 import cuttle.game.cards.behaviors.playerbehaviors.PassBehavior;
 
 import java.util.ArrayList;
@@ -40,6 +41,10 @@ public class Player {
         return mBehaviors;
     }
 
+    public ImmediateDiscardBehavior immediateDiscardBehavior(){
+        return mImmediateDiscardBehavior;
+    }
+
     public Player opponent(){
         return mOpponent;
     }
@@ -60,6 +65,7 @@ public class Player {
     private Player mOpponent;
 
     private ArrayList<PlayerBehavior> mBehaviors;
+    private ImmediateDiscardBehavior mImmediateDiscardBehavior;
 
     /**
      * Initializes a new player.
@@ -84,6 +90,7 @@ public class Player {
         mBehaviors.add(new DrawBehavior(this));
         mBehaviors.add(new DiscardBehavior(this));
         mBehaviors.add(new PassBehavior(this));
+        mImmediateDiscardBehavior = new ImmediateDiscardBehavior(this);
     }
 
     /**

@@ -1,7 +1,8 @@
 package cuttle.game.cards.prompts;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Prompt triggered when the opponent plays a one-off four. Forces the player
+ * to discard a card.
  */
 public class DiscardPrompt extends Prompt {
     public DiscardPrompt(){

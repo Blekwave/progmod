@@ -1,7 +1,8 @@
 package cuttle.game.cards.prompts;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Types of prompts, defined in the prompts themselves and in the behaviors
+ * which correspond to a specific type of prompt.
  */
 public enum PromptType {
     PlayPrompt("play_prompt"),
@@ -14,6 +15,11 @@ public enum PromptType {
 
     private String mString;
 
+    /**
+     * Initializes a prompt type.
+     *
+     * @param string Unique string identifier for this prompt type.
+     */
     PromptType(String string){
         mString = string;
     }

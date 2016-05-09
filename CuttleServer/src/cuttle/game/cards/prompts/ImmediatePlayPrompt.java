@@ -7,7 +7,8 @@ import cuttle.game.cards.behaviors.CardBehavior;
 import cuttle.game.cards.behaviors.PlayerBehavior;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Prompt triggered when a player draws a card and must play it immediately, as
+ * result of a Seven's one-off play. Specific type of PlayPrompt.
  */
 public class ImmediatePlayPrompt extends PlayPrompt {
 
@@ -22,6 +23,12 @@ public class ImmediatePlayPrompt extends PlayPrompt {
         mCard = card;
     }
 
+    /**
+     * Lists all behaviors associated with the target card. If no calls can be
+     * performed, allows the player to discard the card which was drawn.
+     *
+     * @param player Player whose Behaviors should be iterated.
+     */
     @Override
     public void registerValidCalls(Player player){
         for (CardBehavior<? extends BehaviorCall, ? extends Prompt> b : mCard.behaviors()){
@@ -32,12 +39,8 @@ public class ImmediatePlayPrompt extends PlayPrompt {
             }
         }
         if (calls().isEmpty()){
-            for (PlayerBehavior<? extends BehaviorCall, ? extends Prompt> b : player.behaviors()){
-                if (b.promptType().equals(type())){
-                    for (BehaviorCall c : b.listValidCalls()){
-                        registerCall(c);
-                    }
-                }
+            for (BehaviorCall c : player.immediateDiscardBehavior().listValidCalls()){
+                registerCall(c);
             }
         }
     }
