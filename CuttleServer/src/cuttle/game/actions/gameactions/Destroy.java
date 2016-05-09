@@ -19,6 +19,7 @@ public class Destroy extends TargetedAction {
         target().trigger(Trigger.OnBoardExit);
         targetPile().pop(targetPileIndex());
         game().scrapPile().push(target());
+        target().unbindEvents();
         game().updateCardPile(target(), game().scrapPile());
     }
 }

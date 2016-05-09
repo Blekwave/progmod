@@ -92,4 +92,8 @@ public abstract class CuttleCard extends PlayingCard {
             }
         }
     }
+
+    public void unbindEvents(){
+        mEvents = new ArrayList<>();
+    }
 }

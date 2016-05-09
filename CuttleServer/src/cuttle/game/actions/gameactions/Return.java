@@ -19,6 +19,7 @@ public class Return extends TargetedAction {
         target().trigger(Trigger.OnBoardExit);
         targetPile().pop(targetPileIndex());
         game().deck().push(target());
+        target().unbindEvents();
         game().updateCardPile(target(), game().scrapPile());
     }
 }
