@@ -7,9 +7,17 @@ import cuttle.game.cards.behaviors.pointcardbehaviors.PointPlayBehavior;
 import cuttle.game.cards.behaviors.pointcardbehaviors.ScuttleBehavior;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Seven in a game of Cuttle.
  */
 public class Seven extends CuttleCard {
+    /**
+     * Initializes this card, associating it to a CuttleGame, its ID and its
+     * suit.
+     *
+     * @param game CuttleGame to which this card belongs.
+     * @param id Numeric ID of this card.
+     * @param suit This card's suit.
+     */
     public Seven(CuttleGame game, Integer id, Suit suit){
         super(game, id, suit, Rank.SEVEN);
         bindBehavior(new PointPlayBehavior(this));
