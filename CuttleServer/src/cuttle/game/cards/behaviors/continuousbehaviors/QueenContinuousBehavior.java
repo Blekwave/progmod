@@ -9,9 +9,14 @@ import cuttle.game.cards.prompts.PlayPrompt;
 import cuttle.game.cards.prompts.PromptType;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Continuous card behavior for the Queen.
  */
 public class QueenContinuousBehavior extends ContinuousBehavior<BehaviorCall> {
+    /**
+     * Initializes a new behavior, associated to a card.
+     *
+     * @param card Card to which this behavior is associated.
+     */
     public QueenContinuousBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt, "queen_continuous");
     }

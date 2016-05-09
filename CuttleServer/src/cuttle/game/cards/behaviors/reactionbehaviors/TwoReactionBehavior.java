@@ -9,13 +9,24 @@ import cuttle.game.cards.prompts.ReactionPrompt;
 import java.util.ArrayList;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Reaction behavior for the Two.
  */
 public class TwoReactionBehavior extends CardBehavior<BehaviorCall, ReactionPrompt> {
+    /**
+     * Initializes a new behavior, associated to a card.
+     *
+     * @param card Card to which this behavior is associated.
+     */
     public TwoReactionBehavior(CuttleCard card){
         super(card, PromptType.ReactionPrompt, "two_reaction");
     }
 
+    /**
+     * Lists valid calls for the Two as a reaction card, i.e., registers a sin-
+     * gle call if the opponent is not protected.
+     *
+     * @return List of valid calls.
+     */
     @Override
     public ArrayList<BehaviorCall> listValidCalls() {
         ArrayList<BehaviorCall> list = new ArrayList<>();

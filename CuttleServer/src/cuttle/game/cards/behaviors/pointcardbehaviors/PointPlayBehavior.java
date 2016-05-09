@@ -8,14 +8,25 @@ import cuttle.game.cards.prompts.PlayPrompt;
 import cuttle.game.cards.prompts.PromptType;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Point play behavior.
  */
 public class PointPlayBehavior extends CardBehavior<BehaviorCall, PlayPrompt> {
 
+    /**
+     * Initializes a new behavior, associated to a card.
+     *
+     * @param card Card to which this behavior is associated.
+     */
     public PointPlayBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt, "point_play");
     }
 
+    /**
+     * Plays the card as a point card.
+     *
+     * @param c BehaviorCall associated to this behavior.
+     * @param prompt Prompt which prompted this behavior.
+     */
     @Override
     public void call(BehaviorCall c, PlayPrompt prompt) {
         game().perform(new PointPlay(card()));

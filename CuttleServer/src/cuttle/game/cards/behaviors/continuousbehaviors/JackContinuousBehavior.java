@@ -11,13 +11,24 @@ import cuttle.game.cards.prompts.PromptType;
 import java.util.ArrayList;
 
 /**
- * Describe this class and the methods exposed by it.
+ * Continuous card behavior for the Jack.
  */
 public class JackContinuousBehavior extends ContinuousBehavior<TargetedBehaviorCall> {
+    /**
+     * Initializes a new behavior, associated to a card.
+     *
+     * @param card Card to which this behavior is associated.
+     */
     public JackContinuousBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt, "jack_continuous");
     }
 
+    /**
+     * Lists all valid calls for playing the Jack, i.e., calls associated with
+     * every point card on the board.
+     *
+     * @return List of valid calls.
+     */
     @Override
     public ArrayList<TargetedBehaviorCall> listValidCalls() {
         ArrayList<TargetedBehaviorCall> list = new ArrayList<>();
