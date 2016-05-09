@@ -58,6 +58,7 @@ public class Server extends WebSocketServer implements ServerInterface {
             else
                 new GameThread(this, wId, id).start();
 
+            System.out.println("Game started: " + id + " vs " + wId);
             mWaitingSocket = null;
         }
         else {
@@ -70,6 +71,8 @@ public class Server extends WebSocketServer implements ServerInterface {
         Integer id = mSocketIds.get(conn);
         System.out.println("Player " + id + " closed the connection");
 
+        if(mWaitingSocket == conn)
+            mWaitingSocket = null;
         mSocketDatas.remove(id);
         mSocketIds.remove(conn);
 	}
