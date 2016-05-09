@@ -8,17 +8,33 @@ import cuttle.game.cards.prompts.PlayPrompt;
 import cuttle.game.cards.prompts.PromptType;
 
 /**
- * Describe this class and the methods exposed by it.
+ * One-off behavior for the Six.
  */
 public class SixOneOffBehavior extends OneOffBehavior<BehaviorCall> {
+    /**
+     * Initializes a new behavior, associated to a card.
+     *
+     * @param card Card to which this behavior is associated.
+     */
     public SixOneOffBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt, "six_one_off");
     }
 
+    /**
+     * Call for an Action to destroy a card.
+     *
+     * @param card Target card.
+     */
     private void destroy(CuttleCard card){
         game().perform(new Destroy(card));
     }
 
+    /**
+     * Destroys every card in each continuous board.
+     *
+     * @param call BehaviorCall associated to this behavior.
+     * @param prompt Prompt which prompted this behavior.
+     */
     @Override
     public void activateEffect(BehaviorCall call, PlayPrompt prompt) {
         for (CuttleCard c : game().player().continuousBoard()){

@@ -8,13 +8,24 @@ import cuttle.game.cards.prompts.PlayPrompt;
 import cuttle.game.cards.prompts.PromptType;
 
 /**
- * Describe this class and the methods exposed by it.
+ * One-off behavior for the Four.
  */
 public class FourOneOffBehavior extends OneOffBehavior<BehaviorCall> {
+    /**
+     * Initializes a new behavior, associated to a card.
+     *
+     * @param card Card to which this behavior is associated.
+     */
     public FourOneOffBehavior(CuttleCard card){
         super(card, PromptType.PlayPrompt, "four_one_off");
     }
 
+    /**
+     * Forces the opponent to discard two cards.
+     *
+     * @param call BehaviorCall associated to this behavior.
+     * @param prompt Prompt which prompted this behavior.
+     */
     @Override
     public void activateEffect(BehaviorCall call, PlayPrompt prompt) {
         for (int i = 0; i < 2; i++){
