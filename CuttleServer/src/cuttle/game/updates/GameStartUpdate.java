@@ -83,12 +83,14 @@ public class GameStartUpdate implements UpdateInterface {
     public UpdateContainer buildUpdate() {
         JSONObject obj = new JSONObject();
         obj.put("type", "game_start");
-        obj.put("card_by_id", cardById(mGame.deck()));
+        obj.put("card_by_id", cardById(mGame.originalDeck()));
         JSONObject opponent_obj = new JSONObject(obj, JSONObject.getNames(obj));
         obj.put("player_id", mGame.player().id());
         obj.put("hand", cardsInHand(mGame.player()));
+        obj.put("opponent_hand_size", mGame.opponent().hand().size());
         opponent_obj.put("player_id", mGame.opponent().id());
         opponent_obj.put("hand", cardsInHand(mGame.opponent()));
+        opponent_obj.put("opponent_hand_size", mGame.player().hand().size());
         return new UpdateContainer(obj, opponent_obj);
     }
 }

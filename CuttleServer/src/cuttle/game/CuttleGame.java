@@ -27,6 +27,10 @@ public class CuttleGame {
         return mDeck;
     }
 
+    public Pile originalDeck(){
+        return mOriginalDeck;
+    }
+
     public Pile scrapPile(){
         return mScrapPile;
     }
@@ -38,6 +42,9 @@ public class CuttleGame {
     private Player mPlayer;
     private Player mOpponent;
     private Pile mDeck;
+    private Pile mOriginalDeck; // Kept in order to generate the id to card da-
+                                // ta relation after some cards have already
+                                // been dealt.
     private Pile mScrapPile;
     private ServerAdapter mServerAdapter;
 
@@ -88,6 +95,7 @@ public class CuttleGame {
     private void preGamePreparations(){
         DeckBuilder deckBuilder = new DeckBuilder(this);
         mDeck = deckBuilder.buildDeck();
+        mOriginalDeck = new Pile(mDeck);
         mScrapPile = new Pile("scrap_pile", null);
         mTieTurnCounter = 0;
 

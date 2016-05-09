@@ -21,12 +21,19 @@ public class Pile implements Iterable<CuttleCard> {
 
     private String mName;
     private Player mOwner;
-    private ArrayList<CuttleCard> mList;
+    ArrayList<CuttleCard> mList;
 
     public Pile(String name, Player owner){
         mName = name;
         mOwner = owner;
         mList = new ArrayList<>();
+    }
+
+    public Pile(Pile from){
+        this(from.name(), from.owner());
+        for (CuttleCard card : from.mList){
+            mList.add(card);
+        }
     }
 
     public CuttleCard pop(Integer index){
@@ -45,6 +52,10 @@ public class Pile implements Iterable<CuttleCard> {
 
     public CuttleCard last(){
         return mList.get(mList.size() - 1);
+    }
+
+    public Integer size(){
+        return mList.size();
     }
 
     public void shuffle(){
