@@ -1,5 +1,6 @@
 package cuttle.game.updates;
 
+import cuttle.game.CuttleGame;
 import cuttle.game.Player;
 import org.json.JSONObject;
 
@@ -10,7 +11,7 @@ import org.json.JSONObject;
 public class GameEndUpdate implements UpdateInterface {
 
     private Player mWinner;
-
+    private CuttleGame mGame;
     private Boolean mTie;
 
     /**
@@ -20,6 +21,7 @@ public class GameEndUpdate implements UpdateInterface {
      */
     public GameEndUpdate(Player winner){
         mWinner = winner;
+        mGame = winner.game();
         mTie = false;
     }
 
@@ -39,18 +41,23 @@ public class GameEndUpdate implements UpdateInterface {
     public UpdateContainer buildUpdate() {
         JSONObject obj = new JSONObject();
         obj.put("type", "game_end");
+        JSONObject opponent_obj = new JSONObject(obj, JSONObject.getNames(obj));
         if (mTie){
             obj.put("result", "tie");
-            return new SymmetricUpdateContainer(obj);
-        }
-        JSONObject loser_obj = new JSONObject(obj, JSONObject.getNames(obj));
-        obj.put("result", "win");
-        loser_obj.put("result", "loss");
-
-        if (mWinner == mWinner.game().player()){
-            return new UpdateContainer(obj, loser_obj);
+            opponent_obj.put("result", "tie");
+        } else if (mWinner == mGame.player()){
+            obj.put("result", "win");
+            opponent_obj.put("result", "loss");
         } else {
-            return new UpdateContainer(loser_obj, obj);
+            obj.put("result", "loss");
+            opponent_obj.put("result", "win");
         }
+
+        obj.put("player_points", mGame.player().victoryPoints());
+        obj.put("opponent_points", mGame.opponent().victoryPoints());
+        opponent_obj.put("player_points", mGame.opponent().victoryPoints());
+        opponent_obj.put("opponent_points", mGame.player().victoryPoints());
+
+        return new UpdateContainer(obj, opponent_obj);
     }
 }
