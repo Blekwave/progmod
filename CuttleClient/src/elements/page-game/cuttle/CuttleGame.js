@@ -149,7 +149,9 @@ CuttleGame.prototype.actionUpdate = function(msg) {
         case 'return': this.actionUpdateReturn(msg); break;
         case 'show_hand': this.actionUpdateShowHand(msg); break;
         case 'hide_hand': this.actionUpdateHideHand(msg); break;
-        case 'shuffle_hand': this.actionupdateShuffleHand(msg); break;
+        case 'shuffle_hand': this.actionUpdateShuffleHand(msg); break;
+        case 'raiseprotection': this.actionUpdateRaiseProtection(msg); break;
+        case 'lowerprotection': this.actionUpdateLowerProtection(msg); break;
         default: this.invalidType(msg);
     }
 };
@@ -247,6 +249,14 @@ CuttleGame.prototype.actionUpdateShuffleHand = function(msg) {
         this.player.handArea.replaceCards(msg.player_hand);
 };
 
+CuttleGame.prototype.actionUpdateRaiseProtection = function(msg) {
+    // TODO implement highlight.
+};
+
+CuttleGame.prototype.actionUpdateLowerProtection = function(msg) {
+    // TODO remove highlight.
+};
+
 CuttleGame.prototype.behaviorUpdate = function(msg) {
     // Nothing to do by now.
 };
@@ -258,6 +268,5 @@ CuttleGame.prototype.promptResponse = function(b) {
 };
 
 CuttleGame.prototype.invalidType = function(msg) {
-    console.log('Invalid msg received: ');
-    console.log(msg);
+    console.log('Invalid msg received: ' + msg);
 };
