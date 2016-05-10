@@ -2,6 +2,7 @@ package cuttle.game;
 
 import cuttle.game.cards.behaviors.BehaviorCall;
 import cuttle.game.cards.prompts.Prompt;
+import cuttle.game.updates.PromptUpdate;
 import cuttle.game.updates.UpdateContainer;
 import cuttle.game.updates.UpdateInterface;
 import org.json.JSONObject;
@@ -37,6 +38,7 @@ public class ServerAdapter {
      */
     public BehaviorCall prompt(Prompt prompt, Player player) {
         JSONObject message = prompt.promptJSON();
+        update(new PromptUpdate(prompt.type(), player));
         JSONObject response = mServer.prompt(message, player.id());
         Integer chosenCallId = (Integer) response.get("id");
         return prompt.getCallByIndex(chosenCallId);
