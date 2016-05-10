@@ -12,7 +12,7 @@ function CuttleGame(client, root) {
     this.cardById = null;
     this.table = null;
     this.deck = null;
-    this.cemetery = null;
+    this.scrap = null;
     this.centralText = null;
 
     this.createTable();
@@ -42,8 +42,8 @@ CuttleGame.prototype.createTable = function() {
             }
         }.bind(this));
 
-    // Cemetery.
-    this.cemetery = new Cemetery(this, this.width - 100, this.height / 2);
+    // Scrap pile.
+    this.scrap = new ScrapPile(this, this.width - 100, this.height / 2);
 
     // Message.
     this.centralText = this.svg.append('text')
@@ -115,6 +115,8 @@ CuttleGame.prototype.prompt = function(msg) {
     switch(msg.prompt_type) {
         case 'play_prompt': this.promptPlay(msg); break;
         case 'reaction_prompt': this.promptReaction(msg); break;
+        case 'discard_prompt': this.promptDiscard(msg); break;
+        default: this.invalidType(msg);
     }
 };
 
@@ -122,7 +124,16 @@ CuttleGame.prototype.promptPlay = function(msg) {
     // Just wait for the player
 };
 
+
 CuttleGame.prototype.promptReaction = function(msg) {
+    this.promptMessage(msg);
+};
+
+CuttleGame.prototype.promptDiscard = function(msg) {
+    this.promptMessage(msg);
+};
+
+CuttleGame.prototype.promptMessage = function(msg) {
     var div = new PromptDiv(this, msg.calls, false, 300, 300);
 };
 
@@ -134,6 +145,11 @@ CuttleGame.prototype.actionUpdate = function(msg) {
         case 'discard': this.actionUpdateDiscard(msg); break;
         case 'destroy': this.actionUpdateDestroy(msg); break;
         case 'switch': this.actionUpdateSwitch(msg); break;
+        case 'recover': this.actionUpdateRecover(msg); break;
+        case 'return': this.actionUpdateReturn(msg); break;
+        case 'show_hand': this.actionUpdateShowHand(msg); break;
+        case 'hide_hand': this.actionUpdateHideHand(msg); break;
+        case 'shuffle_hand': this.actionupdateShuffleHand(msg); break;
         default: this.invalidType(msg);
     }
 };
@@ -141,6 +157,8 @@ CuttleGame.prototype.actionUpdate = function(msg) {
 CuttleGame.prototype.actionUpdateDraw = function(msg) {
     if(msg.player == this.player.id)
         this.player.handArea.add(msg.drawn);
+    else if(msg.hasOwnProperty('drawn')) // 8 continuous effect.
+        this.enemy.handArea.add(msg.drawn);
     else
         this.enemy.handArea.add(-1);
 };
@@ -173,7 +191,7 @@ CuttleGame.prototype.actionUpdateDiscard = function(msg) {
     else
         this.enemy.handArea.remove(-1);
 
-    this.cemetery.add(msg.target.id);
+    this.scrap.add(msg.target.id);
 };
 
 CuttleGame.prototype.actionUpdateDestroy = function(msg) {
@@ -194,6 +212,39 @@ CuttleGame.prototype.actionUpdateSwitch = function(msg) {
         this.enemy.pointArea.remove(msg.target.id);
         this.player.pointArea.add(msg.target.id);
     }
+};
+
+CuttleGame.prototype.actionUpdateRecover = function(msg) {
+    this.scrap.remove(msg.target.id);
+    if(msg.player == this.player.id)
+        this.player.handArea.add(msg.target.id);
+    else
+        this.enemy.handArea.add(-1);
+};
+
+CuttleGame.prototype.actionUpdateReturn = function(msg) {
+    var owner = msg.target.owner == this.player.id ? this.player : this.enemy;
+    owner.continuousArea.remove(msg.target.id);
+};
+
+CuttleGame.prototype.actionUpdateShowHand = function(msg) {
+    if(msg.player == this.enemy.id)
+        this.enemy.handArea.replaceCards(msg.player_hand);
+};
+
+CuttleGame.prototype.actionUpdateHideHand = function(msg) {
+    if(msg.player == this.enemy.id) {
+        var hiddenCards = [];
+        for(var i = 0; i < this.enemy.handArea.numCards(); ++i)
+            hiddenCards.push(-1);
+
+        this.enemy.handArea.replaceCards(hiddenCards);
+    }
+};
+
+CuttleGame.prototype.actionUpdateShuffleHand = function(msg) {
+    if(msg.player == this.player.id)
+        this.player.handArea.replaceCards(msg.player_hand);
 };
 
 CuttleGame.prototype.behaviorUpdate = function(msg) {

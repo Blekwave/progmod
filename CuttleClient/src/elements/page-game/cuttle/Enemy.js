@@ -3,7 +3,7 @@ function Enemy(id, handSize, game) {
     this.game = game;
     this.handSize = handSize;
 
-    this.handArea = new CardArea(game, 0, -70);
+    this.handArea = new CardArea(game, 695, -70, true);
     for(var i = 0; i < this.handSize; ++i)
         this.handArea.add(-1);
 
