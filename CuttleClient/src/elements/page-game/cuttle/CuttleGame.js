@@ -79,6 +79,7 @@ CuttleGame.prototype.message = function(msg) {
         case 'game_end': this.gameEnd(msg); break;
         case 'new_turn': this.newTurn(msg); break;
         case 'prompt': this.prompt(msg); break;
+        case 'prompt_update': this.promptUpdate(msg); break;
         case 'action_update': this.actionUpdate(msg); break;
         case 'behavior_update': this.behaviorUpdate(msg); break;
         default: this.invalidType(msg);
@@ -92,6 +93,8 @@ CuttleGame.prototype.gameStart = function(msg) {
 };
 
 CuttleGame.prototype.gameEnd = function(msg) {
+    this.updatePoints(msg);
+
     if(msg.result == 'win')
         this.centralText.text('You won!!!');
     else if(msg.result == 'tie')
@@ -101,12 +104,15 @@ CuttleGame.prototype.gameEnd = function(msg) {
 };
 
 CuttleGame.prototype.newTurn = function(msg) {
-    if(this.player.id == msg.player)
-        this.centralText.text('Your turn');
-    else
-        this.centralText.text('Opponent\'s turn');
-
     this.player.calls = null;
+    this.updatePoints(msg);
+};
+
+CuttleGame.prototype.updatePoints = function(msg) {
+    this.player.points = msg.player_points;
+    this.player.updatePointText();
+    this.enemy.points = msg.opponent_points;
+    this.enemy.updatePointText();
 };
 
 CuttleGame.prototype.prompt = function(msg) {
@@ -137,6 +143,21 @@ CuttleGame.prototype.promptMessage = function(msg) {
     var div = new PromptDiv(this, msg.calls, false, 300, 300);
 };
 
+CuttleGame.prototype.promptUpdate = function(msg) {
+    if(msg.prompt_type == 'play_prompt') {
+        if(msg.player == this.player.id)
+            this.centralText.text('Your turn');
+        else
+            this.centralText.text('Opponent\'s turn');
+    }
+    else if(msg.prompt_type == 'reaction_prompt' || msg.prompt_type == 'discard_prompt') {
+        if(msg.player == this.player.id)
+            this.centralText.text('Your turn');
+        else
+            this.centralText.text('Waiting for opponent...');
+    }
+}
+
 CuttleGame.prototype.actionUpdate = function(msg) {
     switch(msg.action_type) {
         case 'draw': this.actionUpdateDraw(msg); break;
@@ -152,6 +173,8 @@ CuttleGame.prototype.actionUpdate = function(msg) {
         case 'shuffle_hand': this.actionUpdateShuffleHand(msg); break;
         case 'raiseprotection': this.actionUpdateRaiseProtection(msg); break;
         case 'lowerprotection': this.actionUpdateLowerProtection(msg); break;
+        case 'lower_victory_req': this.actionUpdateVictoryReq(msg); break;
+        case 'raise_victory_req': this.actionUpdateVictoryReq(msg); break;
         default: this.invalidType(msg);
     }
 };
@@ -255,6 +278,13 @@ CuttleGame.prototype.actionUpdateRaiseProtection = function(msg) {
 
 CuttleGame.prototype.actionUpdateLowerProtection = function(msg) {
     // TODO remove highlight.
+};
+
+CuttleGame.prototype.actionUpdateVictoryReq = function(msg) {
+    var owner = msg.player == this.player.id ? this.player : this.enemy;
+
+    owner.victoryReq = msg.new_victory_req;
+    owner.updatePointText();
 };
 
 CuttleGame.prototype.behaviorUpdate = function(msg) {
