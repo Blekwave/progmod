@@ -1,7 +1,7 @@
 /**
- * Card cemetery.
+ * Card scrap pile.
  */
-function Cemetery(game, x, y) {
+function ScrapPile(game, x, y) {
     this.game = game;
     this.x = x;
     this.y = y;
@@ -9,14 +9,13 @@ function Cemetery(game, x, y) {
     this.cards = [];
 };
 
-Cemetery.prototype.add = function(id) {
-    console.log(id);
+ScrapPile.prototype.add = function(id) {
     this.cards.push(id);
 
     this.update();
 };
 
-Cemetery.prototype.remove = function(id) {
+ScrapPile.prototype.remove = function(id) {
     var index = this.cards.indexOf(id);
     if(index > -1)
         this.cards.splice(index, 1);
@@ -24,7 +23,7 @@ Cemetery.prototype.remove = function(id) {
     this.update();
 };
 
-Cemetery.prototype.update = function() {
+ScrapPile.prototype.update = function() {
     this.area.selectAll('use')
         .data(this.cards).enter()
         .append('use')
@@ -40,6 +39,6 @@ Cemetery.prototype.update = function() {
         .remove();
 };
 
-Cemetery.prototype.processClick = function(d) {
+ScrapPile.prototype.processClick = function(d) {
 
 };
