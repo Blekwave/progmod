@@ -78,6 +78,7 @@ public abstract class Prompt {
     }
 
     public void prompt(Player player) {
+        mCallsJSONArray = new JSONArray();
         registerValidCalls(player);
         BehaviorCall chosenCall = player.game().serverAdapter().prompt(this, player);
         player.game().serverAdapter().update(chosenCall);
@@ -90,7 +91,6 @@ public abstract class Prompt {
      * @param player Player whose Behaviors should be iterated.
      */
     public void registerValidCalls(Player player){
-        mCallsJSONArray = new JSONArray();
         BehaviorIterator it = player.behaviorIterator();
 
         while (it.hasNext()){
