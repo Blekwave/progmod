@@ -2,16 +2,19 @@ package cuttle.game.cards.behaviors.playerbehaviors;
 
 import cuttle.game.Player;
 import cuttle.game.actions.playeractions.Discard;
-import cuttle.game.cards.behaviors.BehaviorCall;
+import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.behaviors.PlayerBehavior;
+import cuttle.game.cards.behaviors.TargetedBehaviorCall;
 import cuttle.game.cards.prompts.ImmediatePlayPrompt;
 import cuttle.game.cards.prompts.PromptType;
+
+import java.util.ArrayList;
 
 /**
  * Behavior for discarding a card drawn by a Seven one-off play, if there are
  * no valid plays to be made.
  */
-public class ImmediateDiscardBehavior extends PlayerBehavior<BehaviorCall, ImmediatePlayPrompt> {
+public class ImmediateDiscardBehavior extends PlayerBehavior<TargetedBehaviorCall, ImmediatePlayPrompt> {
     /**
      * Initializes a new behavior, associated to a player.
      *
@@ -22,7 +25,18 @@ public class ImmediateDiscardBehavior extends PlayerBehavior<BehaviorCall, Immed
     }
 
     @Override
-    public void call(BehaviorCall call, ImmediatePlayPrompt prompt) {
-        game().perform(new Discard(prompt.card()));
+    public ArrayList<TargetedBehaviorCall> listValidCalls() {
+        ArrayList<TargetedBehaviorCall> list = new ArrayList<>();
+
+        CuttleCard last = player().hand().get(player().hand().size() - 1);
+
+        list.add(new TargetedBehaviorCall(this, last));
+
+        return list;
+    }
+
+    @Override
+    public void call(TargetedBehaviorCall call, ImmediatePlayPrompt prompt) {
+        game().perform(new Discard(call.target()));
     }
 }
