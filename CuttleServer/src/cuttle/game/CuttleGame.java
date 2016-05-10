@@ -169,7 +169,7 @@ public class CuttleGame {
     /**
      * Performs an action and sends an action update about it.
      *
-     * @param action
+     * @param action Action to be performed.
      */
     public void perform(Action action){
         action.act();

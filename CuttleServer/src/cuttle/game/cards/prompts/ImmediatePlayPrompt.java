@@ -4,7 +4,6 @@ import cuttle.game.Player;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.behaviors.BehaviorCall;
 import cuttle.game.cards.behaviors.CardBehavior;
-import cuttle.game.cards.behaviors.PlayerBehavior;
 
 /**
  * Prompt triggered when a player draws a card and must play it immediately, as

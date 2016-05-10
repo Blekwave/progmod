@@ -1,6 +1,5 @@
 package cuttle.server;
 
-import cuttle.game.CuttleGame;
 import cuttle.game.ServerInterface;
 import java.util.HashMap;
 import java.util.LinkedList;
