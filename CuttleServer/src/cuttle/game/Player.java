@@ -172,11 +172,11 @@ public class Player {
     }
 
     public void raiseVictoryReq(){
-        mKingCount++;
+        mKingCount--;
     }
 
     public void lowerVictoryReq(){
-        mKingCount--;
+        mKingCount++;
     }
 
     private Integer mEightCount;
