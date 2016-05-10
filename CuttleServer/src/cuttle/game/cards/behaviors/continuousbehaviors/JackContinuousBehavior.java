@@ -49,6 +49,6 @@ public class JackContinuousBehavior extends ContinuousBehavior<TargetedBehaviorC
     @Override
     public void entryEffect(TargetedBehaviorCall call, PlayPrompt prompt) {
         game().perform(new Switch(call.target()));
-        card().bindEvent(new JackExitEvent(card()));
+        card().bindEvent(new JackExitEvent(card(), call.target()));
     }
 }

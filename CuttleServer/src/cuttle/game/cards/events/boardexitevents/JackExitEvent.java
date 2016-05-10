@@ -10,12 +10,16 @@ import cuttle.game.cards.events.Trigger;
  * tinuous card.
  */
 public class JackExitEvent extends Event {
-    public JackExitEvent(CuttleCard card){
+
+    private CuttleCard mTarget;
+
+    public JackExitEvent(CuttleCard card, CuttleCard target){
         super(Trigger.OnBoardExit, card);
+        mTarget = target;
     }
 
     @Override
     public void execute() {
-        game().perform(new Switch(card()));
+        game().perform(new Switch(mTarget));
     }
 }
