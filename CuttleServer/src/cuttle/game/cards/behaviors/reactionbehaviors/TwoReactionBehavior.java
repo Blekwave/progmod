@@ -1,6 +1,5 @@
 package cuttle.game.cards.behaviors.reactionbehaviors;
 
-import cuttle.game.actions.gameactions.Interrupt;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.behaviors.BehaviorCall;
 import cuttle.game.cards.behaviors.CardBehavior;
@@ -40,6 +39,5 @@ public class TwoReactionBehavior extends CardBehavior<BehaviorCall, ReactionProm
     @Override
     public void call(BehaviorCall call, ReactionPrompt prompt) {
         prompt.react();
-        game().perform(new Interrupt(game()));
     }
 }
