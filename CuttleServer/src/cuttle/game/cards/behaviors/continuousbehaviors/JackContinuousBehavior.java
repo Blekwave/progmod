@@ -5,6 +5,7 @@ import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.behaviors.ContinuousBehavior;
 import cuttle.game.cards.behaviors.TargetedBehaviorCall;
 import cuttle.game.cards.events.boardexitevents.JackExitEvent;
+import cuttle.game.cards.events.boardexitevents.JackTargetExitEvent;
 import cuttle.game.cards.prompts.PlayPrompt;
 import cuttle.game.cards.prompts.PromptType;
 
@@ -50,5 +51,6 @@ public class JackContinuousBehavior extends ContinuousBehavior<TargetedBehaviorC
     public void entryEffect(TargetedBehaviorCall call, PlayPrompt prompt) {
         game().perform(new Switch(call.target()));
         card().bindEvent(new JackExitEvent(card(), call.target()));
+        call.target().bindEvent(new JackTargetExitEvent(call.target(), card()));
     }
 }
