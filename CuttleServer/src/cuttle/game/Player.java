@@ -93,17 +93,21 @@ public class Player {
         mImmediateDiscardBehavior = new ImmediateDiscardBehavior(this);
     }
 
+    public Integer victoryPoints(){
+        Integer pointSum = 0;
+        for (CuttleCard card : mPointBoard){
+            pointSum += card.rank().value();
+        }
+        return pointSum;
+    }
+
     /**
      * Checks if this player has enough points to win the game.
      *
      * @return Whether or not it has won the game.
      */
     public Boolean hasWon(){
-        Integer pointSum = 0;
-        for (CuttleCard card : mPointBoard){
-            pointSum += card.rank().value();
-        }
-        return pointSum >= victoryReq();
+        return victoryPoints() >= victoryReq();
     }
 
     /**

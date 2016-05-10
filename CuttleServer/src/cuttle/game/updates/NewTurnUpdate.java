@@ -29,6 +29,8 @@ public class NewTurnUpdate implements UpdateInterface {
         JSONObject obj = new JSONObject();
         obj.put("type", "new_turn");
         obj.put("player", mPlayer.id());
+        obj.put("player_points", mPlayer.victoryPoints());
+        obj.put("opponent_points", mPlayer.opponent().victoryPoints());
         return new SymmetricUpdateContainer(obj);
     }
 }
