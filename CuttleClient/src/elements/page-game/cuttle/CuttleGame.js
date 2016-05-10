@@ -2,6 +2,7 @@ function CuttleGame(client, root) {
     this.client = client;
     this.root = root;
     this.svg = this.root.select('svg');
+    this.audio = this.root.select('audio').node();
     this.width = 800;
     this.height = 600;
     this.cardScale = 0.4;
@@ -19,6 +20,9 @@ function CuttleGame(client, root) {
 };
 
 CuttleGame.prototype.createTable = function() {
+    this.svg
+        .style('border', '5px solid #7B3F00');
+
     this.svg.append('rect')
         .attr('width', '100%')
         .attr('height', '100%')
@@ -90,6 +94,8 @@ CuttleGame.prototype.gameStart = function(msg) {
     this.createCardData(msg.card_by_id);
     this.enemy = new Enemy(msg.opponent_id, parseInt(msg.opponent_hand_size, 10), this);
     this.player = new Player(msg.player_id, msg.hand, this);
+
+    this.audio.play();
 };
 
 CuttleGame.prototype.gameEnd = function(msg) {

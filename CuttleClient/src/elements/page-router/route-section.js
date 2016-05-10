@@ -17,7 +17,8 @@ Polymer({
          */
         elementNode: {
             type: Object,
-            notify: true
+            notify: true,
+            value: null
         }
     },
 

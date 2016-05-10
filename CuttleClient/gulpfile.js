@@ -14,14 +14,15 @@ var gulp        = require("gulp"),
 
 // Config.
 var src             = "src/",
+    res             = "res/",
     debugDest       = "debug/",
     debugPugSrc     = src + "**/*.pug",
     debugPugEnv     = {pretty: true},
     debugLessSrc    = src + "**/*.less",
     debugJsSrc      = src + "elements/**/*.js",
     debugJsDest     = debugDest + "elements",
-    debugSvgSrc     = src + "*.svg",
-    debugSvgDest    = debugDest,
+    debugResSrc     = res + "**/*",
+    debugResDest    = debugDest + res,
     debugBowerSrc   = src + "bower_components/**/*",
     debugBowerDest  = debugDest + "bower_components",
     debugPort       = 5000,
@@ -86,8 +87,8 @@ gulp.task("debug-js", function() {
     return copy(debugJsSrc, debugJsDest);
 });
 
-gulp.task("debug-svg", function() {
-     return copy(debugSvgSrc, debugSvgDest);
+gulp.task("debug-res", function() {
+     return copy(debugResSrc, debugResDest);
 })
 
 gulp.task("debug-bower", function() {
@@ -114,8 +115,8 @@ gulp.task("watch-js", function() {
      return watchCopy(debugJsSrc, debugJsDest);
 });
 
-gulp.task("watch-svg", function() {
-     return watchCopy(debugSvgSrc, debugSvgDest);
+gulp.task("watch-res", function() {
+     return watchCopy(debugResSrc, debugResDest);
 });
 
 gulp.task("watch-bower", function() {
@@ -130,7 +131,7 @@ gulp.task("release-clean", function() {
      return del([releaseDest]);
 });
 
-gulp.task("debug", ["debug-pug", "debug-less", "debug-js", "debug-svg", "debug-bower"]);
+gulp.task("debug", ["debug-pug", "debug-less", "debug-js", "debug-res", "debug-bower"]);
 
 gulp.task("release", ["release-polybuild"], function() {
     // Minify html.
@@ -143,7 +144,7 @@ gulp.task("clean", ["debug-clean", "release-clean"]);
 
 // Debug serve also does watch.
 gulp.task("serve", [
-    "debug", "debug-server", "watch-pug", "watch-less", "watch-js", "watch-svg", "watch-bower"
+    "debug", "debug-server", "watch-pug", "watch-less", "watch-js", "watch-res", "watch-bower"
 ]);
 
 // Release serve has no watch.

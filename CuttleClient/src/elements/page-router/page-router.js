@@ -16,20 +16,19 @@ Polymer({
     },
 
     attached: function() {
-        var self = this;
-
         this._pages.items.forEach(function(item, index) {
             page(item.path, function(ctx) {
-                self.route = index.toString();
+                this.route = index.toString();
                 item.createElement();
 
-                if(self._params)
-                    item.elementNode.params = self._params;
+                if(this._params)
+                    item.elementNode.params = this._params;
                 else
                     item.elementNode.params = ctx.params;
+
                 item.render();
-            });
-        });
+            }.bind(this));
+        }.bind(this));
 
         page();
     },
@@ -37,6 +36,5 @@ Polymer({
     go: function(route, params) {
         this._params = params;
         page(route);
-        this.route = route;
     }
 });

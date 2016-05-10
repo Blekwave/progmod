@@ -1,9 +1,19 @@
 function CuttleClient(root, address) {
     this.root = d3.select(root);
+    this.audio = document.createElement('audio');
     this._socket = null;
 
-    d3.text("cards.svg", function(error, data) {
-        this.root.html(data);
+    this.audio.src = 'res/cuttlematch.mp3'
+    this.audio.controls = 'controls';
+    this.audio.loop = 'loop';
+    this.audio.load();
+
+    d3.text("res/cards.svg", function(error, data) {
+        this.root.node().appendChild(this.audio);
+        this.root.append('br');
+        this.root.append('div')
+            .html(data);
+
         this.game = new CuttleGame(this, this.root);
         this.start(address);
     }.bind(this));
