@@ -25,6 +25,8 @@ Polymer({
 
                 if(self._params)
                     item.elementNode.params = self._params;
+                else
+                    item.elementNode.params = ctx.params;
                 item.render();
             });
         });

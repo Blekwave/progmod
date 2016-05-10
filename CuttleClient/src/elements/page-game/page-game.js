@@ -11,6 +11,10 @@ Polymer({
     },
 
     _paramsChanged: function() {
-        console.log(this.params);
+        this._startGame(this.params.address);
+    },
+
+    _startGame: function(address) {
+        this._client = new CuttleClient(this.$.div, address);
     }
 });
