@@ -1,6 +1,7 @@
 {
     "type": "game_start",
     "player_id": 1,
+    "opponent_id": 2,
     "card_by_id":{
         "0": {
             "suit": "hearts",
