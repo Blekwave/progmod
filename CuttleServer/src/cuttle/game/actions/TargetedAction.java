@@ -49,9 +49,7 @@ public abstract class TargetedAction extends Action {
     @Override
     public JSONObject buildPlayerUpdate() {
         JSONObject obj = super.buildPlayerUpdate();
-        obj.put("target_location", mTargetPile.name());
-        obj.put("target_index", mTargetPileIndex);
-        obj.put("target_id", target().id());
+        obj.put("target", target().genJSON());
         return obj;
     }
 

@@ -5,6 +5,7 @@ import cuttle.game.cards.behaviors.CardBehavior;
 import cuttle.game.cards.events.Event;
 import cuttle.game.cards.events.Trigger;
 import cuttle.game.CuttleGame;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -96,4 +97,18 @@ public abstract class CuttleCard extends PlayingCard {
     public void unbindEvents(){
         mEvents = new ArrayList<>();
     }
+
+
+    public JSONObject genJSON(){
+        JSONObject obj = new JSONObject();
+        Pile pile = mGame.cardPile(this);
+        obj.put("pile", pile.name());
+        obj.put("index", pile.indexOf(this));
+        obj.put("id", id());
+        if (owner() != null){
+            obj.put("owner", owner().id());
+        }
+        return obj;
+    }
+
 }
