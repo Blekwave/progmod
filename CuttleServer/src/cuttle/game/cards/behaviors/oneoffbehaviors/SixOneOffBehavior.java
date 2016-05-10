@@ -2,6 +2,7 @@ package cuttle.game.cards.behaviors.oneoffbehaviors;
 
 import cuttle.game.actions.gameactions.Destroy;
 import cuttle.game.cards.CuttleCard;
+import cuttle.game.cards.Pile;
 import cuttle.game.cards.behaviors.BehaviorCall;
 import cuttle.game.cards.behaviors.OneOffBehavior;
 import cuttle.game.cards.prompts.PlayPrompt;
