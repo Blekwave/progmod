@@ -25,6 +25,7 @@ public abstract class TargetedPlayerAction extends PlayerAction {
     private CuttleCard mTarget;
     private Pile mTargetPile;
     private Integer mTargetPileIndex;
+    private JSONObject mTargetJSON;
 
     /**
      * Initializes a new action, associated with a target card and a player.
@@ -38,6 +39,7 @@ public abstract class TargetedPlayerAction extends PlayerAction {
         mTarget = target;
         mTargetPile = game().cardPile(target);
         mTargetPileIndex = mTargetPile.indexOf(target);
+        mTargetJSON = target.genJSON();
     }
 
     /**
@@ -51,7 +53,7 @@ public abstract class TargetedPlayerAction extends PlayerAction {
     @Override
     public JSONObject buildPlayerUpdate() {
         JSONObject obj = super.buildPlayerUpdate();
-        obj.put("target", target().genJSON());
+        obj.put("target", mTargetJSON);
         return obj;
     }
 
