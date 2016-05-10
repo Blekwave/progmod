@@ -2,6 +2,7 @@ package cuttle.game.cards.behaviors.oneoffbehaviors;
 
 import cuttle.game.actions.gameactions.Destroy;
 import cuttle.game.cards.CuttleCard;
+import cuttle.game.cards.PlayingCard;
 import cuttle.game.cards.behaviors.OneOffBehavior;
 import cuttle.game.cards.behaviors.TargetedBehaviorCall;
 import cuttle.game.cards.prompts.PlayPrompt;
@@ -32,8 +33,8 @@ public class TwoOneOffBehavior extends OneOffBehavior<TargetedBehaviorCall> {
     public ArrayList<TargetedBehaviorCall> listValidCalls() {
         ArrayList<TargetedBehaviorCall> list = new ArrayList<>();
 
-        if (!game().opponent().isProtected()){
-            for (CuttleCard c : game().opponent().continuousBoard()){
+        for (CuttleCard c : game().opponent().continuousBoard()){
+            if (c.rank().equals(PlayingCard.Rank.QUEEN) || !game().opponent().isProtected()){
                 list.add(new TargetedBehaviorCall(this, c));
             }
         }
