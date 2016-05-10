@@ -38,5 +38,6 @@ public class TargetedBehaviorCall extends BehaviorCall {
         Pile targetPile = target().game().cardPile(target());
         obj.put("target_location", targetPile.name());
         obj.put("target_index", targetPile.indexOf(target()));
+        obj.put("target_id", target().id());
     }
 }

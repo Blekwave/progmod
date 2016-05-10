@@ -11,37 +11,45 @@
             "id": 1,
             "behavior_type": "point_play",
             "card_location": "p0_hand",
-            "card_index": 2
+            "card_index": 2,
+            "card_id": 19
         },
         {
             "id": 2,
             "behavior_type": "two_one_off",
             "card_location": "p0_hand",
             "card_index": 2,
+            "card_id": 19,
             "target_location": "p1_continuous_board",
-            "target_index": 0
+            "target_index": 0,
+            "target_id": 33
         },
         {
             "id": 3,
             "behavior_type": "scuttle",
             "card_location": "p0_hand",
             "card_index": 3,
+            "card_id": 22,
             "target_location": "p1_point_board",
-            "target_index": 0
+            "target_index": 0,
+            "target_id": 12
         },
         {
             "id": 4,
             "behavior_type": "scuttle",
             "card_location": "p0_hand",
             "card_index": 3,
+            "card_id": 22,
             "target_location": "p1_point_board",
-            "target_index": 1
+            "target_index": 1,
+            "target_id": 51
         },
         {
             "id": 5,
             "behavior_type": "eight_continuous",
             "card_location": "p0_hand",
-            "card_index": 3
+            "card_index": 3,
+            "card_id": 39
         }
     ]
 }

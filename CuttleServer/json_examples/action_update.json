@@ -3,7 +3,8 @@
     "action_type": "discard",
     "player": 1,
     "card_location": "p1_hand",
-    "card_index": 2
+    "card_index": 2,
+    "card_id": 43
 }
 
 // Sent to player 1 (or to the opponent, if the player's hand is visible)
@@ -24,8 +25,9 @@
 {
     "type": "action_update",
     "action_type": "destroy",
-    "card_location": "p0_hand",
-    "card_index": 3
+    "card_location": "p0_point_board",
+    "card_index": 3,
+    "card_id": 9
 }
 
 // Happens when a player's hand becomes visible

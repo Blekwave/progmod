@@ -43,6 +43,7 @@ public abstract class CardBehavior<T extends BehaviorCall, U extends Prompt> ext
         Pile cardPile = card().game().cardPile(card());
         obj.put("card_location", cardPile.name());
         obj.put("card_index", cardPile.indexOf(card()));
+        obj.put("card_id", card().id());
         return obj;
     }
 }

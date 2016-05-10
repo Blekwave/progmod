@@ -2,5 +2,6 @@
     "type": "behavior_update",
     "behavior_type": "point_play",
     "card_location": "p0_hand",
-    "card_index": 2
+    "card_index": 2,
+    "card_id": 26
 }
