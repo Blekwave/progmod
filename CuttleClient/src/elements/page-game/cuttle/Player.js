@@ -2,7 +2,7 @@ function Player(id, hand, game) {
     this.id = id;
     this.game = game;
     this.points = 0;
-    this.victoryReq = 20;
+    this.victoryReq = 21;
     this.pointArea = new CardArea(game, 0, 300);
     this.continuousArea = new CardArea(game, 0, 400);
     this.handArea = new CardArea(game, 0, 530);
