@@ -49,6 +49,16 @@ public class Pile implements Iterable<CuttleCard> {
     }
 
     /**
+     * Gets a card by its index.
+     *
+     * @param index Index of the card.
+     * @return CuttleCard at the index.
+     */
+    public CuttleCard get(Integer index){
+        return mList.get(index);
+    }
+
+    /**
      * Removes a card from the pile with a certain index and returns it.
      *
      * @param index Index to be removed.

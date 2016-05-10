@@ -37,11 +37,14 @@ public class SixOneOffBehavior extends OneOffBehavior<BehaviorCall> {
      */
     @Override
     public void activateEffect(BehaviorCall call, PlayPrompt prompt) {
-        for (CuttleCard c : game().player().continuousBoard()){
-            destroy(c);
+        Pile p = game().player().continuousBoard();
+        for (int i = p.size() - 1; i >= 0; i--){
+            destroy(p.get(i));
         }
-        for (CuttleCard c: game().opponent().continuousBoard()){
-            destroy(c);
+
+        Pile o = game().opponent().continuousBoard();
+        for (int i = o.size() - 1; i >= 0; i--){
+            destroy(o.get(i));
         }
     }
 
