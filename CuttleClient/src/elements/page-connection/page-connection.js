@@ -2,6 +2,7 @@ Polymer({
     is: "page-connection",
     ready: function() {
         this.listen(this.$.submitButton, "click", "submit");
+        this.$.submitInput.value = document.location.hostname + ":42001";
     },
     submit: function() {
         if(this.$.connectionForm.validate()) {
