@@ -1,52 +1,52 @@
 function CuttleClient(root, address) {
-    this.root = d3.select(root);
-    this.audio = document.createElement('audio');
     this._socket = null;
+    this._game = null;
 
-    this.audio.src = 'res/cuttlematch.mp3'
-    this.audio.controls = 'controls';
-    this.audio.loop = 'loop';
-    this.audio.muted = 'muted';
-    this.audio.load();
+    var audio = document.createElement('audio');
+    audio.src = 'res/cuttlematch.mp3'
+    audio.controls = 'controls';
+    audio.loop = 'loop';
+    audio.muted = 'muted';
+    audio.load();
 
-    d3.text("res/cards.svg", function(error, data) {
-        this.root.node().appendChild(this.audio);
-        this.root.append('br');
-        this.root.append('div')
+    d3.text("res/cards.svg", function(onError, data) {
+        root.appendChild(audio);
+        d3.select(root).append('br');
+        d3.select(root).append('div')
             .attr('class', 'svgDiv')
             .html(data);
 
-        this.game = new CuttleGame(this, this.root);
+        this._game = new CuttleGame(this, root);
         this.start(address);
     }.bind(this));
 };
 
 CuttleClient.prototype.start = function(address) {
     if(!address)
-        address = "ws://localhost:42001";
+        address = 'ws://' + document.location.hostname + ':42001';
 
     this._socket = new WebSocket(address);
-    this._socket.onopen = this.open.bind(this);
-    this._socket.onmessage = this.message.bind(this);
-    this._socket.onclose = this.close.bind(this);
-    this._socket.onerror = this.error.bind(this);
+    this._socket.onopen = this._onOpen.bind(this);
+    this._socket.onmessage = this._onMessage.bind(this);
+    this._socket.onclose = this._onClose.bind(this);
+    this._socket.onerror = this._onError.bind(this);
 }
 
-CuttleClient.prototype.open = function(event) {
+CuttleClient.prototype._onOpen = function(event) {
     console.log('Connected to ' + event.currentTarget.url);
-    this.game.centralText.text('Waiting for opponent')
+    this._game.centralText.text('Waiting for opponent')
 }
 
-CuttleClient.prototype.message = function(event) {
-    this.game.message(JSON.parse(event.data));
+CuttleClient.prototype._onMessage = function(event) {
+    this._game.onMessage(JSON.parse(event.data));
 }
 
-CuttleClient.prototype.close = function(event) {
+CuttleClient.prototype._onClose = function(event) {
     console.log('Connection closed: ' + event.currentTarget.url);
-    this.game.centralText.text('Connection closed');
+    this._game.centralText.text('Connection closed');
 }
 
-CuttleClient.prototype.error = function(error) {
+CuttleClient.prototype._onError = function(error) {
     console.log(error);
     alert("Connection error");
 }
