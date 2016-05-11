@@ -34,6 +34,7 @@ CuttleClient.prototype.start = function(address) {
 
 CuttleClient.prototype.open = function(event) {
     console.log('Connected to ' + event.currentTarget.url);
+    this.game.centralText.text('Waiting for opponent')
 }
 
 CuttleClient.prototype.message = function(event) {
