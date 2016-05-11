@@ -21,7 +21,7 @@ function CuttleGame(client, root) {
 
 CuttleGame.prototype.createTable = function() {
     this.svg
-        .style('border', '5px solid #7B3F00');
+        .style('border', '5px solid #755648');
 
     this.svg.append('rect')
         .attr('width', '100%')

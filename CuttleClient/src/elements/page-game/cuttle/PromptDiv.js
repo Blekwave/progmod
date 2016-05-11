@@ -14,22 +14,19 @@ PromptDiv = function(game, divData, disappear, x, y) {
 
             return text;
         })
+        .attr('class', function(d, i) {
+            var c = '';
+            if(i == 0) c += 'borderTop ';
+            if(i == divData.length - 1) c += 'borderBottom ';
+            return c;
+        })
         .on('click', function(d) {
             div.remove();
             game.promptResponse(d);
         });
 
-    var coords;
-    if(x && y)
-        coords = [x, y];
-    else
-        coords = d3.mouse(game.root.node());
-
-    div.style('position', 'absolute')
-        .style('background-color', 'red')
-        .style('padding', '10px')
-        .style('left', coords[0] + 'px')
-        .style('top', coords[1] + 'px');
+    div.attr('class', 'cuttleDiv')
+        .style('opacity', '0');
 
     div.node().addEventListener('mouseout', function(event) {
         var e = event.toElement || event.relatedTarget;
@@ -41,4 +38,17 @@ PromptDiv = function(game, divData, disappear, x, y) {
     });
 
     game.root.node().appendChild(div.node());
+
+    var coords;
+    if(x && y)
+        coords = [x, y];
+    else
+        coords = d3.mouse(game.root.node());
+
+    var bound = div.node().getBoundingClientRect();
+
+    div
+        .style('left', coords[0] + 'px')
+        .style('top', (coords[1] - bound.height + 25) + 'px')
+        .style('opacity', '0.95');
 };

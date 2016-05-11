@@ -6,6 +6,7 @@ function CuttleClient(root, address) {
     this.audio.src = 'res/cuttlematch.mp3'
     this.audio.controls = 'controls';
     this.audio.loop = 'loop';
+    this.audio.muted = 'muted';
     this.audio.load();
 
     d3.text("res/cards.svg", function(error, data) {
