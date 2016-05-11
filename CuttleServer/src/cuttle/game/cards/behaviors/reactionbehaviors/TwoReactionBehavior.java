@@ -39,11 +39,11 @@ public class TwoReactionBehavior extends CardBehavior<BehaviorCall, ReactionProm
 
     @Override
     public void call(BehaviorCall call, ReactionPrompt prompt) {
+        game().perform(new Discard(card()));
         ReactionPrompt reactionPrompt = new ReactionPrompt();
         reactionPrompt.prompt(card().owner().opponent());
         if (!reactionPrompt.reacted()){
             prompt.react();
         }
-        game().perform(new Discard(card()));
     }
 }
