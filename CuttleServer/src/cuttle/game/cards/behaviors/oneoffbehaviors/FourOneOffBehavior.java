@@ -29,8 +29,10 @@ public class FourOneOffBehavior extends OneOffBehavior<BehaviorCall> {
     @Override
     public void activateEffect(BehaviorCall call, PlayPrompt prompt) {
         for (int i = 0; i < 2; i++){
-            DiscardPrompt discardPrompt = new DiscardPrompt();
-            discardPrompt.prompt(game().opponent());
+            if (!game().opponent().hand().isEmpty()){
+                DiscardPrompt discardPrompt = new DiscardPrompt();
+                discardPrompt.prompt(game().opponent());
+            }
         }
     }
 }
