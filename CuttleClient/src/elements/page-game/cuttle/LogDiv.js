@@ -1,9 +1,9 @@
 function LogDiv(root) {
-    this.root = root;
-    this.div = this.root.append('div')
+    this._root = root;
+    this._div = this._root.append('div')
         .attr('class', 'scrollDiv');
 };
 
 LogDiv.prototype.log = function(msg) {
-    this.div.append('p').text(msg);
+    this._div.append('p').text(msg);
 };
