@@ -27,6 +27,7 @@ var src             = "src/",
     debugBowerDest  = debugDest + "bower_components",
     debugPort       = 5000,
     releaseDest     = "release/",
+    releaseResDest  = releaseDest + res,
     releasePolySrc  = debugDest + "index.html",
     releasePolyEnv  = {maximumCrush: true, suffix: ""},
     releasePort     = 5001;
@@ -131,9 +132,13 @@ gulp.task("release-clean", function() {
      return del([releaseDest]);
 });
 
+gulp.task("release-res", function() {
+    return copy(debugResSrc, releaseResDest);
+})
+
 gulp.task("debug", ["debug-pug", "debug-less", "debug-js", "debug-res", "debug-bower"]);
 
-gulp.task("release", ["release-polybuild"], function() {
+gulp.task("release", ["release-polybuild", "release-res"], function() {
     // Minify html.
     return stream(htmlmin, releaseDest + "index.html", releaseDest, {collapseWhitespace: true, removeComments: true});
 });
