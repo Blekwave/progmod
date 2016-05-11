@@ -5,11 +5,12 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) {
-        for (String s : args){
-            System.out.println(s);
-        }
+
+        Integer port = args.length >= 1 ? Integer.parseInt(args[0]) : 4544;
+        String contentRoot = args.length >= 2 ? args[1] : "release/";
+
         try {
-            Server server = new Server(4544, "release/");
+            new Server(port, contentRoot);
         } catch (IOException e) {
             System.out.println("Something unexpected happened while trying to serve the client.");
         }

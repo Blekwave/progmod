@@ -4,3 +4,4 @@ node_modules
 debug
 release
 src/bower_components
+.idea/
