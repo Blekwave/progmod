@@ -5,6 +5,7 @@ import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.prompts.PlayPrompt;
 import cuttle.game.cards.prompts.PromptType;
 import cuttle.game.cards.prompts.ReactionPrompt;
+import cuttle.game.Player;
 
 /**
  * Behavior related to a card's one-off play.
@@ -23,9 +24,10 @@ public abstract class OneOffBehavior<T extends BehaviorCall> extends CardBehavio
      */
     @Override
     public void call(T call, PlayPrompt prompt) {
+        Player opponent = card().owner().opponent();
         game().perform(new Discard(card()));
         ReactionPrompt reactionPrompt = new ReactionPrompt();
-        reactionPrompt.prompt(card().owner().opponent());
+        reactionPrompt.prompt(opponent);
         if (!reactionPrompt.reacted()){
             activateEffect(call, prompt);
         }
