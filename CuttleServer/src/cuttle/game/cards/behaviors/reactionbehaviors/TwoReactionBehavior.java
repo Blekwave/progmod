@@ -1,5 +1,6 @@
 package cuttle.game.cards.behaviors.reactionbehaviors;
 
+import cuttle.game.Player;
 import cuttle.game.actions.playeractions.Discard;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.behaviors.BehaviorCall;
@@ -39,9 +40,10 @@ public class TwoReactionBehavior extends CardBehavior<BehaviorCall, ReactionProm
 
     @Override
     public void call(BehaviorCall call, ReactionPrompt prompt) {
+        Player opponent = card().owner().opponent();
         game().perform(new Discard(card()));
         ReactionPrompt reactionPrompt = new ReactionPrompt();
-        reactionPrompt.prompt(card().owner().opponent());
+        reactionPrompt.prompt(opponent);
         if (!reactionPrompt.reacted()){
             prompt.react();
         }
