@@ -34,6 +34,7 @@ CuttleClient.prototype.start = function(address) {
 
 CuttleClient.prototype.open = function(event) {
     console.log('Connected to ' + event.currentTarget.url);
+    this.game.centralText.text('Waiting for opponent')
 }
 
 CuttleClient.prototype.message = function(event) {
@@ -42,10 +43,12 @@ CuttleClient.prototype.message = function(event) {
 
 CuttleClient.prototype.close = function(event) {
     console.log('Connection closed: ' + event.currentTarget.url);
+    this.game.centralText.text('Connection closed');
 }
 
 CuttleClient.prototype.error = function(error) {
-    console.log('Connection error: ' + error);
+    console.log(error);
+    alert("Connection error");
 }
 
 CuttleClient.prototype.send = function(msg) {

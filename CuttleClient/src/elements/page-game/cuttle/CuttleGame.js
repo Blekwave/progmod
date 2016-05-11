@@ -56,7 +56,7 @@ CuttleGame.prototype.createTable = function() {
         .attr('y', this.height / 2)
         .attr('font-size', '25')
         .attr('text-anchor', 'middle')
-        .text('Waiting for opponent');
+        .text('Connecting to server');
 };
 
 CuttleGame.prototype.createCardData = function(card_by_id) {
