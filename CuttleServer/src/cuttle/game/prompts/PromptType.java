@@ -1,4 +1,4 @@
-package cuttle.game.cards.prompts;
+package cuttle.game.prompts;
 
 /**
  * Types of prompts, defined in the prompts themselves and in the behaviors

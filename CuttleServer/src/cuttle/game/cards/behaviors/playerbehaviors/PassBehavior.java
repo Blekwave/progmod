@@ -3,8 +3,8 @@ package cuttle.game.cards.behaviors.playerbehaviors;
 import cuttle.game.Player;
 import cuttle.game.cards.behaviors.BehaviorCall;
 import cuttle.game.cards.behaviors.PlayerBehavior;
-import cuttle.game.cards.prompts.PromptType;
-import cuttle.game.cards.prompts.ReactionPrompt;
+import cuttle.game.prompts.PromptType;
+import cuttle.game.prompts.ReactionPrompt;
 
 /**
  * Behavior for not reacting when prompted for a reaction.

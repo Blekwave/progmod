@@ -5,8 +5,8 @@ import cuttle.game.actions.playeractions.Discard;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.behaviors.BehaviorCall;
 import cuttle.game.cards.behaviors.CardBehavior;
-import cuttle.game.cards.prompts.PromptType;
-import cuttle.game.cards.prompts.ReactionPrompt;
+import cuttle.game.prompts.PromptType;
+import cuttle.game.prompts.ReactionPrompt;
 
 import java.util.ArrayList;
 

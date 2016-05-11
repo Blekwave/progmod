@@ -1,4 +1,4 @@
-package cuttle.game.cards.prompts;
+package cuttle.game.prompts;
 
 /**
  * Prompt triggered when a player can react to another's one-off play.

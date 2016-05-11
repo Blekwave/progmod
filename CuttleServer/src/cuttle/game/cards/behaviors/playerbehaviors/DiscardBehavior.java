@@ -5,8 +5,8 @@ import cuttle.game.actions.playeractions.Discard;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.behaviors.PlayerBehavior;
 import cuttle.game.cards.behaviors.TargetedBehaviorCall;
-import cuttle.game.cards.prompts.DiscardPrompt;
-import cuttle.game.cards.prompts.PromptType;
+import cuttle.game.prompts.DiscardPrompt;
+import cuttle.game.prompts.PromptType;
 
 import java.util.ArrayList;
 

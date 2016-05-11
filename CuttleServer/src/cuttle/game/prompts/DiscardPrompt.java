@@ -1,4 +1,4 @@
-package cuttle.game.cards.prompts;
+package cuttle.game.prompts;
 
 /**
  * Prompt triggered when the opponent plays a one-off four. Forces the player

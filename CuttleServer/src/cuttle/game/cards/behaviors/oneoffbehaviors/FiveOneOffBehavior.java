@@ -4,8 +4,8 @@ import cuttle.game.actions.playeractions.Draw;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.behaviors.BehaviorCall;
 import cuttle.game.cards.behaviors.OneOffBehavior;
-import cuttle.game.cards.prompts.PlayPrompt;
-import cuttle.game.cards.prompts.PromptType;
+import cuttle.game.prompts.PlayPrompt;
+import cuttle.game.prompts.PromptType;
 
 
 /**

@@ -4,7 +4,7 @@ import cuttle.game.actions.Action;
 import cuttle.game.cards.Pile;
 import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.deck.DeckBuilder;
-import cuttle.game.cards.prompts.PlayPrompt;
+import cuttle.game.prompts.PlayPrompt;
 import cuttle.game.updates.*;
 
 import java.util.HashMap;

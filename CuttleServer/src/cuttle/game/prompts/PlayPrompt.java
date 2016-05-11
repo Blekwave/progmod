@@ -1,4 +1,4 @@
-package cuttle.game.cards.prompts;
+package cuttle.game.prompts;
 
 /**
  * Prompt triggered at the beginning of every turn, allows a player to make a

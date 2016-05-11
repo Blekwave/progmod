@@ -6,8 +6,8 @@ import cuttle.game.cards.behaviors.ContinuousBehavior;
 import cuttle.game.cards.behaviors.TargetedBehaviorCall;
 import cuttle.game.cards.events.boardexitevents.JackExitEvent;
 import cuttle.game.cards.events.boardexitevents.JackTargetExitEvent;
-import cuttle.game.cards.prompts.PlayPrompt;
-import cuttle.game.cards.prompts.PromptType;
+import cuttle.game.prompts.PlayPrompt;
+import cuttle.game.prompts.PromptType;
 
 import java.util.ArrayList;
 

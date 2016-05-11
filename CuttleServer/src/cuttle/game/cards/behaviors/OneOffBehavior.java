@@ -2,9 +2,9 @@ package cuttle.game.cards.behaviors;
 
 import cuttle.game.actions.playeractions.Discard;
 import cuttle.game.cards.CuttleCard;
-import cuttle.game.cards.prompts.PlayPrompt;
-import cuttle.game.cards.prompts.PromptType;
-import cuttle.game.cards.prompts.ReactionPrompt;
+import cuttle.game.prompts.PlayPrompt;
+import cuttle.game.prompts.PromptType;
+import cuttle.game.prompts.ReactionPrompt;
 import cuttle.game.Player;
 
 /**

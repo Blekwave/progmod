@@ -5,8 +5,8 @@ import cuttle.game.cards.CuttleCard;
 import cuttle.game.cards.Pile;
 import cuttle.game.cards.behaviors.BehaviorCall;
 import cuttle.game.cards.behaviors.OneOffBehavior;
-import cuttle.game.cards.prompts.PlayPrompt;
-import cuttle.game.cards.prompts.PromptType;
+import cuttle.game.prompts.PlayPrompt;
+import cuttle.game.prompts.PromptType;
 
 /**
  * One-off behavior for the Six.

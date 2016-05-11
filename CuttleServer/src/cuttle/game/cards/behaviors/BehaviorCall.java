@@ -1,7 +1,7 @@
 package cuttle.game.cards.behaviors;
 
 import cuttle.game.updates.SymmetricUpdateContainer;
-import cuttle.game.cards.prompts.Prompt;
+import cuttle.game.prompts.Prompt;
 import cuttle.game.updates.UpdateInterface;
 import org.json.JSONObject;
 

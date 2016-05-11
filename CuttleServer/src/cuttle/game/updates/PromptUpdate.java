@@ -1,7 +1,7 @@
 package cuttle.game.updates;
 
 import cuttle.game.Player;
-import cuttle.game.cards.prompts.PromptType;
+import cuttle.game.prompts.PromptType;
 import org.json.JSONObject;
 
 /**

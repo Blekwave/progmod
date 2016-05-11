@@ -2,8 +2,8 @@ package cuttle.game.cards.behaviors;
 
 import cuttle.game.actions.playeractions.ContinuousPlay;
 import cuttle.game.cards.CuttleCard;
-import cuttle.game.cards.prompts.PlayPrompt;
-import cuttle.game.cards.prompts.PromptType;
+import cuttle.game.prompts.PlayPrompt;
+import cuttle.game.prompts.PromptType;
 
 /**
  * Behavior related to a card's continuous play.

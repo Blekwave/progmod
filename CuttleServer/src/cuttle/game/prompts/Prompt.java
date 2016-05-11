@@ -1,4 +1,4 @@
-package cuttle.game.cards.prompts;
+package cuttle.game.prompts;
 
 import cuttle.game.BehaviorIterator;
 import cuttle.game.Player;

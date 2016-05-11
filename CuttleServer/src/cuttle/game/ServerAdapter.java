@@ -1,7 +1,7 @@
 package cuttle.game;
 
 import cuttle.game.cards.behaviors.BehaviorCall;
-import cuttle.game.cards.prompts.Prompt;
+import cuttle.game.prompts.Prompt;
 import cuttle.game.updates.PromptUpdate;
 import cuttle.game.updates.UpdateContainer;
 import cuttle.game.updates.UpdateInterface;

@@ -1,8 +1,8 @@
 package cuttle.game.cards.behaviors;
 
 import cuttle.game.CuttleGame;
-import cuttle.game.cards.prompts.Prompt;
-import cuttle.game.cards.prompts.PromptType;
+import cuttle.game.prompts.Prompt;
+import cuttle.game.prompts.PromptType;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
