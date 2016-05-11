@@ -1,8 +1,9 @@
 function CuttleGame(client, root) {
     this.client = client;
     this.root = root;
-    this.svg = this.root.select('svg');
     this.audio = this.root.select('audio').node();
+    this.svg = this.root.select('svg');
+    this.logDiv = new LogDiv(this.root);
     this.width = 800;
     this.height = 600;
     this.cardScale = 0.4;
@@ -146,7 +147,7 @@ CuttleGame.prototype.promptDiscard = function(msg) {
 };
 
 CuttleGame.prototype.promptMessage = function(msg) {
-    var div = new PromptDiv(this, msg.calls, false, 300, 300);
+    var div = new PromptDiv(this, msg.calls, false, 355, 285);
 };
 
 CuttleGame.prototype.promptUpdate = function(msg) {
@@ -165,6 +166,8 @@ CuttleGame.prototype.promptUpdate = function(msg) {
 }
 
 CuttleGame.prototype.actionUpdate = function(msg) {
+    this.logDiv.log(JSON.stringify(msg));
+
     switch(msg.action_type) {
         case 'draw': this.actionUpdateDraw(msg); break;
         case 'point_play': this.actionUpdatePointPlay(msg); break;
@@ -232,6 +235,8 @@ CuttleGame.prototype.actionUpdateDestroy = function(msg) {
         owner.pointArea.remove(msg.target.id);
     else
         owner.continuousArea.remove(msg.target.id);
+
+    this.scrap.add(msg.target.id);
 };
 
 CuttleGame.prototype.actionUpdateSwitch = function(msg) {
@@ -294,7 +299,7 @@ CuttleGame.prototype.actionUpdateVictoryReq = function(msg) {
 };
 
 CuttleGame.prototype.behaviorUpdate = function(msg) {
-    // Nothing to do by now.
+    this.logDiv.log(JSON.stringify(msg));
 };
 
 CuttleGame.prototype.promptResponse = function(b) {

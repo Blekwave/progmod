@@ -13,6 +13,7 @@ function CuttleClient(root, address) {
         this.root.node().appendChild(this.audio);
         this.root.append('br');
         this.root.append('div')
+            .attr('class', 'svgDiv')
             .html(data);
 
         this.game = new CuttleGame(this, this.root);
