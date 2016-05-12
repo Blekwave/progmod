@@ -19,28 +19,7 @@ run: all
 test: all
 	javac -cp $(TESTCLASSPATH) test/*.java
 
-.PHONY: doc
-doc:
-	cd doc && lualatex doc
-	cd doc && lualatex doc
-	cd doc && bibtex doc
-	cd doc && lualatex doc
-	cd doc && lualatex doc
-
 .PHONY: clean
 clean:
 	find . -type f -name '*.class' -delete
-	rm -f doc/*.aux
-	rm -f doc/*.lof
-	rm -f doc/*.log
-	rm -f doc/*.lot
-	rm -f doc/*.fls
-	rm -f doc/*.out
-	rm -f doc/*.toc
-	rm -f doc/*.bbl
-	rm -f doc/*.bcf
-	rm -f doc/*.blg
-	rm -f doc/*.brf
-	rm -f doc/*.dvi
-	rm -f doc/*.pdf
 

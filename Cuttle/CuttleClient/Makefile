@@ -14,3 +14,6 @@ all:
 run: all
 	java -cp $(CLASSPATH) Main $(RUN_ARGS)
 
+.PHONY=clean
+clean:
+	find . -type f -name '*.class' -delete
