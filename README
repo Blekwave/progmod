@@ -1,0 +1,49 @@
+Alunos: Renato Utsch Gonçalves e Victor Pires Diniz
+
+A pasta CuttleServer contém o cliente do jogo e a pasta CuttleClient contém o
+cliente do jogo.
+
+Para executar o servidor, entre na pasta CuttleServer e digite 'make run'. Isso
+compilará e abrirá o servidor. Por padrão, o servidor iniciará na porta 42001.
+
+Para executar o cliente, entre na pasta CuttleClient e digite 'make run'.
+Isso compilará e abrirá um web server. Por padrão, o web server iniciará na
+porta 4544.
+
+Para abrir o jogo no navegador, acesse 'http://localhost:4544'. Digite o
+endereço do servidor (no caso, 'localhost:42001' -- note que não tem 'http://',
+o protocolo na verdade é 'ws://') e pressione 'Jogar'. Isso abrirá um dos
+clientes. Abra novamente a página do jogo em outra aba ou outro computador e
+clique em jogar novamente com o devido IP. O jogo entre os dois jogadores deve
+começar.
+
+Por favor, utilize o navegador Google Chrome para jogar, o programa não foi
+testado em outros navegadores.
+
+---
+
+Notem que já estamos enviando o código do website compilado para não ser
+necessário que vocês instalem as ferramentas necessárias para compilar. O que
+a compilação faz é apenas traduzir todos os arquivos em JADE e LESS para HTML
+e CSS. Isso é independente de plataforma e, por isso, não é necessário que
+vocês recompilem o website para testar nosso jogo. De qualquer modo, colocamos
+as instruções de como compilar abaixo caso for de interesse.
+
+Para compilar o website do jogo, caso seja de interesse, instale o NPM
+(www.npmjs.com), abra uma nova instância do terminal e execute os seguintes
+comandos na pasta CuttleClient:
+
+-----
+npm install -g bower gulp
+npm install
+bower install
+-----
+
+Pode ser necessário reiniciar o terminal entre os npm install's e o bower install.
+Após isso, é só executar 'gulp serve', e um webserver será automaticamente
+iniciado com o jogo recém compilado (para a pasta debug). Dessa vez o endereço
+padrão é 'localhost:5000'. Pode-se também executar 'gulp serve:release' para
+gerar a versão de produção do jogo e abrir o webserver, no endereço
+'localhost:5001', mas é necessário um pouco de paciência, pois compilação pode
+demorar alguns minutos.
+
