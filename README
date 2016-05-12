@@ -1,14 +1,9 @@
 Alunos: Renato Utsch Gonçalves e Victor Pires Diniz
 
-A pasta CuttleServer contém o cliente do jogo e a pasta CuttleClient contém o
-cliente do jogo.
-
-Para executar o servidor, entre na pasta CuttleServer e digite 'make run'. Isso
-compilará e abrirá o servidor. Por padrão, o servidor iniciará na porta 42001.
-
-Para executar o cliente, entre na pasta CuttleClient e digite 'make run'.
-Isso compilará e abrirá um web server. Por padrão, o web server iniciará na
-porta 4544.
+Para iniciar o jogo, apenas execute 'make run' nesta pasta do trabalho, e ambos
+o cliente e o servidor serão compilados e executados. O cliente estará disponível
+no endereço 'localhost:4544', enquanto o servidor estará funcionando na porta
+42001.
 
 Para abrir o jogo no navegador, acesse 'http://localhost:4544'. Digite o
 endereço do servidor (no caso, 'localhost:42001' -- note que não tem 'http://',
@@ -20,7 +15,21 @@ começar.
 Por favor, utilize o navegador Google Chrome para jogar, o programa não foi
 testado em outros navegadores.
 
----
+Caso desejem compilar o cliente o servidor separadamente, leiam abaixo.
+
+-----
+
+A pasta CuttleServer contém o cliente do jogo e a pasta CuttleClient contém o
+cliente do jogo.
+
+Para executar o servidor, entre na pasta CuttleServer e digite 'make run'. Isso
+compilará e abrirá o servidor. Por padrão, o servidor iniciará na porta 42001.
+
+Para executar o cliente, entre na pasta CuttleClient e digite 'make run'.
+Isso compilará e abrirá um web server. Por padrão, o web server iniciará na
+porta 4544.
+
+-----
 
 Notem que já estamos enviando o código do website compilado para não ser
 necessário que vocês instalem as ferramentas necessárias para compilar. O que
